@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <!-- Should change so two forms in one, first for player second for membership-->
+        <%= form_for :player, url: players_path do |f| %>
+          <h2>Add a Player</h2>
+          <p>
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+            </p>
+            <div id="gender_div">
+                <%= f.radio_button(:gender, 0, checked: true) %>
+                <%= f.label(:gender_0, "Eman") %>
+                <%= f.radio_button(:gender, 1) %>
+                <%= f.label(:gender_1, "Ewo") %>
+            </div>
+            <p>
+              <label>Team:</label>
+              <%= collection_select(:membership, :team_id, Team.all, :id, :name) %>
+            </p>
+            <%= check_box_tag 'captain' %>
+            <%= label_tag 'captain' %>
+          <br><br>
+            <div>
+              <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+            </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function() {
+      $("#gender_div").buttonset();
+  });
+</script>

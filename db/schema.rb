@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023233632) do
+ActiveRecord::Schema.define(version: 20151024050930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 20151023233632) do
   create_table "memberships", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "player_id"
     t.uuid     "team_id"
-    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "captain",    default: false
   end
 
   add_index "memberships", ["player_id"], name: "index_memberships_on_player_id", using: :btree

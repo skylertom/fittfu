@@ -2,10 +2,10 @@ FactoryGirl.define do
   factory :membership do
     association :player
     association :team
-    role Team::Role::PLAYER
+    captain false
 
     trait :captain do
-      role Team::Role::CAPTAIN
+      captain true
     end
   end
 end

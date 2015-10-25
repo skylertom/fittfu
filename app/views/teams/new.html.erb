@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for :team, url: teams_path do |f| %>
+          <h2>Add Team</h2>
+          <p>
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+          </p>
+          <p>
+            <%= f.label :color %>
+            <%= f.text_field :color %>
+          </p>
+          <div>
+            <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>

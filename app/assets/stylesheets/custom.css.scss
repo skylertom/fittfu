@@ -1,0 +1,17 @@
+@import "bootstrap";
+
+$background-gray: #f1f1f1;
+
+.header {
+  margin-bottom: 30px;
+}
+
+body {
+  background-color: $background-gray;
+}
+
+form {
+  background-color: white;
+  padding:30px;
+  padding-top: 10px;
+}

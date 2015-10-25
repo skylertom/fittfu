@@ -7,12 +7,4 @@ class Team < ActiveRecord::Base
 
   has_one :captain_membership, -> { captains }, class_name: 'Membership'
   has_one :captain, class_name: 'Player', through: :captain_membership, source: :player
-
-
-  class Role
-    PLAYER = 'player'
-    CAPTAIN = 'captain'
-
-    ROLES = [PLAYER, CAPTAIN]
-  end
 end
