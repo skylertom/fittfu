@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024050930) do
+ActiveRecord::Schema.define(version: 20151028061552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "games", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.integer  "game_number"
+    t.integer  "week"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "memberships", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "player_id"
@@ -33,6 +40,16 @@ ActiveRecord::Schema.define(version: 20151024050930) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "team_games", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "team_id"
+    t.uuid     "game_id"
+    t.integer  "points",     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "team_games", ["team_id"], name: "index_team_games_on_team_id", using: :btree
 
   create_table "teams", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
