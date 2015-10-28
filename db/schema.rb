@@ -11,11 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028061552) do
+ActiveRecord::Schema.define(version: 20151028062803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "game_stats", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "team_game_id"
+    t.uuid     "player_id"
+    t.integer  "ds",           default: 0
+    t.integer  "turns",        default: 0
+    t.integer  "goals",        default: 0
+    t.integer  "assists",      default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "games", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.integer  "game_number"
