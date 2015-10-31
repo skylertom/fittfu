@@ -13,6 +13,9 @@ Technical Details:
 * Database: Postgres, run the following commands to start (also run on test environment)
   * rake db:reset
   * rake db:migrate
+  * To add sample players/teams (do in this order) in lib/tasks
+    * rake db:sample_teams
+    * rake db:sample_players_data
 * Testing: Rspec
   * For command line: rspec spec/file_name:line_number
   * Can run with no arguments to run all tests, do not need a line number, can run on a folder
