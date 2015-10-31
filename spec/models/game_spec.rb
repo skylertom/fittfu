@@ -4,7 +4,6 @@ describe Game do
   let(:game) { FactoryGirl.build(:game) }
   subject { game }
 
-
   it { should respond_to (:game_number) }
   it { should respond_to (:week) }
 

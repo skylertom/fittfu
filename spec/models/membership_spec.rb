@@ -8,7 +8,10 @@ describe Membership do
   it { should respond_to (:team_id) }
   it { should respond_to (:player_id) }
   it { should respond_to (:captain) }
-  it { should expect(captain).to be false }
+
+  it 'should not be a captain by default' do
+    expect(membership.captain).to be false
+  end
 
   describe '#validations' do
     it 'should be valid' do

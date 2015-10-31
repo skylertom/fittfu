@@ -8,7 +8,9 @@ describe TeamGame do
   it { should respond_to (:team_id) }
   it { should respond_to (:game_id) }
   it { should respond_to (:points) }
-  it { should expect(points).to eq(0) }
+  it 'should set points to 0 by default' do
+    expect(team_game.points).to eq(0)
+  end
 
   describe '#validations' do
     it 'should be valid' do
