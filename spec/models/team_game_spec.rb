@@ -1,5 +1,28 @@
 require 'rails_helper'
 
-RSpec.describe TeamGame, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe TeamGame do
+  let(:team_game) { FactoryGirl.build(:team_game) }
+  subject { team_game }
+
+
+  it { should respond_to (:team_id) }
+  it { should respond_to (:game_id) }
+  it { should respond_to (:points) }
+  it { should expect(points).to eq(0) }
+
+  describe '#validations' do
+    it 'should be valid' do
+      expect(team_game).to be_valid
+    end
+
+    it 'should not be valid without a team' do
+      team_game.team_id = nil
+      expect(team_game).to_not be_valid
+      end
+
+    it 'should not be valid without a game' do
+      team_game.game_id = nil
+      expect(team_game).to_not be_valid
+    end
+  end
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Player do
-  let(:player) { FactoryGirl.create(:player) }
+  let(:player) { FactoryGirl.build(:player) }
   subject { player }
 
 
@@ -21,6 +21,7 @@ describe Player do
 
   describe '#associations' do
     it 'should destroy dependent memberships' do
+      player.save!
       FactoryGirl.create(:membership, player: player)
       expect { player.destroy}.to change {Membership.count}.by(-1)
     end

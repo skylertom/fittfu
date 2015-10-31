@@ -1,8 +1,6 @@
 FactoryGirl.define do
   factory :team_game do
-    team_id ""
-game_id ""
-points 1
+    association :team
+    association :game
   end
-
 end
