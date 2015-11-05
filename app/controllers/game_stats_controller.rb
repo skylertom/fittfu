@@ -1,6 +1,5 @@
 class GameStatsController < ApplicationController
   def update
-    p params
     @game_stat = GameStat.find_by(id: params["id"])
     if @game_stat
       @game_stat.update!(game_stat_params)
