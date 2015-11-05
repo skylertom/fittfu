@@ -20,6 +20,8 @@ class PlayersController < ApplicationController
     @player = Player.find_by(id: params[:id])
   end
 
+  # TODO edit
+
   private
 
   def player_params
