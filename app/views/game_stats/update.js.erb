@@ -1,0 +1,1 @@
+$('#<%= escape_javascript(@game_stat.id) %>').html('<%= escape_javascript(render partial: 'game_stats/row', object: @game_stat, as: 'row') %>');

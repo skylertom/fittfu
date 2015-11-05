@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :players
   resources :teams
   resources :games
+  resources :game_stats, only: [:update]
 end

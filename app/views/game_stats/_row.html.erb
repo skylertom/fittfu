@@ -1,0 +1,13 @@
+  <td><%= link_to(row.player.name, row.player) %></td>
+  <td>N/A</td>
+  <td>
+    <%= button_to(row.goals, game_stat_url(row), remote: true, method: :patch, params: { game_stat: { goals: row.goals+1 } }) %>
+  </td>
+  <td><%= row.assists %></td>
+  <td><%= row.ds %></td>
+  <td>
+    <%= form_for(row, remote: true, html: { method: :patch }) do |f| %>
+        <%= f.hidden_field(:turns, value: row.turns+1) %>
+        <button type="submit"><%= row.turns %></button>
+    <% end %>
+  </td>
