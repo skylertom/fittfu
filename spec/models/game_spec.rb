@@ -4,7 +4,7 @@ describe Game do
   let(:game) { FactoryGirl.build(:game) }
   subject { game }
 
-  it { should respond_to (:game_number) }
+  it { should respond_to (:time_slot) }
   it { should respond_to (:week) }
 
   describe '#validations' do
@@ -17,8 +17,8 @@ describe Game do
       expect(game).to_not be_valid
     end
 
-    it 'should not be valid without a game_number' do
-      game.game_number = nil
+    it 'should not be valid without a time_slot' do
+      game.time_slot = nil
       expect(game).to_not be_valid
     end
   end

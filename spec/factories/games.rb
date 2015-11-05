@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :game do
-    game_number 1
+    time_slot 1
     week 1
   end
 

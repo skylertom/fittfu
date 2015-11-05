@@ -1,0 +1,17 @@
+<h1>Listing Games</h1>
+
+<table class="table table-bordered table-hover">
+  <tr>
+    <th>Matchup</th>
+    <th>Week</th>
+    <th>Time slot</th>
+  </tr>
+
+  <% @games.each do |game| %>
+      <tr>
+        <td><%= link_to("#{game.teams.first.name} vs #{game.teams.second.name}", game) %></td>
+        <td><%= game.week %></td>
+        <td><%= game.time_slot %></td>
+      </tr>
+  <% end %>
+</table>

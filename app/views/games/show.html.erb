@@ -1,0 +1,17 @@
+<p>
+  <strong>Home Team:</strong>
+  <%= link_to @game.teams.first.name, @game.teams.second %>
+</p>
+<p>
+  <strong>Away Team:</strong>
+  <%= link_to @game.teams.second.name, @game.teams.second %>
+</p>
+<p>
+  <strong>Week:</strong>
+  <%= @game.week %>
+</p>
+<p>
+  <strong>Time slot:</strong>
+  <%= @game.time_slot %>
+</p>
+
