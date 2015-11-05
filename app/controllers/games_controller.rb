@@ -6,16 +6,16 @@ class GamesController < ApplicationController
   def new
   end
 
+  # TODO create redirect case when game doesn't save
   def create
     @game = Game.new(game_params)
-    p params[:home_team][:team_id]
     if @game.save
       create_team_game(params[:home_team][:team_id])
       create_team_game(params[:away_team][:team_id])
-      redirect_to @game
     else
       p "Error: could not create game"
     end
+    redirect_to @game
   end
 
   def show
