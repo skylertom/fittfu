@@ -31,11 +31,21 @@ group :development, :test do
   gem 'rspec-rails', '~>3.3.3'
   gem 'factory_girl_rails'
   gem 'dotenv-rails'
+  # type ap before model in rails c to get pretty rendering
+  gem 'awesome_print', require:'ap'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   gem 'rails-footnotes', '~> 4.0'
+  # Rails tab in Google Chrome inspector (needs Rails panel chrome extension)
+  gem 'meta_request'
+  # Better error pages
+  gem 'better_errors'
+  # better asset requests in the server log
+  gem 'quiet_assets'
+  # warns about eager loading and N+1 queries, added code to config/environments/development.rb
+  gem 'bullet'
 end
 
