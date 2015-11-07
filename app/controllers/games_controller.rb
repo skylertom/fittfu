@@ -22,6 +22,13 @@ class GamesController < ApplicationController
     @game = Game.find_by(id: params[:id])
   end
 
+  def create_schedule
+    unless MakeSchedule.build.call(7)
+      flash[:error] = "Games already created or not enough teams were made yet"
+    end
+    redirect_to action: :index
+  end
+
   private
 
   def create_team_game(team_id)
