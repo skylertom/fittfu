@@ -7,5 +7,5 @@ class Membership < ActiveRecord::Base
   belongs_to :team
 
   validates :player_id, presence: true
-  validates :team_id, presence: true, uniqueness: { scope: :team_id }
+  validates :team_id, presence: true, uniqueness: { scope: :player_id }
 end
