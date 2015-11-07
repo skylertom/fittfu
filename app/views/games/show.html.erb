@@ -24,7 +24,7 @@
     <th>Ds</th>
     <th>Turns</th>
   </tr>
-  <% @game.team_games.first.game_stats.each do |stat| %>
+  <% @game.team_games.first.game_stats.includes(:player).each do |stat| %>
       <tr id="<%= stat.id %>">
         <%= render partial: 'game_stats/row', locals: {row: stat} %>
       </tr>
