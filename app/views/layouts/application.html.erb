@@ -8,13 +8,20 @@
 </head>
 <body>
 
-<div class="header">
-  <%= render 'layouts/header' %>
-</div>
+    <div class="header">
+      <%= render 'layouts/header' %>
+    </div>
+
+    <% flash.each do |key, value| %>
+        <div class="alert <%= bootstrap_flash_class(key) %> fade in">
+          <a href="#" data-dismiss="alert" class="close">x</a>
+          <%= value %>
+        </div>
+    <% end %>
 
     <%= yield %>
 
-<%= render 'layouts/footer' %>
+    <%= render 'layouts/footer' %>
 
 </body>
 </html>
