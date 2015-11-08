@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :game_stats, only: [:update]
 
   get 'createschedule', to: 'games#create_schedule', as: :schedule_games
+  get 'deleteall', to: 'games#delete_all', as: :destroy_games
 end

@@ -9,8 +9,8 @@ class TeamGame < ActiveRecord::Base
   after_create :create_game_stats
 
   def create_game_stats
-    team.players.find_each do |player|
-      player.game_stats.create(team_game_id: self.id)
+    team.player_ids.each do |player_id|
+      self.game_stats.create(player_id: player_id)
     end
   end
 end

@@ -29,6 +29,11 @@ class GamesController < ApplicationController
     redirect_to action: :index
   end
 
+  def delete_all
+    Game.destroy_all unless Game.first.blank?
+    redirect_to action: :index
+  end
+
   private
 
   def create_team_game(team_id)
