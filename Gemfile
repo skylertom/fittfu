@@ -9,11 +9,14 @@ gem 'bootstrap-sass'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-rails', '~> 4.0.5'
+gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+# For faster mass inserts
+gem 'activerecord-import', '~> 0.10.0', require: false
+gem 'resque', '~> 1.25.2'
 
 
 # Use ActiveModel has_secure_password
@@ -40,12 +43,12 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'rails-footnotes', '~> 4.0'
   # Rails tab in Google Chrome inspector (needs Rails panel chrome extension)
-  gem 'meta_request'
+  gem 'meta_request', '~> 0.3.4'
   # Better error pages
-  gem 'better_errors'
+  gem 'better_errors', '~> 2.1.1'
   # better asset requests in the server log
-  gem 'quiet_assets'
+  gem 'quiet_assets', ' ~> 1.1.0'
   # warns about eager loading and N+1 queries, added code to config/environments/development.rb
-  gem 'bullet'
+  gem 'bullet', '~> 4.14.10'
 end
 
