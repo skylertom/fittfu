@@ -16,6 +16,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # For faster mass inserts
 gem 'activerecord-import', '~> 0.10.0', require: false
+gem 'redis', '3.2.1'
 gem 'resque', '~> 1.25.2'
 
 
