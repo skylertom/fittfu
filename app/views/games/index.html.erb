@@ -9,7 +9,7 @@
 
   <% @games.each do |game| %>
       <tr>
-        <td><%= link_to("#{game.teams.first.name} vs #{game.teams.second.name}", game) %></td>
+        <td><%= link_to(game.name, game) if game.teams.any? %></td>
         <td><%= game.week %></td>
         <td><%= game.time_slot %></td>
       </tr>

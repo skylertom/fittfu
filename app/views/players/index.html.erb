@@ -9,7 +9,7 @@
 
   <% @players.each do |player| %>
       <tr>
-        <td><%= player.name %></td>
+        <td><%= link_to(player.name, player_path(player)) %></td>
         <td><%= player.gender %></td>
         <td>
           <%= link_to(player.teams.first.name, team_path(player.teams.first)) unless player.teams.blank? %>

@@ -7,3 +7,15 @@
   <strong>Gender:</strong>
   <%= @player.gender %>
 </p>
+<h3>Stats</h3>
+<table class="table table-bordered table-hover">
+  <tr>
+    <th>Game</th>
+    <th>Points</th>
+    <th>Goals</th>
+    <th>Assists</th>
+    <th>Ds</th>
+    <th>Turns</th>
+  </tr>
+  <%= render partial: 'game_stats/simple_row', collection: @player.game_stats.includes(:game) %>
+</table>

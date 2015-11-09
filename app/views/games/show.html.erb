@@ -14,19 +14,21 @@
   <strong>Time slot:</strong>
   <%= @game.time_slot %>
 </p>
-<h3>Team 1 Stats</h3>
-<table class="table table-bordered table-hover">
-  <tr>
-    <th>Player</th>
-    <th>Points</th>
-    <th>Goals</th>
-    <th>Assists</th>
-    <th>Ds</th>
-    <th>Turns</th>
-  </tr>
-  <% @game.team_games.first.game_stats.includes(:player).each do |stat| %>
-      <tr id="<%= stat.id %>">
-        <%= render partial: 'game_stats/row', locals: {row: stat} %>
+<% @game.team_games.each do |team_game| %>
+    <h3>Team 1 Stats</h3>
+    <table class="table table-bordered table-hover" id="<%= team_game.id %>">
+      <tr>
+        <th>Player</th>
+        <th>Points</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Ds</th>
+        <th>Turns</th>
       </tr>
-  <% end %>
-</table>
+      <% team_game.game_stats.includes(:player).each do |stat| %>
+          <tr id="<%= stat.id %>">
+            <%= render partial: 'game_stats/row', locals: {row: stat} %>
+          </tr>
+      <% end %>
+    </table>
+<% end %>

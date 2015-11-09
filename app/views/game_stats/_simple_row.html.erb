@@ -1,0 +1,9 @@
+<tr>
+    <td><%= link_to(simple_row.game.name, game_path(simple_row.game)) %></td>
+    <td><%= simple_row.points %></td>
+    <% GameStat::TYPE.each do |index| %>
+        <td>
+          <p><%= simple_row[index] %></p>
+        </td>
+    <% end %>
+</tr>

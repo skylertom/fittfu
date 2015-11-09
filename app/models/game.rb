@@ -6,4 +6,8 @@ class Game < ActiveRecord::Base
   # TODO should validate these are unique
   validates :time_slot, presence: true, uniqueness: { scope: :week }
   validates :week, presence: true
+
+  def name
+    teams.any? ? "#{teams.first.name} vs #{teams.second.name}" : "No teams assigned"
+  end
 end
