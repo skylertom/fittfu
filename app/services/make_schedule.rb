@@ -13,6 +13,10 @@ class MakeSchedule
     return false if Game.all.size > 0
     team_ids = Team.all.pluck(:id)
     return false if team_ids.size < SIZE
+    create_schedule(team_ids, num_weeks)
+  end
+
+  def create_schedule(team_ids, num_weeks)
     stationary = 0
     front = 1
     columns = [:game_id, :team_id]
@@ -20,9 +24,10 @@ class MakeSchedule
     num_weeks.times do |week|
       current_front = front
       current_last = decrement(front)
+      random = [0, 1, 2, 3].shuffle
       # TODO randomize time_slot each week otherwise team 0 plays first each time
       Team::GAMES_IN_NIGHT.times do |time|
-        g = Game.create(week: week, time_slot: time)
+        g = Game.create(week: week, time_slot: (random[time]))
         values.push([g.id, team_ids[current_last]])
         current_last = decrement(current_last)
         if time == stationary
@@ -43,6 +48,19 @@ class MakeSchedule
         p "Error: #{i}"
       end
       return false
+    end
+  end
+
+  def get_spread(team_ids)
+    team_ids.map do |team_id|
+      name = Team.find(team_id).name
+      { name: name,
+        distribution: [0, 1, 2, 3].map do |time|
+          Game.where(time_slot: time).inject(0) do |sum, game|
+            game.teams.find_by(id: team_id).blank? ? sum : sum + 1
+          end
+        end
+      }
     end
   end
 
