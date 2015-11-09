@@ -6,4 +6,13 @@ module ApplicationHelper
       notice:  'alert-info'
     }[flash_type.to_sym] || flash_type.to_s
   end
+
+  # determines whether the navbar is active
+	def navbar_active(controller)
+		if params[:controller] == controller
+			'active'
+		else
+			''
+		end
+	end
 end
