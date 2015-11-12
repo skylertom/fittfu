@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   def index
-    @players = Player.includes(:teams).all
+    @players = Player.includes(:team).all
   end
 
   def new

@@ -17,7 +17,7 @@ Technical Details:
     ```
   * To add sample players/teams (do in this order) in lib/task: 
     ```bash 
-     $ rake populate:sample_data
+     $ rake db:seed
     ```
 * Development:
   * To use redis (and resque) install foreman gem and run:
