@@ -4,12 +4,14 @@
   <tr>
     <th>Team Name</th>
     <th>Color</th>
+    <th>Delete</th>
   </tr>
 
   <% @teams.each do |team| %>
       <tr>
         <td><%= link_to team.name, team_path(team) %></td>
         <td><%= team.color %></td>
+        <td><%= button_to('x', team, method: :delete) %></td>
       </tr>
   <% end %>
 </table>

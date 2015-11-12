@@ -18,7 +18,7 @@
   <% @team.players.each do |player| %>
       <tr>
         <td><%= link_to(player.name, player_path(player)) %></td>
-        <td><%= player.gender %></td>
+        <td><%= player.gender_text %></td>
       </tr>
   <% end %>
 </table>

@@ -54,5 +54,7 @@ group :development do
   gem 'quiet_assets', ' ~> 1.1.0'
   # warns about eager loading and N+1 queries, added code to config/environments/development.rb
   gem 'bullet', '~> 4.14.10'
+  # tells you query times in top right
+  gem 'rack-mini-profiler'
 end
 

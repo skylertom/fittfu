@@ -26,12 +26,22 @@ class GamesController < ApplicationController
     unless MakeSchedule.build.call(7)
       flash[:error] = "Games already created or not enough teams were made yet"
     end
-    redirect_to action: :index
+    redirect_to games_path
   end
 
   def delete_all
     Game.destroy_all unless Game.first.blank?
-    redirect_to action: :index
+    redirect_to games_path
+  end
+
+  def destroy
+    @game = Game.find_by(id: params[:id])
+    if @game
+      @game.destroy
+    else
+      flash[:error] = "Could not find game with id: #{params[:id]}"
+    end
+    redirect_to games_path
   end
 
   private

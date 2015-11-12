@@ -16,6 +16,16 @@ class TeamsController < ApplicationController
     @team = Team.find_by(id: params[:id])
   end
 
+  def destroy
+    @team = Team.find_by(id: params[:id])
+    if @team
+      @team.destroy
+    else
+      flash[:error] = "Could not find team with id: #{params[:id]}"
+    end
+    redirect_to teams_path
+  end
+
   private
 
     def team_params

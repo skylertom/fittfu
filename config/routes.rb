@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   resources :players
   resources :teams
-  resources :games
+  resources :games do
+    resources :team_games, only: [:create]
+  end
   resources :game_stats, only: [:update]
 
   get 'createschedule', to: 'games#create_schedule', as: :schedule_games

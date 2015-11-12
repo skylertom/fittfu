@@ -16,7 +16,7 @@
           </div>
           <p>
             <label>Team:</label>
-            <%= collection_select(:membership, :team_id, Team.all, :id, :name) %>
+            <%= collection_select(:membership, :team_id, Team.real, :id, :name, {prompt: "Unassigned"}) %>
           </p>
           <%= check_box_tag 'captain' %>
           <%= label_tag 'captain' %>

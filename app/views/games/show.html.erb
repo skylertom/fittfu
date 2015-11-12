@@ -1,34 +1,68 @@
-<p>
-  <strong>Home Team:</strong>
-  <%= link_to @game.teams.first.name, @game.teams.second %>
-</p>
-<p>
-  <strong>Away Team:</strong>
-  <%= link_to @game.teams.second.name, @game.teams.second %>
-</p>
-<p>
-  <strong>Week:</strong>
-  <%= @game.week %>
-</p>
-<p>
-  <strong>Time slot:</strong>
-  <%= @game.time_slot %>
-</p>
-<% @game.teams.each do |team| %>
-    <h3>Team <%= team.color %> Stats</h3>
-    <table class="table table-bordered table-hover" id="<%= team.id %>">
-      <tr>
-        <th>Player</th>
-        <th>Fantasy Points</th>
-        <th>Goals</th>
-        <th>Assists</th>
-        <th>Ds</th>
-        <th>Turns</th>
-      </tr>
-      <% @game.game_stats.where(player: team.players).includes(:player).each do |stat| %>
-          <tr id="<%= stat.id %>">
-            <%= render partial: 'game_stats/row', locals: {row: stat} %>
+<% if @game.has_teams? %>
+    <p>
+      <strong>Home Team:</strong>
+      <%= link_to @game.teams.first.name, @game.teams.second %>
+    </p>
+    <p>
+      <strong>Away Team:</strong>
+      <%= link_to @game.teams.second.name, @game.teams.second %>
+    </p>
+    <p>
+      <strong>Week:</strong>
+      <%= @game.week %>
+    </p>
+    <p>
+      <strong>Time slot:</strong>
+      <%= @game.time_slot %>
+    </p>
+    <% @game.teams.each do |team| %>
+        <h3>Team <%= team.color %> Stats</h3>
+        <table class="table table-bordered table-hover" id="<%= team.id %>">
+          <tr>
+            <th>Player</th>
+            <th>Fantasy Points</th>
+            <th>Goals</th>
+            <th>Assists</th>
+            <th>Ds</th>
+            <th>Turns</th>
           </tr>
-      <% end %>
-    </table>
+          <% @game.game_stats.where(player: team.players).includes(:player).each do |stat| %>
+              <tr id="<%= stat.id %>">
+                <%= render partial: 'game_stats/row', locals: {row: stat} %>
+              </tr>
+          <% end %>
+        </table>
+    <% end %>
+<% else %>
+    <strong>Week:</strong>
+    <%= @game.week %>
+    </p>
+    <p>
+      <strong>Time slot:</strong>
+      <%= @game.time_slot %>
+    </p>
+    <h3>Assign Teams:</h3>
+    <% if @game.teams.any? %>
+        <p>
+          <strong>Home Team:</strong>
+          <%= link_to @game.teams.first.name, @game.teams.second %>
+        </p>
+        <%= form_for [@game, @game.team_games.build] do |f| %>
+            <%= f.hidden_field :game_id %>
+            <label>Add team:</label>
+            <%= f.collection_select(:team_id, Team.real, :id, :name) %>
+            <div>
+              <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+            </div>
+        <% end %>
+    <% else %>
+        <%= form_for [@game, @game.team_games.build] do |f| %>
+            <%= f.hidden_field :game_id %>
+            <label>Add first team:</label>
+            <%= f.collection_select(:team_id, Team.real, :id, :name) %>
+            <div>
+              <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+            </div>
+        <% end %>
+    <% end %>
 <% end %>

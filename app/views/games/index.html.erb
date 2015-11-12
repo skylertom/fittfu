@@ -5,6 +5,7 @@
     <th>Matchup</th>
     <th>Week</th>
     <th>Time slot</th>
+    <th>Delete</th>
   </tr>
 
   <% @games.each do |game| %>
@@ -12,6 +13,7 @@
         <td><%= link_to(game.name, game) if game.teams.any? %></td>
         <td><%= game.week %></td>
         <td><%= game.time_slot %></td>
+        <td><%= button_to('x', game, method: :delete) %></td>
       </tr>
   <% end %>
 </table>

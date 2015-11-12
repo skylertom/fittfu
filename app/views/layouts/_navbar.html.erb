@@ -33,8 +33,22 @@
             <li><%= link_to "Past Games", '#' %></li>
             <li role="separator" class="divider"></li>
             <li><%= link_to "Add new game", new_game_path %></li>
-            <li><%= link_to "Schedule all games", schedule_games_path %></li>
-            <li role="separator" class="divider"></li>
+          </ul>
+        </li>
+        <li class="dropdown <%= navbar_active("schedule")%>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Commissioner <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Add days and times for games", '#' %></li>
+            <li><%= link_to "Auto schedule all games", schedule_games_path %></li>
+          </ul>
+        </li>
+        <li class="dropdown <%= navbar_active("admin")%>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Admin <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
             <li><%= link_to "Delete all games", destroy_games_path %></li>
           </ul>
         </li>
