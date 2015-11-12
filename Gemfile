@@ -17,8 +17,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # For faster mass inserts
 gem 'activerecord-import', '~> 0.10.0', require: false
 gem 'redis', '3.2.1'
-gem 'resque', '~> 1.25.2'
+gem 'rack-timeout', '0.3.2'
 
+group :production do
+  gem 'puma', '2.14.0'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
