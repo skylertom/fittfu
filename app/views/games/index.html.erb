@@ -4,15 +4,17 @@
   <tr>
     <th>Matchup</th>
     <th>Week</th>
-    <th>Time slot</th>
+    <th>Day</th>
+    <th>Time</th>
     <th>Delete</th>
   </tr>
 
   <% @games.each do |game| %>
       <tr>
         <td><%= link_to(game.name, game) if game.teams.any? %></td>
-        <td><%= game.week %></td>
-        <td><%= game.time_slot %></td>
+        <td><%= game.week + 1 %></td>
+        <td><%= game.time.blank? ? "Not scheduled yet" : game.time.to_s(:day_and_month) %></td>
+        <td><%= game.time.blank? ? "#{(game.time_slot + 1).ordinalize} time slot" : game.time.to_s(:time) %></td>
         <td><%= button_to('x', game, method: :delete) %></td>
       </tr>
   <% end %>

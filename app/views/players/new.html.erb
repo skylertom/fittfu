@@ -6,7 +6,7 @@
           <h2>Add a Player</h2>
           <p>
             <%= f.label :name %>
-            <%= f.text_field :name %>
+            <%= f.text_field :name, required: true %>
           </p>
           <div id="gender_div">
             <%= f.radio_button(:gender, 0, checked: true) %>

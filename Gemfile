@@ -21,6 +21,7 @@ gem 'rack-timeout', '0.3.2'
 
 group :production do
   gem 'puma', '2.14.0'
+  gem 'rails_12factor'
 end
 
 # Use ActiveModel has_secure_password

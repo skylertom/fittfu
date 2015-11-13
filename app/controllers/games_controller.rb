@@ -12,10 +12,11 @@ class GamesController < ApplicationController
     if @game.save
       create_team_game(params[:home_team][:team_id])
       create_team_game(params[:away_team][:team_id])
+      redirect_to @game
     else
-      p "Error: could not create game"
+      flash[:error] =  "Error: could not create game"
+      redirect_to new_game_path
     end
-    redirect_to @game
   end
 
   def show
@@ -23,10 +24,18 @@ class GamesController < ApplicationController
   end
 
   def create_schedule
-    unless MakeSchedule.build.call(7)
-      flash[:error] = "Games already created or not enough teams were made yet"
+    if Schedule.for(Time.zone.now.year).any?
+      if MakeSchedule.build.call
+        redirect_to games_path
+      else
+        flash[:error] = "Games already created or not enough teams were made yet"
+        redirect_to root_path
+      end
+    else
+      flash[:error] = "Please add game times first"
+      redirect_to root_path
     end
-    redirect_to games_path
+
   end
 
   def delete_all

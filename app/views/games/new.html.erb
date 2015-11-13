@@ -13,11 +13,11 @@
           </p>
           <p>
             <%= f.label :time_slot %>
-            <%= f.number_field :time_slot %>
+            <%= f.number_field :time_slot, required: true %>
           </p>
           <p>
             <%= f.label :week %>
-            <%= f.number_field :week %>
+            <%= f.number_field :week, required: true %>
           </p>
           <div>
             <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
@@ -26,9 +26,3 @@
     </div>
   </div>
 </div>
-
-<script>
-    $(function() {
-        $("#gender_div").buttonset();
-    });
-</script>

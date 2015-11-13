@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111081000) do
+ActiveRecord::Schema.define(version: 20151116041626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20151111081000) do
     t.integer  "week"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "time"
   end
 
   create_table "memberships", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -49,6 +50,14 @@ ActiveRecord::Schema.define(version: 20151111081000) do
   create_table "players", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.integer  "gender"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "schedules", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

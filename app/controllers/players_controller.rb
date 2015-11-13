@@ -17,7 +17,7 @@ class PlayersController < ApplicationController
         redirect_to team_path(membership.team)
       end
     else
-      redirect_to :back
+      redirect_to new_player_path
     end
   end
 

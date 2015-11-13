@@ -3,7 +3,6 @@ class Team < ActiveRecord::Base
   scope :for_fantasy, -> { where(fantasy: true) }
 
   STD_SIZE = 8
-  GAMES_IN_NIGHT = 4
 
   has_many :memberships, dependent: :destroy
   has_many :players, through: :memberships

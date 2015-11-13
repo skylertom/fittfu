@@ -8,26 +8,37 @@ class MakeSchedule
     new
   end
 
-  def call(num_weeks)
+  def call()
     # TODO only use real teams (not fantasy)
     return false if Game.count > 10
     team_ids = Team.real.limit(8).pluck(:id)
     return false if team_ids.size < SIZE
-    create_schedule(team_ids, num_weeks)
+    create_schedule(team_ids)
   end
 
-  def create_schedule(team_ids, num_weeks)
+  def assign_times
+    return false unless Schedule.for(Time.zone.now.year).any?
+    Schedule.for(Time.zone.now.year).each_with_index do |s, i|
+      week = Game.where(week: i).where('time IS ?', nil)
+      Schedule::GAMES_IN_NIGHT.times do |time_slot|
+        week.find_by(time_slot: time_slot).update_attribute(:time, s.start_time.advance(minutes: (time_slot * Game::DURATION)))
+      end
+    end
+  end
+
+  def create_schedule(team_ids)
     stationary = 0
     front = 1
     columns = [:game_id, :team_id]
     values = []
     game_ids = []
-    num_weeks.times do |week|
+    times = Schedule.where(year: Time.zone.now.year).pluck(:start_time)
+    times.each_with_index do |time, week|
       current_front = front
       current_last = decrement(front)
       random = [0, 1, 2, 3].shuffle
-      Team::GAMES_IN_NIGHT.times do |time|
-        g = Game.create(week: week, time_slot: (random[time]))
+      Schedule::GAMES_IN_NIGHT.times do |time_slot|
+        g = Game.create(week: week, time_slot: random[time_slot], time: time.advance(minutes: Game::DURATION * random[time_slot]))
         values << [g.id, team_ids[current_last]]
         current_last = decrement(current_last)
         if time == stationary
