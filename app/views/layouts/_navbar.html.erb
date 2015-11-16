@@ -29,8 +29,9 @@
           </a>
           <ul class="dropdown-menu">
             <li><%= link_to "View All", games_path %></li>
-            <li><%= link_to "This weeks games", '#' %></li>
-            <li><%= link_to "Past Games", '#' %></li>
+            <li><%= link_to "This weeks games", current_games_path %></li>
+            <li><%= link_to "Past Games", past_games_path %></li>
+            <li><%= link_to "Upcoming Games", upcoming_games_path %></li>
             <li role="separator" class="divider"></li>
             <li><%= link_to "Add new game", new_game_path %></li>
           </ul>

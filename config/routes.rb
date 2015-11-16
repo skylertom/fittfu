@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
+  resources :welcome, only: [:index]
 
   root 'welcome#index'
+
+  get 'games/past', to: 'games#past_index', as: :past_games
+  get 'games/upcoming', to: 'games#upcoming_index', as: :upcoming_games
+  get 'games/current', to: 'games#current_index', as: :current_games
 
   resources :players
   resources :teams

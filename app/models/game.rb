@@ -1,9 +1,9 @@
 class Game < ActiveRecord::Base
   default_scope { order(:week, :time_slot)}
-  #scope :upcoming, -> { where("time > ?", Time.zone.now) }
-  #scope :past, -> { where("time < ?", Time.zone.now) }
+  scope :upcoming, -> { where("time > ?", Time.zone.now) }
+  scope :past, -> { where("time < ?", Time.zone.now) }
   # always show this week's
-  #scope :current, -> { where("time < ? AND time > ?", Time.zone.now.advance(weeks: 1, hours: -2, minutes: 5), Time.zone.now.advance(hours: -2, minutes: 5)) }
+  scope :current, -> { where("time < ? AND time > ?", Time.zone.now.advance(weeks: 1, hours: -2, minutes: 5), Time.zone.now.advance(hours: -2, minutes: 5)) }
 
   DURATION = 30
 

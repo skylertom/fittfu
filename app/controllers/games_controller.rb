@@ -23,6 +23,21 @@ class GamesController < ApplicationController
     @game = Game.find_by(id: params[:id])
   end
 
+  def past_index
+    @games = Game.past.includes(:teams)
+    render :index
+  end
+
+  def current_index
+    @games = Game.current.includes(:teams)
+    render :index
+  end
+
+  def upcoming_index
+    @games = Game.upcoming.includes(:teams)
+    render :index
+  end
+
   def create_schedule
     if Schedule.for(Time.zone.now.year).any?
       if MakeSchedule.build.call
