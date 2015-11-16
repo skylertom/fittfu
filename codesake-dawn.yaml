@@ -1,0 +1,9 @@
+config:
+  verbose: false
+  output: console
+  mvc: “”
+  gemfile_scan: true
+  gemfile_name: “”
+  filename: nil
+  debug: false
+  exit_on_warn: true

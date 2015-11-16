@@ -31,6 +31,8 @@ group :development, :test do
   gem 'rspec-rails', '~>3.3.3'
   gem 'factory_girl_rails'
   gem 'dotenv-rails'
+  gem 'brakeman', require: false
+  gem 'codesake-dawn', require: false
 end
 
 group :development do
