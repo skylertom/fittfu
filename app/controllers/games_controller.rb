@@ -23,6 +23,10 @@ class GamesController < ApplicationController
     @game = Game.find_by(id: params[:id])
   end
 
+  def scorekeep
+    @game = Game.find_by(id: params[:id])
+  end
+
   def past_index
     @games = Game.past.includes(:teams)
     render :index

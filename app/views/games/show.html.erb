@@ -1,4 +1,5 @@
 <% if @game.has_teams? %>
+    <button><%= link_to "Scorekeep (Edit Game Stats)", scorekeep_games_path(@game) %></button>
     <p>
       <strong>Home Team:</strong>
       <%= link_to @game.teams.first.name, @game.teams.second %>
@@ -16,22 +17,7 @@
       <%= @game.time_slot %>
     </p>
     <% @game.teams.each do |team| %>
-        <h3>Team <%= team.color %> Stats</h3>
-        <table class="table table-bordered table-hover" id="<%= team.id %>">
-          <tr>
-            <th>Player</th>
-            <th>Fantasy Points</th>
-            <th>Goals</th>
-            <th>Assists</th>
-            <th>Ds</th>
-            <th>Turns</th>
-          </tr>
-          <% @game.game_stats.where(player: team.players).includes(:player).each do |stat| %>
-              <tr id="<%= stat.id %>">
-                <%= render partial: 'game_stats/row', locals: {row: stat} %>
-              </tr>
-          <% end %>
-        </table>
+        <%= render partial: 'game_stats/table', locals: {team: team, game: @game} %>
     <% end %>
 <% else %>
     <strong>Week:</strong>

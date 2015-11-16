@@ -2,8 +2,6 @@
   <td><%= row.points %></td>
   <% GameStat::TYPE.each do |index| %>
       <td>
-        <%= button_to('+', row, remote: true, method: :patch, params: { "game_stat[#{index}]": row[index]+1 }) %>
         <p><%= row[index] %></p>
-        <%= button_to('-', row, remote: true, method: :patch, params: { "game_stat[#{index}]": row[index]-1 }) %>
       </td>
   <% end %>
