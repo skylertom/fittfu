@@ -1,0 +1,4 @@
+test:
+  post:
+    - bundle exec brakeman --exit-on-warn -o $CIRCLE_ARTIFACTS/brakeman.html
+    - bundle exec dawn -C --exit-on-warn -c codesake-dawn.yaml --html -F $CIRCLE_ARTIFACTS/dawn.html .

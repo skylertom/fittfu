@@ -41,6 +41,8 @@ group :development, :test do
   gem 'dotenv-rails'
   # type ap before model in rails c to get pretty rendering
   gem 'awesome_print', require:'ap'
+  gem 'brakeman', require: false
+  gem 'codesake-dawn', require: false
 end
 
 group :development do
