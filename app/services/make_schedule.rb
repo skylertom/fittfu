@@ -11,7 +11,7 @@ class MakeSchedule
   def call()
     # TODO only use real teams (not fantasy)
     return false if Game.count > 10
-    team_ids = Team.real.limit(8).pluck(:id)
+    team_ids = Team.real.limit(SIZE).pluck(:id)
     return false if team_ids.size < SIZE
     create_schedule(team_ids)
   end
@@ -41,7 +41,7 @@ class MakeSchedule
         g = Game.create(week: week, time_slot: random[time_slot], time: time.advance(minutes: Game::DURATION * random[time_slot]))
         values << [g.id, team_ids[current_last]]
         current_last = decrement(current_last)
-        if time == stationary
+        if time_slot == stationary
           values << [g.id, team_ids[stationary]]
         else
           values << [g.id, team_ids[current_front]]
