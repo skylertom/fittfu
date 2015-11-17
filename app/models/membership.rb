@@ -10,4 +10,12 @@ class Membership < ActiveRecord::Base
 
   validates :player_id, presence: true
   validates :team_id, presence: true, uniqueness: { scope: :player_id }
+
+  after_save :create_game_stats
+
+  def create_game_stats
+    unless fantasy || team.games.blank?
+      team.games.each { |game| game.game_stats.create(player_id: player_id) }
+    end
+  end
 end

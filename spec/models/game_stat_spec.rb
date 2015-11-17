@@ -1,37 +1,53 @@
 require 'rails_helper'
 
 describe GameStat do
-  let(:game_stat) { FactoryGirl.build(:game_stat) }
+  let(:game_stat) { build(:game_stat) }
   subject { game_stat }
 
 
-  it { should respond_to (:team_game_id) }
+  it { should respond_to (:game_id) }
   it { should respond_to (:player_id) }
   it { should respond_to (:ds) }
   it { should respond_to (:turns) }
   it { should respond_to (:goals) }
   it { should respond_to (:assists) }
 
-  it 'should expect stats to be initialized to 0' do
-    expect(game_stat.ds).to eq(0)
-    expect(game_stat.turns).to eq(0)
-    expect(game_stat.goals).to eq(0)
-    expect(game_stat.assists).to eq(0)
+  it 'has a valid factory' do
+    expect(build(:game_stat)).to be_valid
   end
 
-  describe '#validations' do
-    it 'should be valid' do
-      expect(game_stat).to be_valid
+  describe 'ActiveModel validations' do
+    it { expect(subject).to validate_presence_of(:player_id) }
+    it { expect(subject).to validate_presence_of(:game_id) }
+  end
+
+  describe 'Initialize Game Stats' do
+    it { expect(subject.ds).to eq(0) }
+    it { expect(subject.turns).to eq(0) }
+    it { expect(subject.goals).to eq(0) }
+    it { expect(subject.assists).to eq(0) }
+  end
+
+  describe 'ActiveRecord associations' do
+    it { expect(subject).to belong_to(:player) }
+    it { expect(subject).to belong_to(:game) }
+    it { expect(subject).to have_one(:team).through(:player) }
+  end
+
+  describe 'public instance methods' do
+    context 'responds to its methods' do
+      it { expect(subject).to respond_to(:points) }
     end
 
-    it 'should not be valid without a team' do
-      game_stat.team_game_id = nil
-      expect(game_stat).to_not be_valid
-    end
-
-    it 'should not be valid without a game' do
-      game_stat.player_id = nil
-      expect(game_stat).to_not be_valid
+    context 'executes methods correctly' do
+      context '#points' do
+        it 'evaluates number of points' do
+          subject.ds = 1
+          subject.goals = 2
+          subject.turns = 1
+          expect(subject.points).to eq(5)
+        end
+      end
     end
   end
 end

@@ -1,30 +1,35 @@
 require 'rails_helper'
 
 describe TeamGame do
-  let(:team_game) { FactoryGirl.build(:team_game) }
+  let(:team_game) { build(:team_game) }
   subject { team_game }
 
-
-  it { should respond_to (:team_id) }
   it { should respond_to (:game_id) }
-  it { should respond_to (:points) }
-  it 'should set points to 0 by default' do
-    expect(team_game.points).to eq(0)
+  it { should respond_to (:team_id) }
+
+  it 'has a valid factory' do
+    expect(build(:team_game)).to be_valid
   end
 
-  describe '#validations' do
-    it 'should be valid' do
-      expect(team_game).to be_valid
+  describe 'ActiveModel validations' do
+    before(:each) do
+      allow(subject).to receive(:create_game_stats)
     end
+    it { expect(subject).to validate_presence_of(:game_id) }
+    it { expect(subject).to validate_presence_of(:team_id) }
+    it { expect(subject).to validate_uniqueness_of(:team_id).scoped_to(:game_id) }
+  end
 
-    it 'should not be valid without a team' do
-      team_game.team_id = nil
-      expect(team_game).to_not be_valid
-      end
-
-    it 'should not be valid without a game' do
-      team_game.game_id = nil
-      expect(team_game).to_not be_valid
+  describe 'callbacks' do
+    it 'makes and deletes  game stats after being made/destroyed' do
+      team_game.team.players.create(name: "pudge")
+      expect { team_game.save }.to change {GameStat.count}.by(1)
+      expect { team_game.destroy }.to change {GameStat.count}.by(-1)
     end
+  end
+
+  describe 'ActiveRecord associations' do
+    it { expect(subject).to belong_to(:game) }
+    it { expect(subject).to belong_to(:team) }
   end
 end

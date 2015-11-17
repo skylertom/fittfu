@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
   scope :upcoming, -> { where("time > ?", Time.zone.now) }
   scope :past, -> { where("time < ?", Time.zone.now) }
   # always show this week's
-  scope :current, -> { where("time < ? AND time > ?", Time.zone.now.advance(weeks: 1, hours: -2, minutes: 5), Time.zone.now.advance(hours: -2, minutes: 5)) }
+  scope :current, -> { where("time < ? AND time > ?", Time.zone.now.advance(weeks: 1, hours: -2), Time.zone.now.advance(hours: -2)) }
 
   DURATION = 30
 
@@ -12,7 +12,7 @@ class Game < ActiveRecord::Base
   has_many :players, through: :teams
   has_many :game_stats, dependent: :destroy
 
-  validates :time_slot, presence: true, uniqueness: { scope: :week }
+  validates :time_slot, presence: true
   validates :week, presence: true
 
   def name

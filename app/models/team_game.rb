@@ -15,6 +15,6 @@ class TeamGame < ActiveRecord::Base
   end
 
   def destroy_game_stats
-    game.game_stats.where(player_id: team.players.pluck(:id)).destroy_all
+    game.game_stats.where(player_id: team.player_ids).destroy_all
   end
 end

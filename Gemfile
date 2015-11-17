@@ -33,11 +33,15 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :test do
+  gem 'rspec-rails', '~>3.3.3'
+  gem 'factory_girl_rails'
+  gem 'shoulda'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-byebug'
-  gem 'rspec-rails', '~>3.3.3'
-  gem 'factory_girl_rails'
   gem 'dotenv-rails'
   # type ap before model in rails c to get pretty rendering
   gem 'awesome_print', require:'ap'

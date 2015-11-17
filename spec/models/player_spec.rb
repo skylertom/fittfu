@@ -1,29 +1,25 @@
 require 'rails_helper'
 
 describe Player do
-  let(:player) { FactoryGirl.build(:player) }
+  let(:player) { build(:player) }
   subject { player }
-
 
   it { should respond_to (:name) }
   it { should respond_to (:gender) }
 
-  describe '#validations' do
-    it 'should be valid' do
-      expect(player).to be_valid
-    end
-
-    it 'should not be valid without a name' do
-      player.name = nil
-      expect(player).to_not be_valid
-    end
+  it 'has a valid factory' do
+    expect(build(:game)).to be_valid
   end
 
-  describe '#associations' do
-    it 'should destroy dependent memberships' do
-      player.save!
-      FactoryGirl.create(:membership, player: player)
-      expect { player.destroy}.to change {Membership.count}.by(-1)
-    end
+  describe 'ActiveModel validations' do
+    it { expect(subject).to validate_presence_of(:name) }
+  end
+
+  describe 'ActiveRecord associations' do
+    it { expect(subject).to have_many(:memberships).dependent(:destroy) }
+    it { expect(subject).to have_many(:teams).through(:memberships) }
+    it { expect(subject).to have_one(:membership) }
+    it { expect(subject).to have_one(:team).through(:membership) }
+    it { expect(subject).to have_many(:game_stats).dependent(:destroy) }
   end
 end
