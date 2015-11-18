@@ -4,11 +4,12 @@ class GamesController < ApplicationController
   end
 
   def new
+    authorize Game.new
   end
 
-  # TODO create redirect case when game doesn't save
   def create
     @game = Game.new(game_params)
+    authorize @game
     if @game.save
       create_team_game(params[:home_team][:team_id])
       create_team_game(params[:away_team][:team_id])
@@ -25,6 +26,7 @@ class GamesController < ApplicationController
 
   def scorekeep
     @game = Game.find_by(id: params[:id])
+    authorize @game
   end
 
   def past_index
@@ -43,6 +45,7 @@ class GamesController < ApplicationController
   end
 
   def create_schedule
+    authorize Game.new
     if Schedule.for(Time.zone.now.year).any?
       if MakeSchedule.build.call
         redirect_to games_path
@@ -57,6 +60,7 @@ class GamesController < ApplicationController
 
   end
 
+  # TODO Remove for production
   def delete_all
     Game.destroy_all unless Game.first.blank?
     redirect_to games_path
@@ -64,6 +68,7 @@ class GamesController < ApplicationController
 
   def destroy
     @game = Game.find_by(id: params[:id])
+    authorize @game
     if @game
       @game.destroy
     else

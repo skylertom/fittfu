@@ -4,10 +4,12 @@ class PlayersController < ApplicationController
   end
 
   def new
+    authorize Player.new
   end
 
   def create
     @player = Player.new(player_params)
+    authorize @player
     if @player.save
       if params[:membership][:team_id].blank?
         redirect_to @player
@@ -29,6 +31,7 @@ class PlayersController < ApplicationController
 
   def destroy
     @player = Player.find_by(id: params[:id])
+    authorize @player
     if @player
       @player.destroy
     else

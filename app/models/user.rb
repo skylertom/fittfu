@@ -4,15 +4,17 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  TYPE = %w(ADMIN COMMISSIONER)
-  ADMIN = 0
-  COMMISSIONER = 1
-
-  def is_admin?
-    user_type == ADMIN
+  def admin_or_commissioner?
+    admin || commissioner
   end
 
+  # TODO remove
+  def is_admin?
+    true
+  end
+
+  # TODO remove
   def is_commissioner?
-    user_type == COMMISSIONER
+    true
   end
 end

@@ -3,6 +3,7 @@ class GameStatsController < ApplicationController
 
   def update
     @game_stat = GameStat.find_by(id: params["id"])
+    authorize @game_stat
     if @game_stat
       @game_stat.update!(game_stat_params)
       respond_to do |format|

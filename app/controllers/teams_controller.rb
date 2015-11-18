@@ -4,10 +4,12 @@ class TeamsController < ApplicationController
   end
 
   def new
+    authorize Team.new
   end
 
   def create
     @team = Team.new(team_params)
+    authorize @team
     @team.save
     redirect_to @team
   end
@@ -18,6 +20,7 @@ class TeamsController < ApplicationController
 
   def destroy
     @team = Team.find_by(id: params[:id])
+    authorize @team
     if @team
       @team.destroy
     else

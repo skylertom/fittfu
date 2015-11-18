@@ -1,9 +1,11 @@
 class SchedulesController < ApplicationController
   def index
     @schedules = Schedule.all
+    authorize @schedules
   end
 
   def new
+    authorize Schedule.new
   end
 
   def create
@@ -12,6 +14,7 @@ class SchedulesController < ApplicationController
     params['schedule']['start_time'] = Time.zone.parse(params['start_time'], base_time)
     params['schedule']['end_time'] = Time.zone.parse(params['end_time'], base_time)
     @schedule = Schedule.new(schedule_params)
+    authorize @schedule
     if @schedule.save
       flash[:success] = "Created event starting at #{@schedule.start_time.to_s(:feedback)}"
     else
@@ -24,6 +27,7 @@ class SchedulesController < ApplicationController
 
   def destroy
     @schedule = Schedule.find_by(id: params[:id])
+    authorize @schedule
     if @schedule
       @schedule.destroy
     else
