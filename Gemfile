@@ -18,6 +18,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'activerecord-import', '~> 0.10.0', require: false
 gem 'redis', '3.2.1'
 gem 'rack-timeout', '0.3.2'
+gem 'devise'
 
 group :production do
   gem 'puma', '2.14.0'

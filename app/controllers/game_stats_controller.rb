@@ -1,4 +1,6 @@
 class GameStatsController < ApplicationController
+  before_filter :authenticate_user!
+
   def update
     @game_stat = GameStat.find_by(id: params["id"])
     if @game_stat
