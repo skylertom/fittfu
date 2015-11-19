@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118051958) do
+ActiveRecord::Schema.define(version: 20151119031742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20151118051958) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "time"
+  end
+
+  create_table "invitations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "authority"
+    t.uuid     "user_id"
+    t.uuid     "code"
+    t.string   "email"
+    t.uuid     "invitor_id"
+    t.integer  "accepted",   default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "memberships", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -96,6 +107,7 @@ ActiveRecord::Schema.define(version: 20151118051958) do
     t.string   "name"
     t.boolean  "admin",                  default: false
     t.boolean  "commissioner",           default: false
+    t.uuid     "invite_code"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

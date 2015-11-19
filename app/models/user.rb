@@ -4,17 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def admin_or_commissioner?
-    admin || commissioner
-  end
+  after_create :resolve_invitations
 
-  # TODO remove
-  def is_admin?
-    true
-  end
-
-  # TODO remove
-  def is_commissioner?
-    true
+  def resolve_invitations
+    i = Invitation.find_by(code: invite_code, user_id: nil, accepted: 0)
+    unless i.blank? || i.invitor.blank?
+      self.update(i.authority => true)
+      i.update(user_id: id, accepted: 1)
+    end
   end
 end

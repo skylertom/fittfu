@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for :invitation, url: invitations_path do |f| %>
+          <h2>Invite someone</h2>
+          <p>
+            <%= f.label :email %>
+            <%= f.text_field :email, required: true %>
+          </p>
+          <div class="field">
+            <%= f.label :authority %>
+            <%= f.select :authority, Invitation::TYPES %>
+          </div>
+          <div>
+            <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
