@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @teams = Team.all
   end
@@ -32,6 +34,6 @@ class TeamsController < ApplicationController
   private
 
     def team_params
-      params.require(:team).permit(:name, :color)
+      params.require(:team).permit(policy(@team).permitted_attributes)
     end
 end

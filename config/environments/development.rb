@@ -1,28 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-
-  # for bullet
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.alert = true
-    Bullet.bullet_logger = true
-    Bullet.console = true
-    #Bullet.growl = true
-    #Bullet.xmpp = { :account  => 'bullets_account@jabber.org',
-    #                :password => 'bullets_password_for_jabber',
-    #                :receiver => 'your_account@jabber.org',
-    #                :show_online_status => true }
-    Bullet.rails_logger = true
-    #Bullet.honeybadger = true
-    #Bullet.bugsnag = true
-    #Bullet.airbrake = true
-    #Bullet.rollbar = true
-    Bullet.add_footer = true
-    #Bullet.stacktrace_includes = [ 'your_gem', 'your_middleware' ]
-    #Bullet.slack = { webhook_url: 'http://some.slack.url', foo: 'bar' }
-  end
-
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -35,8 +13,21 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => 'utf-8'
+  config.action_mailer.default_url_options = { host: ENV['MAIL_HOST']}
+  config.action_mailer.smtp_settings = {
+      # ActionMailer::Base.smtp_settings = {
+      :address        => 'smtp.sendgrid.net',
+      :port           => '587',
+      :authentication => :plain,
+      :user_name      => ENV['SENDGRID_USERNAME'],
+      :password       => ENV['SENDGRID_PASSWORD'],
+      :domain         => 'heroku.com',
+      :enable_starttls_auto => true
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -60,4 +51,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.default_email = ENV['FROM_EMAIL']
+  config.guest_email = ENV['GUEST_EMAIL']
+  config.guest_password = ENV['GUEST_PASS']
 end

@@ -6,6 +6,10 @@ class PlayerPolicy < ApplicationPolicy
     @player = player
   end
 
+  def permitted_attributes
+    [:name, :gender]
+  end
+
   def new?
     user.admin || user.commissioner
   end

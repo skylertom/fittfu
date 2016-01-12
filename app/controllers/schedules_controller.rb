@@ -1,4 +1,6 @@
 class SchedulesController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @schedules = Schedule.all
     authorize @schedules
@@ -39,6 +41,6 @@ class SchedulesController < ApplicationController
   private
 
   def schedule_params
-    params.require(:schedule).permit(:start_time, :end_time)
+    params.require(:schedule).permit(policy(@schedule).permitted_attributes)
   end
 end

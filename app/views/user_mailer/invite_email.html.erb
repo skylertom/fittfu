@@ -1,0 +1,11 @@
+<p>Hello!</p>
+
+<p><%= @invitor.name %> has invited you to be a(n) <% @invite.authority %> for FITTFU. You can do this through the link below.</p>
+
+<p><%= link_to 'Create an account', new_user_registration_url(invite: @invite.code) %></p>
+
+<p>If you didn't request this, please ignore this email.</p>
+<p>When you sign up, you don't need to use this email address, but you must use this link to gain the status of <%= @invite.authority %></p>
+
+<p>Thanks,</p>
+<p>The FITTFU creators</p>

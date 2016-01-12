@@ -6,6 +6,10 @@ class GameStatPolicy < ApplicationPolicy
     @game_stat = game_stat
   end
 
+  def permitted_attributes
+    [:ds, :goals, :assists, :turns]
+  end
+
   def update?
     user.admin || user.commissioner
   end

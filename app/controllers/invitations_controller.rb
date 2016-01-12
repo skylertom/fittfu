@@ -11,6 +11,7 @@ class InvitationsController < ApplicationController
     @invitation.invitor_id = current_user.id
     authorize @invitation
     if @invitation.save
+      UserMailer.invite_email(@invitation).deliver_later
       flash[:success] =  "Sent invitation to #{@invitation.email} to be a #{@invitation.authority}"
       redirect_to invitations_path
     else
@@ -37,6 +38,6 @@ class InvitationsController < ApplicationController
   private
   
   def invitation_params
-    params.require(:invitation).permit(:authority, :code, :invited_by, :email)
+    params.require(:invitation).permit(policy(@invitation).permitted_attributes)
   end
 end

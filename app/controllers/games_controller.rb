@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @games = Game.all.includes(:teams)
   end
@@ -90,6 +92,6 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:week, :time_slot)
+    params.require(:game).permit(policy(@game).permitted_attributes)
   end
 end

@@ -1,4 +1,6 @@
 class PlayersController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @players = Player.includes(:team).all
   end
@@ -43,6 +45,6 @@ class PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:name, :gender)
+    params.require(:player).permit(policy(@player).permitted_attributes)
   end
 end

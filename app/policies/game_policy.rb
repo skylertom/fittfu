@@ -6,6 +6,10 @@ class GamePolicy < ApplicationPolicy
     @game = game
   end
 
+  def permitted_attributes
+    [:week, :time_slot]
+  end
+
   def new?
     user.admin
   end
@@ -19,6 +23,10 @@ class GamePolicy < ApplicationPolicy
   end
 
   def destroy?
+    user.admin
+  end
+
+  def delete_all?
     user.admin
   end
 
