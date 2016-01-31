@@ -6,10 +6,6 @@ class TeamPolicy < ApplicationPolicy
     @team = team
   end
 
-  def permitted_attributes
-    [:name, :color]
-  end
-
   def new?
     user.admin || user.commissioner
   end

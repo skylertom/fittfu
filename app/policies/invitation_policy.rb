@@ -6,10 +6,6 @@ class InvitationPolicy < ApplicationPolicy
     @invitation = invitation
   end
 
-  def permitted_attributes
-    [:authority, :code, :invited_by, :email]
-  end
-
   def new?
     user.admin || user.commissioner
   end

@@ -92,6 +92,6 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(policy(@game).permitted_attributes)
+    params.require(:game).permit(:week, :time_slot)
   end
 end

@@ -41,6 +41,6 @@ class SchedulesController < ApplicationController
   private
 
   def schedule_params
-    params.require(:schedule).permit(policy(@schedule).permitted_attributes)
+    params.require(:schedule).permit(:start_time, :end_time)
   end
 end

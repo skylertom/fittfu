@@ -16,7 +16,6 @@ class PlayersController < ApplicationController
       if params[:membership][:team_id].blank?
         redirect_to @player
       else
-        binding.pry
         membership = @player.memberships.create(team_id: params[:membership][:team_id])
         redirect_to team_path(membership.team)
       end
@@ -45,6 +44,6 @@ class PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(policy(@player).permitted_attributes)
+    params.require(:player).permit(:name, :gender)
   end
 end

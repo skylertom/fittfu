@@ -38,6 +38,6 @@ class InvitationsController < ApplicationController
   private
   
   def invitation_params
-    params.require(:invitation).permit(policy(@invitation).permitted_attributes)
+    params.require(:invitation).permit(:authority, :code, :invited_by, :email)
   end
 end
