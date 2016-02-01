@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   GUEST_ID = "2fa8c788-1dec-4500-9721-95253f6a9322"
-  TUFTS_REGEX = /\b[A-Z0-9._%a-z\-]+@tufts.edu/
+  TUFTS_REGEX = /\A[A-Z0-9._%a-z\-]+@tufts.edu\z/
 
   has_many :sent_invites, class_name: 'Invitation', foreign_key: 'invitor_id'
   has_many :used_invites, class_name: 'Invitation', foreign_key: 'user_id', dependent: :destroy
