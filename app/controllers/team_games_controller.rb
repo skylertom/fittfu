@@ -1,4 +1,6 @@
 class TeamGamesController < ApplicationController
+  before_filter :authenticate_user!
+
   def create
     @team_game = TeamGame.new(team_games_params)
     @team_game.save

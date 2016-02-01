@@ -12,12 +12,7 @@
       <%= render 'layouts/header' %>
     </div>
 
-    <% flash.each do |key, value| %>
-        <div class="alert <%= bootstrap_flash_class(key) %> fade in">
-          <a href="#" data-dismiss="alert" class="close">x</a>
-          <%= value %>
-        </div>
-    <% end %>
+    <%= render 'layouts/flash_messages' %>
 
     <%= yield %>
 

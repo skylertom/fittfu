@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116041626) do
+ActiveRecord::Schema.define(version: 20151124060712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20151116041626) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "time"
+  end
+
+  create_table "invitations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "authority"
+    t.uuid     "user_id"
+    t.uuid     "code"
+    t.string   "email"
+    t.uuid     "invitor_id"
+    t.integer  "accepted",   default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "memberships", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -79,5 +90,31 @@ ActiveRecord::Schema.define(version: 20151116041626) do
     t.datetime "updated_at",                 null: false
     t.boolean  "fantasy",    default: false
   end
+
+  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "name"
+    t.boolean  "admin",                  default: false
+    t.boolean  "commissioner",           default: false
+    t.uuid     "invite_code"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+  end
+
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

@@ -21,7 +21,7 @@ class MakeSchedule
     Schedule.for(Time.zone.now.year).each_with_index do |s, i|
       week = Game.where(week: i).where('time IS ?', nil)
       Schedule::GAMES_IN_NIGHT.times do |time_slot|
-        week.find_by(time_slot: time_slot).update_attribute(:time, s.start_time.advance(minutes: (time_slot * Game::DURATION)))
+        week.find_by(time_slot: time_slot).update(time: s.start_time.advance(minutes: (time_slot * Game::DURATION)))
       end
     end
   end

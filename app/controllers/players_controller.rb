@@ -1,18 +1,21 @@
 class PlayersController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @players = Player.includes(:team).all
   end
 
   def new
+    authorize Player.new
   end
 
   def create
     @player = Player.new(player_params)
+    authorize @player
     if @player.save
       if params[:membership][:team_id].blank?
         redirect_to @player
       else
-        binding.pry
         membership = @player.memberships.create(team_id: params[:membership][:team_id])
         redirect_to team_path(membership.team)
       end
@@ -29,6 +32,7 @@ class PlayersController < ApplicationController
 
   def destroy
     @player = Player.find_by(id: params[:id])
+    authorize @player
     if @player
       @player.destroy
     else

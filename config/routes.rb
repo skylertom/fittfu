@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {:registrations => "users/registrations"}
   resources :welcome, only: [:index]
 
   root 'welcome#index'
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   end
   resources :game_stats, only: [:update]
   resources :schedules
+  resources :invitations
 
   get 'games/:id/scorekeep', to: 'games#scorekeep', as: :scorekeep_games
 

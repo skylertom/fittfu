@@ -18,6 +18,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'activerecord-import', '~> 0.10.0', require: false
 gem 'redis', '3.2.1'
 gem 'rack-timeout', '0.3.2'
+gem 'devise'
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
+end
+gem 'pundit'
 
 group :production do
   gem 'puma', '2.14.0'
@@ -33,11 +40,7 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :test do
-  gem 'rspec-rails', '~>3.3.3'
-  gem 'factory_girl_rails'
-  gem 'shoulda'
-end
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -47,6 +50,7 @@ group :development, :test do
   gem 'awesome_print', require:'ap'
   gem 'brakeman', require: false
   gem 'codesake-dawn', require: false
+  gem 'foreman'
 end
 
 group :development do
@@ -59,8 +63,6 @@ group :development do
   gem 'better_errors', '~> 2.1.1'
   # better asset requests in the server log
   gem 'quiet_assets', ' ~> 1.1.0'
-  # warns about eager loading and N+1 queries, added code to config/environments/development.rb
-  gem 'bullet', '~> 4.14.10'
   # tells you query times in top right
   gem 'rack-mini-profiler'
 end
