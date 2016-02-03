@@ -1,6 +1,6 @@
 <div class="stats-table">
-  <h3 class="thin"><%= team.name %> (<%= team.color %>) Stats</h3>
-    <table class="table table-bordered table-hover table-nonfluid" id="<%= team.id %>">
+  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span class="<%= team.color %>">0</span></h3>
+    <table class="table table-bordered table-hover table-nonfluid" id="<%= team.color %>">
       <tr>
         <th>Player</th>
         <th>Fantasy Points</th>
@@ -17,3 +17,13 @@
       <% end %>
     </table>
 </div>
+
+<script>
+    $(function() {
+        sum = 0;
+        $("table#<%= team.color %> tr > td:nth-child(3)").each(function() {
+            sum += parseInt($(this).text());
+        });
+        $('span.<%= team.color %>').html(sum);
+    });
+</script>

@@ -1,6 +1,6 @@
 <div class="stats-table">
-  <h3 class="thin"><%= team.name %> (<%= team.color %>) Stats</h3>
-  <table class="table table-bordered table-hover" id="<%= team.id %>">
+  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span class="<%= team.color %>">0</span></h3>
+  <table class="table table-bordered table-hover" id="<%= team.color %>">
       <colgroup>
         <col class="name" />
         <col class="points" />
@@ -26,3 +26,22 @@
       <% end %>
     </table>
 </div>
+
+<script>
+    $(function() {
+        var sum = 0;
+        $("table#<%= team.color %> tr > td:nth-child(3)").each(function() {
+            sum += parseInt($(this).text());
+        });
+        sessionStorage['<%= team.color %>'] = sum;
+        $('span.<%= team.color %>').html(sum);
+    });
+    $("table#<%= team.color %>").on('click', 'tr > td:nth-child(3) .plus', function () {
+        sessionStorage['<%= team.color %>'] = parseInt(sessionStorage['<%= team.color %>']) + 1
+        $('span.<%= team.color %>').html(sessionStorage['<%= team.color %>']);
+    });
+    $("table#<%= team.color %>").on('click', 'tr > td:nth-child(3) .minus', function () {
+        sessionStorage['<%= team.color %>'] = parseInt(sessionStorage['<%= team.color %>']) - 1
+        $('span.<%= team.color %>').html(sessionStorage['<%= team.color %>']);
+    });
+</script>
