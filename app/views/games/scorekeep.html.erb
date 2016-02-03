@@ -1,12 +1,6 @@
-<button><%= link_to "Done scorekeeping", @game %></button>
-<p>
-  <strong>Home Team:</strong>
-  <%= link_to @game.teams.first.name, @game.teams.second %>
-</p>
-<p>
-  <strong>Away Team:</strong>
-  <%= link_to @game.teams.second.name, @game.teams.second %>
-</p>
+<div class="btn">
+  <%= link_to "Done scorekeeping", @game %>
+</div>
 <p>
   <strong>Week:</strong>
   <%= @game.week %>
@@ -15,6 +9,8 @@
   <strong>Time slot:</strong>
   <%= @game.time_slot %>
 </p>
-<% @game.teams.each do |team| %>
-    <%= render partial: 'game_stats/scorekeep_table', locals: {team: team, game: @game} %>
-<% end %>
+<div class="playing-teams">
+    <% @game.teams.each do |team| %>
+        <%= render partial: 'game_stats/scorekeep_table', locals: {team: team, game: @game} %>
+    <% end %>
+</div>

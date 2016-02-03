@@ -13,4 +13,5 @@ class TeamPolicy < ApplicationPolicy
   alias_method :create?, :new?
   alias_method :destroy?, :new?
   alias_method :update?, :create?
-end
+  alias_method :edit?, :create?
+  alias_method :update, :edit?end

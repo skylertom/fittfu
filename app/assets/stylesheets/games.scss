@@ -15,3 +15,33 @@ table {
   }
 }
 
+body {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.playing-teams {
+  div {
+    float:right;
+  }
+  div:first-child {
+    float:left;
+  }
+  .stats-table {
+    width: 49%;
+    table {
+      td, th {
+        vertical-align: middle;
+        text-align: center;
+      }
+      .points {
+        width: 20px;
+      }
+      td {
+        //font-size: 20px;
+      }
+    }
+    display: inline;
+  }
+}
+

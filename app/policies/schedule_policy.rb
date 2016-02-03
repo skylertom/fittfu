@@ -14,4 +14,7 @@ class SchedulePolicy < ApplicationPolicy
   alias_method :destroy?, :new?
   alias_method :update?, :new?
   alias_method :index?, :new?
+  alias_method :edit?, :create?
+  alias_method :update, :edit?
+
 end

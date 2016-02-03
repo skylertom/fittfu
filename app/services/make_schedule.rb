@@ -8,6 +8,15 @@ class MakeSchedule
     new
   end
 
+  # TEST function
+  def test
+    current = Time.zone.now.advance(days: 2, hours: 17)
+    5.times do |i|
+      Schedule.create(start_time: current, end_time: current.advance(hours: 2), year: current.year)
+      current = current.advance(weeks: 1)
+    end
+  end
+
   def call()
     # TODO only use real teams (not fantasy)
     return false if Game.count > 10

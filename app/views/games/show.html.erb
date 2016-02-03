@@ -1,14 +1,6 @@
 <% if @game.has_teams? %>
     <button><%= link_to "Scorekeep (Edit Game Stats)", scorekeep_games_path(@game) %></button>
     <p>
-      <strong>Home Team:</strong>
-      <%= link_to @game.teams.first.name, @game.teams.second %>
-    </p>
-    <p>
-      <strong>Away Team:</strong>
-      <%= link_to @game.teams.second.name, @game.teams.second %>
-    </p>
-    <p>
       <strong>Week:</strong>
       <%= @game.week %>
     </p>

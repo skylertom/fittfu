@@ -13,4 +13,5 @@ class GameStatPolicy < ApplicationPolicy
   def update?
     user.admin || user.commissioner
   end
+  alias_method :edit?, :update?
 end

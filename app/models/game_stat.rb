@@ -8,8 +8,8 @@ class GameStat < ActiveRecord::Base
   validates :game_id, presence: true
   validates :player_id, presence: true, uniqueness: { scope: :game_id }
 
-  TYPE = %i(goals assists ds turns)
-  SCORE = [2, 2, 2, -1]
+  TYPE = %i(goals assists ds turns swag)
+  SCORE = [2, 2, 2, -1, 1]
   COUNT = TYPE.zip(SCORE)
 
 

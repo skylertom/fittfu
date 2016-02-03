@@ -1,16 +1,28 @@
-<h3>Team <%= team.color %> Stats</h3>
-<table class="table table-bordered table-hover" id="<%= team.id %>">
-  <tr>
-    <th>Player</th>
-    <th>Fantasy Points</th>
-    <th>Goals</th>
-    <th>Assists</th>
-    <th>Ds</th>
-    <th>Turns</th>
-  </tr>
-  <% game.game_stats.where(player: team.players).includes(:player).each do |stat| %>
-      <tr id="<%= stat.id %>">
-        <%= render partial: 'game_stats/edit_row', locals: {row: stat} %>
+<div class="stats-table">
+    <h2>Team <%= team.color %> Stats</h2>
+    <table class="table table-bordered table-hover" id="<%= team.id %>">
+      <colgroup>
+        <col class="name" />
+        <col class="points" />
+        <col class="goals" />
+        <col class="assists" />
+        <col class="ds" />
+        <col class="turns" />
+        <col class="swag" />
+      </colgroup>
+      <tr>
+        <th>Player</th>
+        <th>Fantasy Points</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Ds</th>
+        <th>Turns</th>
+        <th>Swag</th>
       </tr>
-  <% end %>
-</table>
+      <% game.game_stats.where(player: team.players).includes(:player).each do |stat| %>
+          <tr id="<%= stat.id %>">
+            <%= render partial: 'game_stats/edit_row', locals: {row: stat} %>
+          </tr>
+      <% end %>
+    </table>
+</div>
