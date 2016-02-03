@@ -38,7 +38,9 @@ table {
       }
       .points {
         width: 50px;
-        text-align: left;
+      }
+      th.points {
+        padding: 0;
       }
       .points > td {
         font-size: 30px;

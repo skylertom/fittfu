@@ -1,5 +1,5 @@
 <div class="stats-table">
-  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span class="<%= team.color %>">0</span></h3>
+  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span class="<%= team.color %>"></span></h3>
   <table class="table table-bordered table-hover" id="<%= team.color %>">
       <colgroup>
         <col class="name" />
@@ -12,7 +12,7 @@
       </colgroup>
       <tr>
         <th>Player</th>
-        <th>Points</th>
+        <th class="points">Points</th>
         <th>Goals</th>
         <th>Assists</th>
         <th>Ds</th>
