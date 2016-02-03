@@ -1,6 +1,5 @@
-
 <div class="login centered">
-      <h2>Sign up</h2>
+      <h2 class="title">Sign up</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
@@ -13,7 +12,7 @@
 
       <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm Password", class: "centered" %>
       <div class="actions">
-        <%= f.submit "Sign up", class: "centered btn" %>
+        <%= f.submit "Sign up", class: "centered btn blue" %>
       </div>
   <% end %>
 

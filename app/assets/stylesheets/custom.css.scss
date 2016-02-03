@@ -10,6 +10,10 @@ $white: #FFF;
 $blue: #86BCF2;
 $darkened-blue: #6DA3D9;
 
+h2 {
+  font-weight: 300;
+}
+
 .header {
   margin-bottom: 30px;
 }
@@ -112,3 +116,95 @@ form {
   padding:30px;
   padding-top: 10px;
 }
+
+.login {
+  margin-top: 40px;
+  background-color: $white;
+  border-radius: 7px;
+  width: 350px;
+  border-color: $gray;
+  border-width: 1px;
+  border-style: solid;
+  h2.title {
+    text-align: center;
+    border-bottom-color: $gray;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    padding-bottom: 20px;
+  }
+  input, a {
+    display: block;
+  }
+  input[type=email], input[type=password], input[type=text] {
+    margin-bottom: 10px;
+    border-radius: 4px;
+    width: 250px;
+    border-width: 1px;
+    border-color: $gray;
+    border-style: solid;
+    height: 35px;
+    padding: 10px;
+  }
+  .actions {
+    padding-top: 15px;
+  }
+  input[type=submit].blue {
+    width: 250px;
+    color: $white;
+    background-color: $blue;
+    height: 43px;
+    font-size: 20px;
+    font-weight: 500;
+    a {
+      line-height: 43px;
+    }
+    &:hover {
+      background-color: $darkened-blue;
+    }
+  }
+  form {
+    padding-top: 30px;
+    padding-bottom: 0px;
+  }
+  .forgot {
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #999999;
+    text-decoration: none;
+    &:hover {
+      color: #000000;
+    }
+  }
+
+  .btn-container {
+    border-top-color: $gray;
+    border-top-width: thin;
+    border-top-style: solid;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .btn-gray {
+    height: 43px;
+    width: 250px;
+    a {
+      line-height: 43px;
+    }
+  }
+  &.edit {
+    width: 400px;
+    form.edit_user {
+      border-bottom-color: $gray;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+    input, input.blue, .btn-gray {
+      width: 300px;
+    }
+    .button_to {
+      padding-bottom: 30px;
+    }
+  }
+}
+
