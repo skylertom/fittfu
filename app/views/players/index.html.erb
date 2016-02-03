@@ -5,7 +5,6 @@
     <th>Name</th>
     <th>Gender</th>
     <th>Team</th>
-    <th>Delete</th>
   </tr>
 
   <% @players.each do |player| %>
@@ -15,7 +14,6 @@
         <td>
           <%= player.team.blank? ? content_tag(:p, "Unassigned") : link_to(player.team.name, team_path(player.team)) %>
         </td>
-        <td><%= button_to('x', player, method: :delete) %></td>
       </tr>
   <% end %>
 </table>

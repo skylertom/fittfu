@@ -1,0 +1,88 @@
+$background-gray: #f1f1f1;
+$white: #FFF;
+$blue: #86BCF2;
+$darkened-blue: #6DA3D9;
+$gray: #777;
+
+.login {
+  margin-top: 40px;
+  background-color: $white;
+  border-radius: 7px;
+  width: 340px;
+  border-color: $gray;
+  border-width: 1px;
+  border-style: solid;
+  h2 {
+    text-align: center;
+    font-weight: 300;
+    border-bottom-color: $gray;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    padding-bottom: 20px;
+  }
+  input, a {
+    display: block;
+  }
+  input[type=email], input[type=password] {
+    margin-bottom: 10px;
+    border-radius: 4px;
+    width: 250px;
+    border-width: 1px;
+    border-color: $gray;
+    border-style: solid;
+    height: 35px;
+    padding: 10px;
+  }
+  .actions {
+    padding-top: 15px;
+  }
+  input[type=submit] {
+    width: 250px;
+    color: $white;
+    background-color: $blue;
+    height: 43px;
+    font-size: 20px;
+    font-weight: 500;
+    a {
+      line-height: 43px;
+    }
+    &:hover {
+      background-color: $darkened-blue;
+    }
+  }
+  form {
+    padding-top: 30px;
+    padding-bottom: 0px;
+  }
+  .forgot {
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #999999;
+    text-decoration: none;
+    &:hover {
+      color: #000000;
+    }
+  }
+
+  .btn-container {
+    border-top-color: $gray;
+    border-top-width: thin;
+    border-top-style: solid;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .btn:hover > div {
+    background-color:rgba(0, 0, 0, .2);
+  }
+
+  .btn-gray {
+    height: 43px;
+    width: 250px;
+    a {
+      line-height: 43px;
+    }
+  }
+}
+

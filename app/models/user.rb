@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :confirmable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  devise :confirmable if Rails.env.production?
 
   GUEST_ID = "2fa8c788-1dec-4500-9721-95253f6a9322"
   TUFTS_REGEX = /\A[A-Z0-9._%a-z\-]+@tufts.edu\z/

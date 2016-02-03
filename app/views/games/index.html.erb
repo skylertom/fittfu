@@ -6,7 +6,6 @@
     <th>Week</th>
     <th>Day</th>
     <th>Time</th>
-    <th>Delete</th>
   </tr>
 
   <% @games.each do |game| %>
@@ -15,7 +14,6 @@
         <td><%= game.week + 1 %></td>
         <td><%= game.time.blank? ? "Not scheduled yet" : game.time.to_s(:day_and_month) %></td>
         <td><%= game.time.blank? ? "#{(game.time_slot + 1).ordinalize} time slot" : game.time.to_s(:time) %></td>
-        <td><%= button_to('x', game, method: :delete) %></td>
       </tr>
   <% end %>
 </table>
