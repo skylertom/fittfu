@@ -32,5 +32,5 @@ class GamePolicy < ApplicationPolicy
 
   alias_method :create?, :new?
   alias_method :edit?, :create?
-  alias_method :update, :edit?
+  alias_method :update?, :edit?
 end

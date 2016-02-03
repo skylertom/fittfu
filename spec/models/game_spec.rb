@@ -82,7 +82,7 @@ describe Game do
           game.save!
           game.team_games.create(team_id: create(:team).id)
           game.team_games.create(team_id: create(:team).id)
-          expect(game.name).to eq "#{game.teams.first.name} vs #{game.teams.second.name}"
+          expect(game.name).to eq "#{game.teams.first.name} VS #{game.teams.second.name}"
         end
       end
     end
