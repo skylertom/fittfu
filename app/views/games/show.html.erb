@@ -1,16 +1,24 @@
 <% if @game.has_teams? %>
-    <button><%= link_to "Scorekeep (Edit Game Stats)", scorekeep_games_path(@game) %></button>
-    <p>
-      <strong>Week:</strong>
-      <%= @game.week %>
-    </p>
-    <p>
-      <strong>Time slot:</strong>
-      <%= @game.time_slot %>
-    </p>
-    <% @game.teams.each do |team| %>
-        <%= render partial: 'game_stats/table', locals: {team: team, game: @game} %>
-    <% end %>
+    <div class="show-game">
+      <div class="score-header">
+        <p>
+          <strong>Week:</strong>
+          <%= @game.week %>
+        </p>
+        <p>
+          <strong>Time slot:</strong>
+          <%= @game.time_slot %>
+        </p>
+        <div class="btn">
+          <%= link_to "Scorekeep (Edit Game Stats)", scorekeep_games_path(@game) %>
+        </div>
+      </div>
+      <div class="playing-teams">
+          <% @game.teams.each do |team| %>
+              <%= render partial: 'game_stats/table', locals: {team: team, game: @game} %>
+          <% end %>
+      </div>
+    </div>
 <% else %>
     <strong>Week:</strong>
     <%= @game.week %>
@@ -19,28 +27,30 @@
       <strong>Time slot:</strong>
       <%= @game.time_slot %>
     </p>
-    <h3>Assign Teams:</h3>
-    <% if @game.teams.any? %>
-        <p>
-          <strong>Home Team:</strong>
-          <%= link_to @game.teams.first.name, @game.teams.second %>
-        </p>
-        <%= form_for [@game, @game.team_games.build] do |f| %>
-            <%= f.hidden_field :game_id %>
-            <label>Add team:</label>
-            <%= f.collection_select(:team_id, Team.real, :id, :name) %>
-            <div>
-              <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
-            </div>
-        <% end %>
-    <% else %>
-        <%= form_for [@game, @game.team_games.build] do |f| %>
-            <%= f.hidden_field :game_id %>
-            <label>Add first team:</label>
-            <%= f.collection_select(:team_id, Team.real, :id, :name) %>
-            <div>
-              <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
-            </div>
+    <% if policy(@game).scorekeep? %>
+        <h3>Assign Teams:</h3>
+        <% if @game.teams.any? %>
+            <p>
+              <strong>Home Team:</strong>
+              <%= link_to @game.teams.first.name, @game.teams.second %>
+            </p>
+            <%= form_for [@game, @game.team_games.build] do |f| %>
+                <%= f.hidden_field :game_id %>
+                <label>Add team:</label>
+                <%= f.collection_select(:team_id, Team.real, :id, :name) %>
+                <div>
+                  <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+                </div>
+            <% end %>
+        <% else %>
+            <%= form_for [@game, @game.team_games.build] do |f| %>
+                <%= f.hidden_field :game_id %>
+                <label>Add first team:</label>
+                <%= f.collection_select(:team_id, Team.real, :id, :name) %>
+                <div>
+                  <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+                </div>
+            <% end %>
         <% end %>
     <% end %>
 <% end %>

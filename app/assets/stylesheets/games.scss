@@ -1,6 +1,7 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$gray: #777;
 
 table {
   form {
@@ -31,8 +32,13 @@ table {
   .stats-table {
     width: 49%;
     table {
+      table-layout: fixed;
+      .name {
+        width: 100px;
+      }
       .points {
-        width: 20px;
+        width: 50px;
+        text-align: left;
       }
       .points > td {
         font-size: 30px;
@@ -41,6 +47,9 @@ table {
         font-size: 14px;
         vertical-align: middle;
         text-align: center;
+      }
+      th {
+        font-weight: 500;
       }
       td {
         a {
@@ -61,14 +70,56 @@ table {
   }
 }
 
+.show-game {
+  table{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.table > tbody > tr > td.editval {
+  padding: 0;
+}
+
+td.editval {
+  position: relative;
+  form input[type=submit] {
+    margin: 0;
+  }
+  .plus, .minus {
+    width: 30px;
+    background-color: #EDF5FD;
+    border: none;
+    color: gray;
+    &:hover {
+      background-color: #C2DDF8;
+    }
+  }
+  .plus {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-bottom-left-radius: 10px;
+  }
+  .minus {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top-right-radius: 10px;
+  }
+}
+
 .games-table {
-  margin-left: 50px;
+  .table > tbody > tr > td {
+    vertical-align: middle;
+  }
   table {
     td, th {
       text-align: center;
+      vertical-align: middle;
     }
     .matchup {
-      width: 250px;
+      width: 270px;
     }
     .week {
       width: 40px;

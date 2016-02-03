@@ -1,13 +1,15 @@
-<table class="table table-bordered table-hover table-nonfluid">
-  <tr>
-    <th>Team Name</th>
-    <th>Color</th>
-  </tr>
-
-  <% @teams.each do |team| %>
+<div class="outerpadleftright">
+    <table class="table table-bordered table-hover table-nonfluid">
       <tr>
-        <td><%= link_to team.name, team_path(team) %></td>
-        <td><%= team.color %></td>
+        <th>Team Name</th>
+        <th>Color</th>
       </tr>
-  <% end %>
-</table>
+
+      <% @teams.each do |team| %>
+          <tr>
+            <td><%= link_to team.name, team_path(team) %></td>
+            <td><%= team.color %></td>
+          </tr>
+      <% end %>
+    </table>
+</div>

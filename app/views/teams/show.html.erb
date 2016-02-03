@@ -1,24 +1,26 @@
-<p>
-  <strong>Team Name:</strong>
-  <%= @team.name %>
-</p>
+<div class="outerpadleftright">
+    <p>
+      <strong>Team Name:</strong>
+      <%= @team.name %>
+    </p>
 
-<p>
-  <strong>Color:</strong>
-  <%= @team.color %>
-</p>
-<h1>Listing Players</h1>
+    <p>
+      <strong>Color:</strong>
+      <%= @team.color %>
+    </p>
+    <h1>Listing Players</h1>
 
-<table class="table table-bordered table-hover">
-  <tr>
-    <th>Name</th>
-    <th>Gender</th>
-  </tr>
-
-  <% @team.players.each do |player| %>
+    <table class="table table-bordered table-hover">
       <tr>
-        <td><%= link_to(player.name, player_path(player)) %></td>
-        <td><%= player.gender_text %></td>
+        <th>Name</th>
+        <th>Gender</th>
       </tr>
-  <% end %>
-</table>
+
+      <% @team.players.each do |player| %>
+          <tr>
+            <td><%= link_to(player.name, player_path(player)) %></td>
+            <td><%= player.gender_text %></td>
+          </tr>
+      <% end %>
+    </table>
+</div>

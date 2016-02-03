@@ -1,17 +1,19 @@
-<h3>Team <%= team.color %> Stats</h3>
-<table class="table table-bordered table-hover" id="<%= team.id %>">
-  <tr>
-    <th>Player</th>
-    <th>Fantasy Points</th>
-    <th>Goals</th>
-    <th>Assists</th>
-    <th>Ds</th>
-    <th>Turns</th>
-    <th>Swag</th>
-  </tr>
-  <% game.game_stats.where(player: team.players).includes(:player).each do |stat| %>
-      <tr id="<%= stat.id %>">
-        <%= render partial: 'game_stats/row', locals: {row: stat} %>
+<div class="stats-table">
+  <h3 class="thin"><%= team.name %> (<%= team.color %>) Stats</h3>
+    <table class="table table-bordered table-hover table-nonfluid" id="<%= team.id %>">
+      <tr>
+        <th>Player</th>
+        <th>Fantasy Points</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Ds</th>
+        <th>Turns</th>
+        <th>Swag</th>
       </tr>
-  <% end %>
-</table>
+      <% game.game_stats.where(player: team.players).includes(:player).each do |stat| %>
+          <tr id="<%= stat.id %>">
+            <%= render partial: 'game_stats/row', locals: {row: stat} %>
+          </tr>
+      <% end %>
+    </table>
+</div>

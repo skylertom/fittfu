@@ -1,4 +1,4 @@
-<div class="games-table">
+<div class="games-table outerpadleftright">
     <table class="games-table table table-bordered table-hover table-nonfluid">
       <colgroup>
         <col class="matchup" />
@@ -18,7 +18,10 @@
       </tr>
       <% @games.each do |game| %>
           <tr>
-            <td><%= link_to(game.teams.first.name, game.teams.first) %> VS <%= link_to(game.teams.second.name, game.teams.second) %></td>
+            <td>
+              <%= link_to(game.teams.first.name, game.teams.first) %>
+              <br><p>vs</p>
+              <%= link_to(game.teams.second.name, game.teams.second) %></td>
             <% if policy(game).scorekeep? %>
                 <td><%= link_to("Scorekeep", scorekeep_games_path(game)) if game.teams.any? %></td>
             <% end %>

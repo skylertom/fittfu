@@ -1,17 +1,19 @@
-<table class="table table-bordered table-hover table-nonfluid">
-  <tr>
-    <th>Name</th>
-    <th>Gender</th>
-    <th>Team</th>
-  </tr>
-
-  <% @players.each do |player| %>
+<div class="outerpadleftright">
+    <table class="table table-bordered table-hover table-nonfluid">
       <tr>
-        <td><%= link_to(player.name, player_path(player)) %></td>
-        <td><%= player.gender_text %></td>
-        <td>
-          <%= player.team.blank? ? content_tag(:p, "Unassigned") : link_to(player.team.name, team_path(player.team)) %>
-        </td>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Team</th>
       </tr>
-  <% end %>
-</table>
+
+      <% @players.each do |player| %>
+          <tr>
+            <td><%= link_to(player.name, player_path(player)) %></td>
+            <td><%= player.gender_text %></td>
+            <td>
+              <%= player.team.blank? ? content_tag(:p, "Unassigned") : link_to(player.team.name, team_path(player.team)) %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+</div>
