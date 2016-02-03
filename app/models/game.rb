@@ -16,7 +16,7 @@ class Game < ActiveRecord::Base
   validates :week, presence: true
 
   def name
-    has_teams? ? "#{teams.first.name} vs #{teams.second.name}" : "Not enoughh teams assigned"
+    has_teams? ? "#{teams.first.name} VS #{teams.second.name}" : "Not enoughh teams assigned"
   end
 
   def has_teams?

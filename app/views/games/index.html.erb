@@ -1,21 +1,32 @@
-<table class="table table-bordered table-hover">
-  <tr>
-    <th>Matchup</th>
-    <th>Week</th>
-    <th>Day</th>
-    <th>Time</th>
-  </tr>
-
-  <% @games.each do |game| %>
+<div class="games-table">
+    <table class="games-table table table-bordered table-hover table-nonfluid">
+      <colgroup>
+        <col class="matchup" />
+        <% if policy(Game.new).scorekeep? %><col class="scorekeep"/><% end %>
+        <col class="view"/>
+        <col class="week" />
+        <col class="day" />
+        <col class="time" />
+      </colgroup>
       <tr>
-        <% if policy(game).scorekeep? %>
-            <td><%= link_to(game.name, scorekeep_games_path(game)) if game.teams.any? %></td>
-        <% else %>
-            <td><%= link_to(game.name, game) if game.teams.any? %></td>
-        <% end %>
-        <td><%= game.week + 1 %></td>
-        <td><%= game.time.blank? ? "Not scheduled yet" : game.time.to_s(:day_and_month) %></td>
-        <td><%= game.time.blank? ? "#{(game.time_slot + 1).ordinalize} time slot" : game.time.to_s(:time) %></td>
+        <th>Matchup</th>
+        <% if policy(Game.new).scorekeep? %><th>Scorekeep</th><% end %>
+        <th>View</th>
+        <th>Week</th>
+        <th>Day</th>
+        <th>Time</th>
       </tr>
-  <% end %>
-</table>
+      <% @games.each do |game| %>
+          <tr>
+            <td><%= link_to(game.teams.first.name, game.teams.first) %> VS <%= link_to(game.teams.second.name, game.teams.second) %></td>
+            <% if policy(game).scorekeep? %>
+                <td><%= link_to("Scorekeep", scorekeep_games_path(game)) if game.teams.any? %></td>
+            <% end %>
+            <td><%= link_to("View", game) if game.teams.any? %></td>
+            <td><%= game.week + 1 %></td>
+            <td><%= game.time.blank? ? "Not scheduled yet" : game.time.to_s(:day_and_month) %></td>
+            <td><%= game.time.blank? ? "#{(game.time_slot + 1).ordinalize} time slot" : game.time.to_s(:time) %></td>
+          </tr>
+      <% end %>
+    </table>
+</div>

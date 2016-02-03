@@ -15,12 +15,13 @@ table {
   }
 }
 
-body {
+.body {
   padding-right: 20px;
   padding-left: 20px;
 }
 
 .playing-teams {
+  text-align: center;
   div {
     float:right;
   }
@@ -30,14 +31,21 @@ body {
   .stats-table {
     width: 49%;
     table {
-      td, th {
-        vertical-align: middle;
-        text-align: center;
-      }
       .points {
         width: 20px;
       }
+      .points > td {
+        font-size: 30px;
+      }
+      td, th {
+        font-size: 14px;
+        vertical-align: middle;
+        text-align: center;
+      }
       td {
+        a {
+          color: #000000;
+        }
         //font-size: 20px;
       }
     }
@@ -45,3 +53,31 @@ body {
   }
 }
 
+.score-header {
+  padding-left: 50px;
+  p, div {
+    padding-right: 20px;
+    display: inline-block;
+  }
+}
+
+.games-table {
+  margin-left: 50px;
+  table {
+    td, th {
+      text-align: center;
+    }
+    .matchup {
+      width: 250px;
+    }
+    .week {
+      width: 40px;
+    }
+    .day {
+      width: 100px;
+    }
+    .time {
+      width: 60px;
+    }
+  }
+}
