@@ -7,7 +7,7 @@ class GameStatPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:ds, :goals, :assists, :turns]
+    [:ds, :goals, :assists, :turns, :swag]
   end
 
   def update?

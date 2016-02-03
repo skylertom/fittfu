@@ -1,5 +1,5 @@
 class GameStat < ActiveRecord::Base
-  FIELDS = %w(Ds Goals Assists Turns)
+  FIELDS = %w(Ds Goals Assists Turns Swag)
 
   belongs_to :player
   belongs_to :game
