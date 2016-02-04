@@ -9,7 +9,6 @@ module ApplicationHelper
 
   # determines whether the navbar is active
 	def navbar_active(controller)
-    p params[:controller]
 		if params[:controller] == controller
 			'active'
 		else

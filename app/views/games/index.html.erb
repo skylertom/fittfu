@@ -1,4 +1,19 @@
 <div class="games-table outerpadleftright">
+  <div class="header">
+    <h3 class="thin inline-block">View: </h3>
+    <div class="inline-block">
+      <%= link_to "Current games", root_path(params.merge(time: :current)), class: games_range("current") %>
+    </div>
+    <div class="inline-block">
+      <%= link_to "Upcoming games", root_path(params.merge(time: "upcoming")), class: games_range("upcoming") %>
+    </div>
+    <div class="inline-block">
+        <%= link_to "Past games", root_path(params.merge(time: :past)), class: games_range("past") %>
+    </div>
+    <div class="inline-block">
+        <%= link_to "All games", root_path(params.merge(time: :all)), class: games_range("all") %>
+    </div>
+  </div>
     <table class="games-table table table-bordered table-hover table-nonfluid">
       <colgroup>
         <col class="matchup" />

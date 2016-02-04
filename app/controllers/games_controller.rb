@@ -2,7 +2,16 @@ class GamesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @games = Game.all.includes(:teams)
+    if params[:time] == "past"
+      @games = Game.past.includes(:teams)
+    elsif params[:time] == "upcoming"
+      @games = Game.upcoming.includes(:teams)
+    elsif params[:time] == "all"
+      @games = Game.all.includes(:teams)
+    else
+      @games = Game.current.includes(:teams)
+    end
+    authorize @games
   end
 
   def new
@@ -24,26 +33,12 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find_by(id: params[:id])
+    authorize @game
   end
 
   def scorekeep
     @game = Game.find_by(id: params[:id])
     authorize @game
-  end
-
-  def past_index
-    @games = Game.past.includes(:teams)
-    render :index
-  end
-
-  def current_index
-    @games = Game.current.includes(:teams)
-    render :index
-  end
-
-  def upcoming_index
-    @games = Game.upcoming.includes(:teams)
-    render :index
   end
 
   def create_schedule

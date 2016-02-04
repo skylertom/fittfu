@@ -10,6 +10,10 @@ class GamePolicy < ApplicationPolicy
     [:week, :time_slot]
   end
 
+  def index?
+    !user.blank?
+  end
+
   def new?
     user.admin
   end

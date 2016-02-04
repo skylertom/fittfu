@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $gray: #777;
+$background-gray: #f1f1f1;
+$black: #000000;
 
 table {
   form {
@@ -14,6 +16,10 @@ table {
   p {
     display: inline;
   }
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .body {
@@ -112,6 +118,18 @@ td.editval {
 }
 
 .games-table {
+  .header {
+    div, h3 {
+      margin-right: 20px;
+    }
+    a {
+      font-size: 20px;
+      font-weight: 200;
+      &.active {
+        color: $black;
+      }
+    }
+  }
   .table > tbody > tr > td {
     vertical-align: middle;
   }
