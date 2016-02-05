@@ -4,6 +4,8 @@
 $gray: #777;
 $background-gray: #f1f1f1;
 $black: #000000;
+$blue: #86BCF2;
+
 
 table {
   form {
@@ -63,7 +65,6 @@ table {
         a {
           color: #000000;
         }
-        //font-size: 20px;
       }
     }
     display: inline;
@@ -118,8 +119,15 @@ td.editval {
 }
 
 .games-table {
-  .header {
+  a:hover {
+    font-weight: bold;
+  }
+  .views {
+    background-color: $background-gray;
+    width: 100%;
+    margin-bottom: 15px;
     div, h3 {
+      margin-top: 10px;
       margin-right: 20px;
     }
     a {
@@ -134,15 +142,41 @@ td.editval {
     vertical-align: middle;
   }
   table {
+    background: none;
+    border: none;
+    border-collapse: separate;
+    tr {
+      &.empty {
+        height: 15px;
+      }
+    }
     td, th {
+      border-spacing: 0 20px;
+      background-color: #FFF;
       text-align: center;
       vertical-align: middle;
     }
+    td.first {
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+    td.last {
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
     .matchup {
-      width: 270px;
+      padding-left: 20px;
+      width: 280px;
+      text-align: left;
+    }
+    .scorekeep {
+      width: 90px;
+    }
+    .view {
+      width: 60px;
     }
     .week {
-      width: 40px;
+      width: 80px;
     }
     .day {
       width: 100px;
