@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   resources :schedules
   resources :invitations
 
+  resources :commissioner, only: [:index]
+  get 'commissioner/authenticate', to: 'commissioner#auth', as: :authenticate_commissioner
+  get 'commissioner/oath2callback', to: 'commissioner#oath2callback', as: :oath2callback_commissioner
+
   get 'games/:id/scorekeep', to: 'games#scorekeep', as: :scorekeep_games
 
   get 'createschedule', to: 'games#create_schedule', as: :schedule_games
