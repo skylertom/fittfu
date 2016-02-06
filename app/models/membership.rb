@@ -14,8 +14,6 @@ class Membership < ActiveRecord::Base
   after_save :create_game_stats
 
   def create_game_stats
-    unless fantasy || team.games.blank?
-      team.games.each { |game| game.game_stats.create(player_id: player_id) }
-    end
+    team.games.each { |game| game.game_stats.create(player_id: player_id) } unless fantasy
   end
 end
