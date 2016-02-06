@@ -45,7 +45,7 @@ describe GameStat do
           subject.ds = 1
           subject.goals = 2
           subject.turns = 1
-          expect(subject.points).to eq(5)
+          expect(subject.points).to eq(7)
         end
       end
     end
