@@ -15,7 +15,7 @@
       </div>
       <div class="playing-teams">
           <% @game.teams.each do |team| %>
-              <%= render partial: 'game_stats/table', locals: {team: team, game: @game} %>
+              <%= render partial: 'game_stats/table', locals: {team: team, team_game: @game.team_games.first} %>
           <% end %>
       </div>
     </div>

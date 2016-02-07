@@ -17,4 +17,5 @@
 //= require jquery-ui/button
 //= require jquery-ui/datepicker
 //= require jquery-ui/selectmenu
+//= require jquery.tablesorter
 //= require_tree .

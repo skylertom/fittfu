@@ -11,16 +11,27 @@
     <h1>Listing Players</h1>
 
     <table class="table table-bordered table-hover">
-      <tr>
-        <th>Name</th>
-        <th>Gender</th>
-      </tr>
-
-      <% @team.players.each do |player| %>
+      <thead>
           <tr>
-            <td><%= link_to(player.name, player_path(player)) %></td>
-            <td><%= player.gender_text %></td>
+            <th>Name</th>
+            <th>Gender</th>
           </tr>
-      <% end %>
+      </thead>
+      <tbody>
+          <% @team.players.each do |player| %>
+              <tr>
+                <td><%= link_to(player.name, player_path(player)) %></td>
+                <td><%= player.gender_text %></td>
+              </tr>
+          <% end %>
+      </tbody>
     </table>
 </div>
+
+<script>
+    $(document).ready(function()
+        {
+            $("table").tablesorter();
+        }
+    );
+</script>

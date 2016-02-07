@@ -1,15 +1,26 @@
 <div class="outerpadleftright">
     <table class="table table-bordered table-hover table-nonfluid">
+      <thead>
       <tr>
         <th>Team Name</th>
         <th>Color</th>
       </tr>
-
+      </thead>
+      <tbody>
       <% @teams.each do |team| %>
           <tr>
             <td><%= link_to team.name, team_path(team) %></td>
             <td><%= team.color %></td>
           </tr>
       <% end %>
+      </tbody>
     </table>
 </div>
+
+<script>
+    $(document).ready(function()
+        {
+            $("table").tablesorter();
+        }
+    );
+</script>

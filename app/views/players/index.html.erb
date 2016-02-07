@@ -1,11 +1,13 @@
 <div class="outerpadleftright">
     <table class="table table-bordered table-hover table-nonfluid">
-      <tr>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Team</th>
-      </tr>
-
+      <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Team</th>
+          </tr>
+      </thead>
+      <tbody>
       <% @players.each do |player| %>
           <tr>
             <td><%= link_to(player.name, player_path(player)) %></td>
@@ -15,5 +17,14 @@
             </td>
           </tr>
       <% end %>
+      </tbody>
     </table>
 </div>
+
+<script>
+    $(document).ready(function()
+        {
+            $("table").tablesorter();
+        }
+    );
+</script>

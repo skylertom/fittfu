@@ -1,29 +1,31 @@
 <div class="stats-table">
-  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span class="<%= team.color %>"></span></h3>
+  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span><%= team_game.points %></span></h3>
     <table class="table table-bordered table-hover table-nonfluid" id="<%= team.color %>">
-      <tr>
-        <th>Player</th>
-        <th>Fantasy Points</th>
-        <th>Goals</th>
-        <th>Assists</th>
-        <th>Ds</th>
-        <th>Turns</th>
-        <th>Swag</th>
-      </tr>
-      <% game.game_stats.where(player: team.players).includes(:player).each do |stat| %>
+      <thead>
+          <tr>
+            <th>Player</th>
+            <th>Fantasy Points</th>
+            <th>Goals</th>
+            <th>Assists</th>
+            <th>Ds</th>
+            <th>Turns</th>
+            <th>Swag</th>
+          </tr>
+      </thead>
+      <tbody>
+      <% team_game.game_stats.includes(:player).each do |stat| %>
           <tr id="<%= stat.id %>">
             <%= render partial: 'game_stats/row', locals: {row: stat} %>
           </tr>
       <% end %>
+      </tbody>
     </table>
 </div>
 
 <script>
-    $(function() {
-        var sum = 0;
-        $("table#<%= team.color %> tr > td:nth-child(3)").each(function() {
-            sum += parseInt($(this).text());
-        });
-        $('span.<%= team.color %>').html(sum);
-    });
+    $(document).ready(function()
+        {
+            $("#<%= team.color %>").tablesorter();
+        }
+    );
 </script>

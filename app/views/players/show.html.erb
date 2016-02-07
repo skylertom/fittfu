@@ -14,6 +14,7 @@
     </p>
     <h3>Stats</h3>
     <table class="table table-bordered table-hover">
+      <thead>
       <tr>
         <th>Game</th>
         <th>Points</th>
@@ -22,6 +23,17 @@
         <th>Ds</th>
         <th>Turns</th>
       </tr>
+      </thead>
+      <tbody>
       <%= render partial: 'game_stats/simple_row', collection: @player.game_stats %>
+      </tbody>
     </table>
 </div>
+
+<script>
+    $(document).ready(function()
+        {
+            $("#<%= team.color %>").tablesorter();
+        }
+    );
+</script>
