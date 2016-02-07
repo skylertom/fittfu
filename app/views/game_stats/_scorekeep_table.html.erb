@@ -1,41 +1,32 @@
 <div class="stats-table">
-  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span class="<%= team.color %>"></span></h3>
-  <table class="table table-bordered table-hover" id="<%= team.color %>">
-      <colgroup>
-        <col class="name" />
-        <col class="points" />
-        <col class="goals" />
-        <col class="assists" />
-        <col class="ds" />
-        <col class="turns" />
-        <col class="swag" />
-      </colgroup>
+  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span class="<%= team.color %>"><%= team_game.points %></span></h3>
+  <table class="table table-bordered table-hover scorekeeptable" id="<%= team.color %>">
+    <thead>
       <tr>
-        <th>Player</th>
+        <th class="name">Player</th>
         <th class="points">Points</th>
-        <th>Goals</th>
-        <th>Assists</th>
-        <th>Ds</th>
-        <th>Turns</th>
-        <th>Swag</th>
+        <th class="goals">Goals</th>
+        <th class="assists">Assists</th>
+        <th class="ds">Ds</th>
+        <th class="turns">Turns</th>
+        <th class="swag">Swag</th>
       </tr>
+    </thead>
+    <tbody>
       <% team_game.game_stats.includes(:player).each do |stat| %>
           <tr id="<%= stat.id %>">
             <%= render partial: 'game_stats/edit_row', locals: {row: stat} %>
           </tr>
       <% end %>
-    </table>
+    </tbody>
+  </table>
 </div>
 
 <script>
-    $(function() {
-        var sum = 0;
-        $("table#<%= team.color %> tr > td:nth-child(3)").each(function() {
-            sum += parseInt($(this).text());
-        });
-        sessionStorage['<%= team.color %>'] = sum;
-        $('span.<%= team.color %>').html(sum);
-    });
+  $(function() {
+      $("table#<%= team.color %>").tablesorter();
+      sessionStorage['<%= team.color %>'] = parseInt($('span.<%= team.color %>').html());
+  });
     $("table#<%= team.color %>").on('click', 'tr > td:nth-child(3) .plus', function () {
         sessionStorage['<%= team.color %>'] = parseInt(sessionStorage['<%= team.color %>']) + 1
         $('span.<%= team.color %>').html(sessionStorage['<%= team.color %>']);

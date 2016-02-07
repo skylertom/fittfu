@@ -74,8 +74,13 @@ table {
 .score-header {
   padding-left: 50px;
   p, div {
-    padding-right: 20px;
+    margin-right: 20px;
     display: inline-block;
+  }
+  .btn-no-padding a {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: block;
   }
 }
 
@@ -86,35 +91,66 @@ table {
   }
 }
 
-.table > tbody > tr > td.editval {
-  padding: 0;
-}
-
-td.editval {
-  position: relative;
-  form input[type=submit] {
-    margin: 0;
+table.scorekeeptable {
+  border-collapse: collapse;
+  &.table > tbody > tr > td {
+    padding:0; margin:0;
+    height: 35px;
+    position: relative;
   }
-  .plus, .minus {
-    width: 30px;
-    background-color: #EDF5FD;
-    border: none;
-    color: gray;
-    &:hover {
-      background-color: #C2DDF8;
+  td.editval {
+    .whole {
+      width: 100%;
+      height: 100%;
+      padding: 0;
     }
-  }
-  .plus {
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-bottom-left-radius: 10px;
-  }
-  .minus {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-top-right-radius: 10px;
+    form input[type=submit] {
+      margin: 0;
+    }
+    .plus, .minus {
+      border: none;
+    }
+    &:hover > div > span.add1 {
+      color: #000000;
+    }
+    span.add1 {
+      position: absolute;
+      color: #FFFFFF;
+      font-weight: bold;
+      top: 5px;
+      right: 15%;
+      cursor: pointer;
+      pointer-events: none;
+    }
+    span.value {
+      position: absolute;
+      color: #000000;
+      top: 7px;
+      left: 45%;
+      cursor: pointer;
+      pointer-events: none;
+    }
+    .plus {
+      background-color: transparent;
+      height: 100%;
+      width: 100%;
+      &:hover {
+        background-color: #C2DDF8;
+      }
+    }
+    .minus {
+      color: gray;
+      background-color: $background-gray;
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-top-right-radius: 10px;
+      &:hover {
+        background-color: #fee0d2
+      }
+    }
   }
 }
 

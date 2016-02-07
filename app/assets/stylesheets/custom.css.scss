@@ -83,6 +83,12 @@ a {
   color: $blue;
 }
 
+@media (min-width: 979px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
+}
+
 .centered {
   margin-left: auto;
   margin-right: auto;

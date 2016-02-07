@@ -9,9 +9,11 @@
           <strong>Time slot:</strong>
           <%= @game.time_slot %>
         </p>
-        <div class="btn">
-          <%= link_to "Scorekeep (Edit Game Stats)", scorekeep_games_path(@game) %>
-        </div>
+        <% if policy(@game).scorekeep? %>
+            <div class="btn btn-no-padding">
+              <%= link_to "Scorekeep (Edit Game Stats)", scorekeep_games_path(@game) %>
+            </div>
+        <% end %>
       </div>
       <div class="playing-teams">
           <% @game.team_games.each do |team_game| %>
