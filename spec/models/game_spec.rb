@@ -17,7 +17,6 @@ describe Game do
   end
 
   describe 'ActiveRecord associations' do
-    it { expect(subject).to have_many(:game_stats) }
     it { expect(subject).to have_many(:team_games) }
     it { expect(subject).to have_many(:teams).through(:team_games) }
     it { expect(subject).to have_many(:players).through(:teams) }

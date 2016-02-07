@@ -5,7 +5,7 @@ describe GameStat do
   subject { game_stat }
 
 
-  it { should respond_to (:game_id) }
+  it { should respond_to (:team_game_id) }
   it { should respond_to (:player_id) }
   it { should respond_to (:ds) }
   it { should respond_to (:turns) }
@@ -18,7 +18,7 @@ describe GameStat do
 
   describe 'ActiveModel validations' do
     it { expect(subject).to validate_presence_of(:player_id) }
-    it { expect(subject).to validate_presence_of(:game_id) }
+    it { expect(subject).to validate_presence_of(:team_game_id) }
   end
 
   describe 'Initialize Game Stats' do
@@ -30,7 +30,7 @@ describe GameStat do
 
   describe 'ActiveRecord associations' do
     it { expect(subject).to belong_to(:player) }
-    it { expect(subject).to belong_to(:game) }
+    it { expect(subject).to belong_to(:team_game) }
     it { expect(subject).to have_one(:team).through(:player) }
   end
 

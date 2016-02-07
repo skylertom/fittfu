@@ -17,6 +17,7 @@ describe TeamGame do
     end
     it { expect(subject).to validate_presence_of(:game_id) }
     it { expect(subject).to validate_presence_of(:team_id) }
+    it { expect(subject).to have_many(:game_stats) }
     it { expect(subject).to validate_uniqueness_of(:team_id).scoped_to(:game_id) }
   end
 
