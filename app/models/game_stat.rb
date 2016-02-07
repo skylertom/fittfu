@@ -2,13 +2,14 @@ class GameStat < ActiveRecord::Base
   FIELDS = %w(Ds Goals Assists Turns Swag)
 
   belongs_to :player
-  belongs_to :game
+  belongs_to :team_game
   has_one :team, through: :player
+  has_one :game, through: :team_game
 
-  validates :game_id, presence: true
-  validates :player_id, presence: true, uniqueness: { scope: :game_id }
+  validates :team_game_id, presence: true
+  validates :player_id, presence: true, uniqueness: { scope: :team_game_id }
 
-  before_save :update_team_game, if: :goals_changed?
+  before_save :update_team_game
 
   TYPE = %i(goals assists ds turns swag)
   SCORE = [3, 3, 2, -1, 1]
@@ -20,6 +21,6 @@ class GameStat < ActiveRecord::Base
   end
 
   def update_team_game
-    team.team_games.find_by(team_id: team.id).update_attributes(points: goals - goals_was)
+    team_game.update_attributes(points: goals - goals_was) if goals_changed?
   end
 end

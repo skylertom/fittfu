@@ -14,8 +14,8 @@
         </div>
       </div>
       <div class="playing-teams">
-          <% @game.teams.each do |team| %>
-              <%= render partial: 'game_stats/table', locals: {team: team, team_game: @game.team_games.first} %>
+          <% @game.team_games.each do |team_game| %>
+              <%= render partial: 'game_stats/table', locals: {team: team_game.team, team_game: team_game} %>
           <% end %>
       </div>
     </div>
@@ -29,7 +29,7 @@
     </p>
     <% if policy(@game).scorekeep? %>
         <h3>Assign Teams:</h3>
-        <% if @game.teams.any? %>
+        <% if @game.team_games.any? %>
             <p>
               <strong>Home Team:</strong>
               <%= link_to @game.teams.first.name, @game.teams.second %>

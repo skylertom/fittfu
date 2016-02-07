@@ -12,7 +12,7 @@
     </div>
 </div>
 <div class="playing-teams">
-    <% @game.teams.each do |team| %>
-        <%= render partial: 'game_stats/scorekeep_table', locals: {team: team, game: @game} %>
+    <% @game.team_games.each do |team_game| %>
+        <%= render partial: 'game_stats/scorekeep_table', locals: {team: team_game.team, team_game: team_game} %>
     <% end %>
 </div>

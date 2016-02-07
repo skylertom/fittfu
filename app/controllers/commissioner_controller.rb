@@ -32,7 +32,7 @@ class CommissionerController < ApplicationController
         Resque.enqueue(ExportData, auth.access_token, 1)
       end
     else
-      Resque.enqueue(ExportData, session[:google_access_token], 2)
+      Resque.enqueue(ExportData, session[:google_access_token], 1)
     end
   end
 end

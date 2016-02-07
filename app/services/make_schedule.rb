@@ -1,3 +1,6 @@
+# Note: using active-record-import is overkill in this scenario
+#   the number of records isn't large enough to be necessary, but
+#   I wanted to learn the gem
 require 'activerecord-import/base'
 ActiveRecord::Import.require_adapter(ActiveRecord::Base.configurations['production']['adapter'])
 
@@ -9,9 +12,9 @@ class MakeSchedule
   end
 
   # TEST function
-  def test
-    current = Time.zone.now.advance(days: 2, hours: 17)
-    5.times do |i|
+  def make_times
+    current = Time.zone.local(2016, 1, 29, 20)
+    6.times do |i|
       Schedule.create(start_time: current, end_time: current.advance(hours: 2), year: current.year)
       current = current.advance(weeks: 1)
     end
@@ -62,7 +65,7 @@ class MakeSchedule
     end
     team_game_save = TeamGame.import columns, values
     if team_game_save.failed_instances.blank?
-      return make_game_stats(game_ids)
+      return make_game_stats(team_game_save)
     else
       p "Error: Failed to schedule all games"
       team_game_save.failed_instances.each do |i|
@@ -85,12 +88,12 @@ class MakeSchedule
     end
   end
 
-  def make_game_stats(game_ids)
-    columns = [:game_id, :player_id]
+  def make_game_stats(team_game_save)
+    columns = [:team_game_id, :player_id]
     values = []
-    games = Game.where(id: game_ids).includes(:players)
-    games.each do |row|
-      row.players.pluck(:id).each do |player_id|
+    TeamGame.all.each do |row|
+      player_ids = row.team.players.pluck(:id)
+      player_ids.each do |player_id|
         values << [row.id, player_id]
       end
     end

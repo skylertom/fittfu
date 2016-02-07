@@ -19,7 +19,7 @@
         <th>Turns</th>
         <th>Swag</th>
       </tr>
-      <% game.game_stats.where(player: team.players).includes(:player).each do |stat| %>
+      <% team_game.game_stats.includes(:player).each do |stat| %>
           <tr id="<%= stat.id %>">
             <%= render partial: 'game_stats/edit_row', locals: {row: stat} %>
           </tr>

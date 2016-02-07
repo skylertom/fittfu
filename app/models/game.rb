@@ -10,7 +10,6 @@ class Game < ActiveRecord::Base
   has_many :team_games, inverse_of: :game, dependent: :destroy
   has_many :teams, through: :team_games
   has_many :players, through: :teams
-  has_many :game_stats, dependent: :destroy
 
   validates :time_slot, presence: true
   validates :week, presence: true
