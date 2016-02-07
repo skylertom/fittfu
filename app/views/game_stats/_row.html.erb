@@ -1,0 +1,7 @@
+  <td><%= link_to(row.player.name, row.player) %></td>
+  <td><%= row.points %></td>
+  <% GameStat::TYPE.each do |index| %>
+      <td>
+        <p><%= row[index] %></p>
+      </td>
+  <% end %>

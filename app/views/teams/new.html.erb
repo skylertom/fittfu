@@ -5,11 +5,11 @@
           <h2>Add Team</h2>
           <p>
             <%= f.label :name %>
-            <%= f.text_field :name %>
+            <%= f.text_field :name, required: true %>
           </p>
           <p>
             <%= f.label :color %>
-            <%= f.text_field :color %>
+            <%= f.text_field :color, required: true %>
           </p>
           <div>
             <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>

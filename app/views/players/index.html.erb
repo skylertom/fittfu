@@ -1,20 +1,30 @@
-<h1>Listing Players</h1>
+<div class="outerpadleftright">
+    <table class="table table-bordered table-hover table-nonfluid">
+      <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Team</th>
+          </tr>
+      </thead>
+      <tbody>
+      <% @players.each do |player| %>
+          <tr>
+            <td><%= link_to(player.name, player_path(player)) %></td>
+            <td><%= player.gender_text %></td>
+            <td>
+              <%= player.team.blank? ? content_tag(:p, "Unassigned") : link_to(player.team.name, team_path(player.team)) %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+</div>
 
-<table class="table table-bordered table-hover">
-  <tr>
-    <th>Name</th>
-    <th>Gender</th>
-    <th>Team</th>
-  </tr>
-
-  <% @players.each do |player| %>
-      <tr>
-        <td><%= player.name %></td>
-        <td><%= player.gender %></td>
-        <td>
-          <%= link_to(player.teams.first.name, team_path(player.teams.first)) unless player.teams.blank? %>
-          <%= "Unassigned" if player.teams.blank? %>
-        </td>
-      </tr>
-  <% end %>
-</table>
+<script>
+    $(document).ready(function()
+        {
+            $("table").tablesorter();
+        }
+    );
+</script>

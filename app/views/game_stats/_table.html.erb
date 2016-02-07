@@ -1,0 +1,31 @@
+<div class="stats-table">
+  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span><%= team_game.points %></span></h3>
+    <table class="table table-bordered table-hover table-nonfluid" id="<%= team.color %>">
+      <thead>
+          <tr>
+            <th>Player</th>
+            <th>Fantasy Points</th>
+            <th>Goals</th>
+            <th>Assists</th>
+            <th>Ds</th>
+            <th>Turns</th>
+            <th>Swag</th>
+          </tr>
+      </thead>
+      <tbody>
+      <% team_game.game_stats.includes(:player).each do |stat| %>
+          <tr id="<%= stat.id %>">
+            <%= render partial: 'game_stats/row', locals: {row: stat} %>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function()
+        {
+            $("#<%= team.color %>").tablesorter();
+        }
+    );
+</script>

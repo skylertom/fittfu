@@ -1,8 +1,24 @@
 class Game < ActiveRecord::Base
-  validates :game_number, presence: true
+  default_scope { order(:week, :time_slot)}
+  scope :upcoming, -> { where("time > ?", Time.zone.now) }
+  scope :past, -> { where("time < ?", Time.zone.now) }
+  # always show this week's
+  scope :current, -> { where("time < ? AND time > ?", Time.zone.now.advance(weeks: 1, hours: -2), Time.zone.now.advance(hours: -2)) }
+
+  DURATION = 30
+
+  has_many :team_games, inverse_of: :game, dependent: :destroy
+  has_many :teams, through: :team_games
+  has_many :players, through: :teams
+
+  validates :time_slot, presence: true
   validates :week, presence: true
 
-  has_many :team_games
-  has_many :teams, through: :team_games
-  has_many :game_stats, through: :team_games
+  def name
+    has_teams? ? "#{teams.first.name} VS #{teams.second.name}" : "Not enoughh teams assigned"
+  end
+
+  def has_teams?
+    return team_games.size == 2
+  end
 end

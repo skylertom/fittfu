@@ -1,0 +1,24 @@
+<div class="login centered edit">
+    <h2 class="title">Edit <%= resource_name.to_s.humanize %></h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <%= f.text_field :name, placeholder: "Name", class: "centered" %>
+
+      <%= f.email_field :email, placeholder: "Email", class: "centered" %>
+
+      <%= f.password_field :password, autocomplete: "off", placeholder: "New Password (leave blank for no change)", class: "centered" %>
+
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm New Password", class: "centered" %>
+
+      <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current Password (to authorize)", class: "centered" %>
+
+      <div class="actions">
+        <%= f.submit "Update", class: "centered btn blue" %>
+      </div>
+    <% end %>
+
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "centered btn btn-gray" %>
+
+</div>

@@ -1,24 +1,37 @@
-<p>
-  <strong>Team Name:</strong>
-  <%= @team.name %>
-</p>
+<div class="outerpadleftright">
+    <p>
+      <strong>Team Name:</strong>
+      <%= @team.name %>
+    </p>
 
-<p>
-  <strong>Color:</strong>
-  <%= @team.color %>
-</p>
-<h1>Listing Players</h1>
+    <p>
+      <strong>Color:</strong>
+      <%= @team.color %>
+    </p>
+    <h1>Listing Players</h1>
 
-<table class="table table-bordered table-hover">
-  <tr>
-    <th>Name</th>
-    <th>Gender</th>
-  </tr>
+    <table class="table table-bordered table-hover">
+      <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% @team.players.each do |player| %>
+              <tr>
+                <td><%= link_to(player.name, player_path(player)) %></td>
+                <td><%= player.gender_text %></td>
+              </tr>
+          <% end %>
+      </tbody>
+    </table>
+</div>
 
-  <% @team.players.each do |player| %>
-      <tr>
-        <td><%= player.name %></td>
-        <td><%= player.gender %></td>
-      </tr>
-  <% end %>
-</table>
+<script>
+    $(document).ready(function()
+        {
+            $("table").tablesorter();
+        }
+    );
+</script>

@@ -1,0 +1,232 @@
+// Place all the styles related to the Games controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$gray: #777;
+$background-gray: #f1f1f1;
+$black: #000000;
+$blue: #86BCF2;
+
+
+table {
+  form {
+    height: 25px;
+    overflow: hidden;
+    background: none;
+    padding: 0;
+    display: inline;
+  }
+  p {
+    display: inline;
+  }
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.body {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.playing-teams {
+  text-align: center;
+  div {
+    float:right;
+  }
+  div:first-child {
+    float:left;
+  }
+  .stats-table {
+    width: 49.5%;
+    table {
+      table-layout: fixed;
+      .name {
+        width: 100px;
+      }
+      .points {
+        width: 50px;
+      }
+      th.points {
+        padding: 0;
+      }
+      .points > td {
+        font-size: 30px;
+      }
+      td, th {
+        font-size: 14px;
+        vertical-align: middle;
+        text-align: center;
+      }
+      th {
+        font-weight: 500;
+      }
+      td {
+        a {
+          color: #000000;
+        }
+      }
+    }
+    display: inline;
+  }
+}
+
+.score-header {
+  padding-left: 50px;
+  p, div {
+    margin-right: 20px;
+    display: inline-block;
+  }
+  .btn-no-padding a {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: block;
+  }
+}
+
+.show-game {
+  table{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+table.scorekeeptable {
+  border-collapse: collapse;
+  &.table > tbody > tr > td {
+    padding:0; margin:0;
+    height: 35px;
+    position: relative;
+  }
+  td.editval {
+    .whole {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+    }
+    form input[type=submit] {
+      margin: 0;
+    }
+    .plus, .minus {
+      border: none;
+    }
+    &:hover > div > span.add1 {
+      color: #000000;
+    }
+    span.add1 {
+      position: absolute;
+      color: #FFFFFF;
+      font-weight: bold;
+      top: 5px;
+      right: 15%;
+      cursor: pointer;
+      pointer-events: none;
+    }
+    span.value {
+      position: absolute;
+      color: #000000;
+      top: 7px;
+      left: 45%;
+      cursor: pointer;
+      pointer-events: none;
+    }
+    .plus {
+      background-color: transparent;
+      height: 100%;
+      width: 100%;
+      &:hover {
+        background-color: #C2DDF8;
+      }
+    }
+    .minus {
+      color: gray;
+      background-color: $background-gray;
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-top-right-radius: 10px;
+      &:hover {
+        background-color: #fee0d2
+      }
+    }
+  }
+}
+
+.games-table {
+  .views {
+    background-color: $background-gray;
+    width: 100%;
+    margin-bottom: 15px;
+    h3 {
+      margin-top: 10px;
+      padding-left: 5px;
+    }
+    div {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    a {
+      font-size: 20px;
+      font-weight: 200;
+      &.active {
+        color: $black;
+        font-weight: 400;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .table > tbody > tr > td {
+    vertical-align: middle;
+  }
+  table {
+    a:hover {
+      font-weight: 500;
+    }
+    background: none;
+    border: none;
+    border-collapse: separate;
+    tr {
+      &.empty {
+        height: 15px;
+      }
+    }
+    td, th {
+      border-spacing: 0 20px;
+      background-color: #FFF;
+      text-align: center;
+      vertical-align: middle;
+    }
+    td.first {
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+    td.last {
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+    .matchup {
+      padding-left: 20px;
+      width: 280px;
+      text-align: left;
+    }
+    .scorekeep {
+      width: 90px;
+    }
+    .view {
+      width: 60px;
+    }
+    .week {
+      width: 80px;
+    }
+    .day {
+      width: 100px;
+    }
+    .time {
+      width: 60px;
+    }
+  }
+}

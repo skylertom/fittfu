@@ -1,0 +1,65 @@
+<div class="games-table outerpadleftright">
+  <div class="views">
+    <h3 class="blthin inline-block">View: </h3>
+    <div class="inline-block">
+      <%= link_to "Current games", root_path(params.merge(time: :current)), class: games_range("current") %>
+    </div>
+    <div class="inline-block">
+      <%= link_to "Upcoming games", root_path(params.merge(time: "upcoming")), class: games_range("upcoming") %>
+    </div>
+    <div class="inline-block">
+        <%= link_to "Past games", root_path(params.merge(time: :past)), class: games_range("past") %>
+    </div>
+    <div class="inline-block">
+        <%= link_to "All games", root_path(params.merge(time: :all)), class: games_range("all")  %>
+    </div>
+  </div>
+  <% if @games.any? %>
+    <table cellspacing=10 class="games-table table table-bordered table-hover table-nonfluid">
+      <colgroup>
+        <col class="week" />
+        <col class="matchup" />
+        <% if policy(Game.new).scorekeep? %><col class="scorekeep"/><% end %>
+        <col class="view"/>
+        <col class="day" />
+        <col class="time" />
+      </colgroup>
+      <% @games.each do |game| %>
+          <tr>
+            <td class="first">Week <%= game.week + 1 %></td>
+            <td class="matchup">
+              <%= link_to(game.teams.first.name, game.teams.first) %>
+              <br><p>vs</p>
+              <%= link_to(game.teams.second.name, game.teams.second) %></td>
+            <% if policy(game).scorekeep? %>
+                <td><%= link_to("Scorekeep", scorekeep_games_path(game)) if game.team_games.any? %></td>
+            <% end %>
+            <td><%= link_to("View", game) %></td>
+            <td><%= game.time.blank? ? "Not scheduled yet" : game.time.to_s(:day_and_month) %></td>
+            <td class="last"><%= game.time.blank? ? "#{(game.time_slot + 1).ordinalize} time slot" : game.time.to_s(:time) %></td>
+          </tr>
+          <tr class="empty"></tr>
+      <% end %>
+    </table>
+  <% else %>
+    <h3 class="thin indent">No <%= params[:time].blank? ? "current" : params[:time] %> games, please try a different view</h3>
+  <% end%>
+</div>
+
+<script>
+    $(window).scroll(function(e){
+        var $el = $('.views');
+        var isPositionFixed = ($el.css('position') == 'fixed');
+        if ($(this).scrollTop() > 72 && !isPositionFixed){
+            $('.views').css({'position': 'fixed', 'top': '0px'});
+            $('body').css({'padding-top': '135px'})
+            $('.header').css({'display' : 'none'})
+        }
+        if ($(this).scrollTop() < 72 && isPositionFixed)
+        {
+            $('.views').css({'position': 'static', 'top': '0px'});
+            $('body').css({'padding-top': '0'})
+            $('.header').css({'display' : 'block'})
+        }
+    });
+</script>

@@ -3,5 +3,4 @@ FactoryGirl.define do
     association :team_game
     association :player
   end
-
 end

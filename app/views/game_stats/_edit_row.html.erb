@@ -1,0 +1,13 @@
+  <td><%= link_to(row.player.name, row.player) %></td>
+  <td><%= row.points %></td>
+  <% GameStat::TYPE.each do |index| %>
+      <td class="editval">
+        <div class="whole">
+            <%= button_to("", row, remote: true, method: :patch, params: { "game_stat[#{index}]": row[index]+1 }, class: "plus") %>
+            <span class="value"><%= row[index] %></span>
+            <span class="add1">+</span>
+        </div>
+        <%= button_to('-', row, remote: true, method: :patch, params: { "game_stat[#{index}]": row[index]-1 }, class: "minus") %>
+
+      </td>
+  <% end %>

@@ -1,0 +1,58 @@
+<% if @game.has_teams? %>
+    <div class="show-game">
+      <div class="score-header">
+        <p>
+          <strong>Week:</strong>
+          <%= @game.week %>
+        </p>
+        <p>
+          <strong>Time slot:</strong>
+          <%= @game.time_slot %>
+        </p>
+        <% if policy(@game).scorekeep? %>
+            <div class="btn btn-no-padding">
+              <%= link_to "Scorekeep (Edit Game Stats)", scorekeep_games_path(@game) %>
+            </div>
+        <% end %>
+      </div>
+      <div class="playing-teams">
+          <% @game.team_games.each do |team_game| %>
+              <%= render partial: 'game_stats/table', locals: {team: team_game.team, team_game: team_game} %>
+          <% end %>
+      </div>
+    </div>
+<% else %>
+    <strong>Week:</strong>
+    <%= @game.week %>
+    </p>
+    <p>
+      <strong>Time slot:</strong>
+      <%= @game.time_slot %>
+    </p>
+    <% if policy(@game).scorekeep? %>
+        <h3>Assign Teams:</h3>
+        <% if @game.team_games.any? %>
+            <p>
+              <strong>Home Team:</strong>
+              <%= link_to @game.teams.first.name, @game.teams.second %>
+            </p>
+            <%= form_for [@game, @game.team_games.build] do |f| %>
+                <%= f.hidden_field :game_id %>
+                <label>Add team:</label>
+                <%= f.collection_select(:team_id, Team.real, :id, :name) %>
+                <div>
+                  <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+                </div>
+            <% end %>
+        <% else %>
+            <%= form_for [@game, @game.team_games.build] do |f| %>
+                <%= f.hidden_field :game_id %>
+                <label>Add first team:</label>
+                <%= f.collection_select(:team_id, Team.real, :id, :name) %>
+                <div>
+                  <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>

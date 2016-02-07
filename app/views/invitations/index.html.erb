@@ -1,0 +1,23 @@
+<h1>Listing Invitations</h1>
+
+<table class="table table-bordered table-hover">
+  <tr>
+    <th>Email sent to</th>
+    <th>User</th>
+    <th>Sent by:</th>
+    <th>Accepted:</th>
+    <th>Delete</th>
+  </tr>
+
+  <% @invitations.each do |invitation| %>
+      <tr>
+        <td><%= invitation.email %></td>
+        <td><%= invitation.user_id.blank? ? "Unassigned" : invitation.user.name %></td>
+        <td>
+          <%= invitation.invitor.blank? ? "No longer a user" : invitation.invitor.name %>
+        </td>
+        <td><%= invitation.accepted == 0 ? "No" : "Yes" %></td>
+        <td><%= button_to('x', invitation, method: :delete) %></td>
+      </tr>
+  <% end %>
+</table>

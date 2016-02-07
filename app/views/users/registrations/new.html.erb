@@ -1,0 +1,24 @@
+<div class="login centered">
+      <h2 class="title">Sign up</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+
+      <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "centered" %>
+
+      <%= f.email_field :email, placeholder: "Tufts Email", class: "centered" %>
+
+      <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "centered" %>
+
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm Password", class: "centered" %>
+      <div class="actions">
+        <%= f.submit "Sign up", class: "centered btn blue" %>
+      </div>
+  <% end %>
+
+  <div class="btn-container text-centered">
+    <div class="btn btn-no-padding btn-gray">
+      <%= link_to "Sign in", new_user_session_path %>
+    </div>
+  </div>
+</div>

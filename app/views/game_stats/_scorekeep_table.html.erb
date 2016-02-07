@@ -1,0 +1,38 @@
+<div class="stats-table">
+  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span class="<%= team.color %>"><%= team_game.points %></span></h3>
+  <table class="table table-bordered table-hover scorekeeptable" id="<%= team.color %>">
+    <thead>
+      <tr>
+        <th class="name">Player</th>
+        <th class="points">Points</th>
+        <th class="goals">Goals</th>
+        <th class="assists">Assists</th>
+        <th class="ds">Ds</th>
+        <th class="turns">Turns</th>
+        <th class="swag">Swag</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% team_game.game_stats.includes(:player).each do |stat| %>
+          <tr id="<%= stat.id %>">
+            <%= render partial: 'game_stats/edit_row', locals: {row: stat} %>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  $(function() {
+      $("table#<%= team.color %>").tablesorter();
+      sessionStorage['<%= team.color %>'] = parseInt($('span.<%= team.color %>').html());
+  });
+    $("table#<%= team.color %>").on('click', 'tr > td:nth-child(3) .plus', function () {
+        sessionStorage['<%= team.color %>'] = parseInt(sessionStorage['<%= team.color %>']) + 1
+        $('span.<%= team.color %>').html(sessionStorage['<%= team.color %>']);
+    });
+    $("table#<%= team.color %>").on('click', 'tr > td:nth-child(3) .minus', function () {
+        sessionStorage['<%= team.color %>'] = parseInt(sessionStorage['<%= team.color %>']) - 1
+        $('span.<%= team.color %>').html(sessionStorage['<%= team.color %>']);
+    });
+</script>

@@ -1,0 +1,18 @@
+<div class="score-header">
+    <p>
+      <strong>Week:</strong>
+      <%= @game.week %>
+    </p>
+    <p>
+      <strong>Time slot:</strong>
+      <%= @game.time_slot %>
+    </p>
+    <div class="btn btn-no-padding">
+        <%= link_to "Done scorekeeping", @game %>
+    </div>
+</div>
+<div class="playing-teams">
+    <% @game.team_games.each do |team_game| %>
+        <%= render partial: 'game_stats/scorekeep_table', locals: {team: team_game.team, team_game: team_game} %>
+    <% end %>
+</div>
