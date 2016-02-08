@@ -1,0 +1,64 @@
+<div class="outerpadleftright">
+    <table class="table table-bordered table-hover table-nonfluid">
+      <thead>
+          <tr>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>Commissioner?</th>
+            <th>Admin?</th>
+            <% if policy(User.new).destroy? %>
+                <th>Delete Account?</th>
+            <% end %>
+          </tr>
+      </thead>
+      <tbody>
+      <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td>
+              <div class="commissioner">
+                <p>
+                  <%= bool_to_s(user.commissioner) %>
+                  (
+                </p>
+                <% if policy(user).destroy? %>
+                    <%= form_for user, action: "patch" do |f| %>
+                        <%= f.hidden_field :commissioner, value: !user.commissioner %>
+                        <%= f.submit "Change" %>
+                    <% end %>
+                <% end %>
+                <p>)</p>
+              </div>
+            </td>
+            <td>
+              <div class="admin">
+                <p>
+                  <%= bool_to_s(user.admin) %>
+                  (
+                </p>
+                <% if policy(user).destroy? %>
+                    <%= form_for user, action: "patch" do |f| %>
+                        <%= f.hidden_field :admin, value: !user.admin %>
+                        <%= f.submit "Change" %>
+                    <% end %>
+                <% end %>
+                <p>)</p>
+              </div>
+            </td>
+            <% if policy(User.new).destroy? %>
+                <td><%= button_to('x', user, method: :delete) %></td>
+            <% end %>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function()
+        {
+            $("table").tablesorter();
+        }
+    );
+</script>

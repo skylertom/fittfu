@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :games do
     resources :team_games, only: [:create]
   end
+  resources :users, only: [:index, :destroy]
+  patch 'users/:id', to: 'users#update'
 
   resources :game_stats, only: [:update]
   resources :schedules
