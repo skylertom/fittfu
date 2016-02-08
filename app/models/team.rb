@@ -13,4 +13,12 @@ class Team < ActiveRecord::Base
 
   validates :name, presence: true
   validates :color, presence: true
+
+  before_create :before_create
+
+  #for lookup in google spreadsheet
+  def before_create
+    self.captain_tab = self.name if self.captain_tab.blank?
+    self.short_name = self.name if self.short_name.blank?
+  end
 end

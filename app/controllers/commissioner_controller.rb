@@ -9,9 +9,20 @@ class CommissionerController < ApplicationController
     redirect_to root_url unless current_user.admin || current_user.commissioner
   end
 
-  def auth
-    redirect_to root_url unless current_user.admin || current_user.commissioner
-    if session[:google_access_token].blank? || session[:google_token_date].blank? || Time.now > Time.parse(session[:google_token_date])
+  def get_players
+    if Player.exists?
+      # tell commissioner you already have players
+    else
+      key = auth(get_players_commissioner_url)
+      if !key.blank?
+        GetPlayers.from_google(key)
+        redirect_to teams_path
+      end
+    end
+  end
+
+  def auth(redirect_url)
+    if session[:google_access_token].blank? || session[:google_token_date].blank? || DateTime.now > DateTime.parse(session[:google_token_date])
       client = Google::APIClient.new
       auth = client.authorization
       auth.update!(
@@ -19,20 +30,22 @@ class CommissionerController < ApplicationController
           client_secret: ENV['GOOGLE_CLIENT_SECRET'],
           grant_type: "authorization_code",
           scope: "https://www.googleapis.com/auth/drive ",
-          redirect_uri: authenticate_commissioner_url
+          redirect_uri: redirect_url
       )
       if params['code'].blank?
         auth_url = auth.authorization_uri.to_s
         redirect_to auth_url
+        ""
       else
         auth.code = request['code']
         auth.fetch_access_token!
         session[:google_access_token] = auth.access_token
-        session[:google_token_date] = Time.now.advance(hours: 1).to_s
-        Resque.enqueue(ExportData, auth.access_token, 1)
+        session[:google_token_date] = DateTime.now.advance(hours: 1).to_s
+        return auth.access_token
       end
     else
-      Resque.enqueue(ExportData, session[:google_access_token], 1)
+      p "Already have token"
+      return session[:google_access_token]
     end
   end
 end

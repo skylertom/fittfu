@@ -13,6 +13,7 @@ class GameStat < ActiveRecord::Base
 
   TYPE = %i(goals assists ds turns swag)
   SCORE = [3, 3, 2, -1, 1]
+
   COUNT = TYPE.zip(SCORE)
 
 
@@ -21,6 +22,6 @@ class GameStat < ActiveRecord::Base
   end
 
   def update_team_game
-    team_game.update_attributes(points: goals - goals_was) if goals_changed?
+    team_game.update_attributes(goals: team_game.goals + (goals - goals_was)) if goals_changed?
   end
 end
