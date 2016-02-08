@@ -10,14 +10,24 @@ class CommissionerController < ApplicationController
   end
 
   def get_players
+    # TODO better check for over calling
     if Player.exists?
       # tell commissioner you already have players
     else
-      key = auth(get_players_commissioner_url)
+      key = auth(get_players_url)
       if !key.blank?
         GetPlayers.from_google(key)
         redirect_to teams_path
       end
+    end
+  end
+
+  def load_stats
+    # TODO safeguard against overcalling
+    key = auth(load_stats_url)
+    if !key.blank?
+      GetPlayersStats.from_google(key)
+      redirect_to games_path(params: {time: "all"})
     end
   end
 

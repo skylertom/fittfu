@@ -13,7 +13,7 @@
           </tr>
       </thead>
       <tbody>
-      <% team_game.game_stats.includes(:player).each do |stat| %>
+      <% team_game.game_stats.order(updated_at: :desc).includes(:player).each do |stat| %>
           <tr id="<%= stat.id %>">
             <%= render partial: 'game_stats/row', locals: {row: stat} %>
           </tr>

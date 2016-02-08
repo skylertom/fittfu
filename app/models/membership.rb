@@ -16,8 +16,7 @@ class Membership < ActiveRecord::Base
 
   def create_game_stats
     unless self.fantasy
-      team_game_ids = team.team_games.pluck(:id)
-      team_game_ids.each { |team_game_id| GameStat.create(player_id: player_id, team_game_id: team_game_id) }
+      team.team_games.each { |team_game| GameStat.create(player_id: player_id, team_game_id: team_game.id, week: team_game.game.week) }
     end
   end
 

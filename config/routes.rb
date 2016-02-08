@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   resources :invitations
 
   resources :commissioner, only: [:index]
-  get 'commissioner/getplayers', to: 'commissioner#get_players', as: :get_players_commissioner
+  get 'commissioner/getplayers', to: 'commissioner#get_players', as: :get_players
+  get 'commissioner/loadstats', to: 'commissioner#load_stats', as: :load_stats
 
   get 'games/:id/scorekeep', to: 'games#scorekeep', as: :scorekeep_games
 
