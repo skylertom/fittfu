@@ -4,15 +4,15 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
 
-      <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "centered" %>
+      <%= f.text_field :name, autofocus: true, required: true, placeholder: "Name", class: "centered" %>
 
-      <%= f.email_field :email, placeholder: "Tufts Email", class: "centered" %>
+      <%= f.email_field :email, required: true, placeholder: "Tufts Email", class: "centered" %>
 
-      <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "centered" %>
+      <%= f.password_field :password, required: true, autocomplete: "off", placeholder: "Password", class: "centered" %>
 
-      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm Password", class: "centered" %>
+      <%= f.password_field :password_confirmation, required: true, autocomplete: "off", placeholder: "Confirm Password", class: "centered" %>
       <div class="actions">
-        <%= f.submit "Sign up", class: "centered btn blue" %>
+        <%= f.submit "Sign up", data: { disable_with: "Please wait...." }, class: "centered btn blue" %>
       </div>
   <% end %>
 

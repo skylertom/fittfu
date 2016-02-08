@@ -20,12 +20,49 @@
       <% end %>
     </tbody>
   </table>
+  <button type="button" class="btn" data-toggle="modal" data-target="#addPlayer<%= team.color %>">
+    Add a player to <%= team.color %> Team
+  </button>
+  <div class="modal fade" id="addPlayer<%= team.color %>" tabindex="-1" role="dialog" aria-labelledby="title">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <%= form_for :player, url: players_path, remote: true do |f| %>
+              <div class="form-header">
+                  <h2 id="title"><%= team.color %> Team</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="form-body">
+                  <p>
+                    <%= f.text_field :name, required: true, placeholder: "Name" %>
+                  </p>
+                  <div class="gender_div">
+                    <%= f.radio_button(:gender, 0, checked: true) %>
+                    <%= f.label(:gender_0, "Eman") %>
+                    <%= f.radio_button(:gender, 1) %>
+                    <%= f.label(:gender_1, "Ewo") %>
+                  </div>
+                  <%= hidden_field_tag 'membership[team_id]', team.id  %>
+              </div>
+              <div class="form-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <%= f.submit "Add Player", data: { disable_with: "Please wait...." }, class: "btn" %>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
   $(function() {
       $("table#<%= team.color %>").tablesorter();
       sessionStorage['<%= team.color %>'] = parseInt($('span.<%= team.color %>').html());
+      $(".gender_div").buttonset();
+  });
+  $('.modal input[type=submit]').click(function() {
+    location.reload();
   });
     $("table#<%= team.color %>").on('click', 'tr > td:nth-child(3) .plus', function () {
         sessionStorage['<%= team.color %>'] = parseInt(sessionStorage['<%= team.color %>']) + 1
@@ -35,4 +72,7 @@
         sessionStorage['<%= team.color %>'] = parseInt(sessionStorage['<%= team.color %>']) - 1
         $('span.<%= team.color %>').html(sessionStorage['<%= team.color %>']);
     });
+  $('#addPlayer<%= team.color %>').on('shown.bs.modal', function () {
+      $('#player_name').focus()
+  });
 </script>
