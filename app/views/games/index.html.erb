@@ -52,14 +52,14 @@
         var isPositionFixed = ($el.css('position') == 'fixed');
         if ($(this).scrollTop() > 72 && !isPositionFixed){
             $('.views').css({'position': 'fixed', 'top': '0px'});
-            $('body').css({'padding-top': '135px'})
-            $('.header').css({'display' : 'none'})
+            $('body.games.index').css({'padding-top': '135px'})
+            $('.games.index .header').css({'display' : 'none'})
         }
         if ($(this).scrollTop() < 72 && isPositionFixed)
         {
             $('.views').css({'position': 'static', 'top': '0px'});
-            $('body').css({'padding-top': '0'})
-            $('.header').css({'display' : 'block'})
+            $('body.games.index').css({'padding-top': '0'})
+            $('.games.index .header').css({'display' : 'block'})
         }
     });
 </script>
