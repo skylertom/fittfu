@@ -17,7 +17,7 @@ class OutputWeek
       while !sheet[y, 1].blank? || gender < Player::EWO do
         gender = Player::EWO if sheet[y, 1].blank?
         p = players.find_by(name: sheet[y, 1], gender: gender)
-        sheet[y, week + 1 + 1] = p.game_stats.find_by(week: week).points if !p.blank? && sheet[y, week + 1 + 1].blank?
+        sheet[y, week + 1 + 1] = p.game_stats.find_by(week: week).points if !p.blank?
         y += 1
       end
       sheet.save
