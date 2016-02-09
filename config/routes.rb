@@ -8,14 +8,17 @@ Rails.application.routes.draw do
   resources :games do
     resources :team_games, only: [:create]
   end
+  resources :users, only: [:index, :show, :destroy]
+  patch 'users/:id', to: 'users#update'
 
   resources :game_stats, only: [:update]
   resources :schedules
   resources :invitations
 
   resources :commissioner, only: [:index]
-  get 'commissioner/authenticate', to: 'commissioner#auth', as: :authenticate_commissioner
-  get 'commissioner/oath2callback', to: 'commissioner#oath2callback', as: :oath2callback_commissioner
+  get 'commissioner/getplayers', to: 'commissioner#get_players', as: :get_players
+  get 'commissioner/loadstats', to: 'commissioner#load_stats', as: :load_stats
+  get 'commissioner/export_week', to: 'commissioner#export_week', as: :export_week
 
   get 'games/:id/scorekeep', to: 'games#scorekeep', as: :scorekeep_games
 

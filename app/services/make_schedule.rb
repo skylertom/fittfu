@@ -1,4 +1,5 @@
-# Note: using active-record-import is overkill in this scenario
+# Note: using active-record-import is overkill and no longer efficient
+#   in this scenario
 #   the number of records isn't large enough to be necessary, but
 #   I wanted to learn the gem
 require 'activerecord-import/base'
@@ -89,12 +90,12 @@ class MakeSchedule
   end
 
   def make_game_stats(team_game_save)
-    columns = [:team_game_id, :player_id]
+    columns = [:team_game_id, :player_id, :week]
     values = []
     TeamGame.all.each do |row|
       player_ids = row.team.players.pluck(:id)
       player_ids.each do |player_id|
-        values << [row.id, player_id]
+        values << [row.id, player_id, row.game.week]
       end
     end
     game_stat_save = GameStat.import columns, values

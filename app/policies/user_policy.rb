@@ -1,11 +1,24 @@
 class UserPolicy < ApplicationPolicy
-  def update?
-    user.id != User.GUEST_ID
+  attr_reader :current_user, :target_user
+
+  def initialize(current_user, target_user)
+    @current_user = current_user
+    @target_user = target_user
   end
 
   def index?
-    user.admin
+    current_user.admin
   end
 
-  alias_method :destroy?, :index?
+  def show?
+    current_user.admin
+  end
+
+  def destroy?
+    current_user.admin
+  end
+
+  def update?
+    current_user.admin
+  end
 end

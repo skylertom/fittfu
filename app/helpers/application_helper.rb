@@ -14,5 +14,9 @@ module ApplicationHelper
 		else
 			''
 		end
-	end
+  end
+
+  def bool_to_s(boolean)
+    boolean ? 'Yep' : 'Nope'
+  end
 end

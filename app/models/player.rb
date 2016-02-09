@@ -1,5 +1,7 @@
 class Player < ActiveRecord::Base
   GENDER = %w(eman ewo)
+  EMAN = 0
+  EWO = 1
 
   has_many :memberships, dependent: :destroy
   has_many :teams, through: :memberships

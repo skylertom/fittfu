@@ -8,7 +8,7 @@ describe GamePolicy do
   let(:game) { build(:game)}
   subject { described_class }
 
-  permissions :scorekeep? do
+  permissions :scorekeep?, :new?, :update?, :create?, :destroy? do
     it "denies access if not admin or commissioner" do
       expect(subject).not_to permit(user, game)
     end
@@ -22,7 +22,7 @@ describe GamePolicy do
     end
   end
 
-  permissions :new?, :update?, :create?, :destroy?, :create_schedule? do
+  permissions :create_schedule? do
     it "denies access if not admin or commissioner" do
       expect(subject).not_to permit(user, game)
     end

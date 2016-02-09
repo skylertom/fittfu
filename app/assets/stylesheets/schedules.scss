@@ -1,12 +1,14 @@
-form {
-  label, select, span {
-    vertical-align: middle;
-  }
-  div {
-    padding-bottom: 20px;
-  }
+.schedules {
+  form {
+    label, select, span {
+      vertical-align: middle;
+    }
+    div {
+      padding-bottom: 20px;
+    }
 
-  input[type=submit] {
-    margin-top: 10px;
+    input[type=submit] {
+      margin-top: 10px;
+    }
   }
 }

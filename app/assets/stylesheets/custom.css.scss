@@ -19,8 +19,19 @@ h3.thin {
   font-weight: 300;
 }
 
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+
 .black {
   color: black;
+}
+
+.margin_15 {
+  margin: 15px;
 }
 
 a {
@@ -102,6 +113,8 @@ a {
   padding: 0;
   a {
     line-height: 40px;
+    padding-right: 10px;
+    padding-left: 10px;
   }
 }
 
@@ -111,6 +124,14 @@ a {
   background-color: $blue;
   height: 40px;
   font-size: 20px;
+  color: white;
+  &:active, &:focus {
+    background-color: #D2DBE5;
+    color: #474747;
+    > a {
+      color: #474747;
+    }
+  }
   a {
     color: $white;
     width: 100%;
@@ -119,6 +140,7 @@ a {
   }
   &:hover {
     background-color: $darkened-blue;
+    color: #FFF;
   }
 }
 
@@ -198,7 +220,6 @@ form {
   }
   form {
     padding-top: 30px;
-    padding-bottom: 0px;
   }
   .forgot {
     margin-bottom: 30px;

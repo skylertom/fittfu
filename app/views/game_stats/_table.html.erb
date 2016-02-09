@@ -1,19 +1,19 @@
 <div class="stats-table">
-  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span><%= team_game.points %></span></h3>
+  <h3 class="thin"><%= team.name %> (<%= team.color %>): <span><%= team_game.goals %></span></h3>
     <table class="table table-bordered table-hover table-nonfluid" id="<%= team.color %>">
       <thead>
           <tr>
             <th>Player</th>
             <th>Fantasy Points</th>
-            <th>Goals</th>
-            <th>Assists</th>
-            <th>Ds</th>
-            <th>Turns</th>
-            <th>Swag</th>
+            <th>Goals (3)</th>
+            <th>Assists (3)</th>
+            <th>Ds (2)</th>
+            <th>Turns (-1)</th>
+            <th>Swag (1)</th>
           </tr>
       </thead>
       <tbody>
-      <% team_game.game_stats.includes(:player).each do |stat| %>
+      <% team_game.game_stats.order(updated_at: :desc).includes(:player).each do |stat| %>
           <tr id="<%= stat.id %>">
             <%= render partial: 'game_stats/row', locals: {row: stat} %>
           </tr>

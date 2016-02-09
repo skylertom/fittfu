@@ -12,10 +12,10 @@
 
       <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm New Password", class: "centered" %>
 
-      <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current Password (to authorize)", class: "centered" %>
+      <%= f.password_field :current_password, required: true, autocomplete: "off", placeholder: "Current Password (to authorize)", class: "centered" %>
 
       <div class="actions">
-        <%= f.submit "Update", class: "centered btn blue" %>
+        <%= f.submit "Update", data: { disable_with: "Please wait...." }, class: "centered btn blue" %>
       </div>
     <% end %>
 

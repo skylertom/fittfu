@@ -8,6 +8,8 @@ class GamesController < ApplicationController
       @games = Game.upcoming.includes(:teams)
     elsif params[:time] == "all"
       @games = Game.all.includes(:teams)
+    elsif !params[:week].blank?
+      @games = Game.where(week: params[:week]).includes(:teams)
     else
       @games = Game.current.includes(:teams)
     end

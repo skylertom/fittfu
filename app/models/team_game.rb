@@ -10,7 +10,7 @@ class TeamGame < ActiveRecord::Base
 
   def create_game_stats
     team.players.pluck(:id).each do |player_id|
-      self.game_stats.create(player_id: player_id)
+      self.game_stats.create(player_id: player_id, week: self.game.week)
     end
   end
 end

@@ -11,9 +11,17 @@ class Membership < ActiveRecord::Base
   validates :player_id, presence: true
   validates :team_id, presence: true, uniqueness: { scope: :player_id }
 
-  after_save :create_game_stats
+  after_create :create_game_stats
+  after_destroy :remove_game_stats
 
   def create_game_stats
-    team.games.each { |game| game.game_stats.create(player_id: player_id) } unless self.fantasy
+    unless self.fantasy
+      team.team_games.each { |team_game| GameStat.create(player_id: player_id, team_game_id: team_game.id, week: team_game.game.week) }
+    end
+  end
+
+  def remove_game_stats
+    team_games = TeamGame.where(team_id: team_id).pluck(:id)
+    GameStat.where(player_id: player_id, team_game_id: team_games).destroy_all
   end
 end
