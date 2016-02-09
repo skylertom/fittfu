@@ -1,3 +1,49 @@
 // Place all the styles related to the commissioner controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.commissioner.index {
+  .body {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+  .load, .output, .add, .schedule {
+    .btn, input[type=submit].btn {
+      height: 35px;
+      > a {
+        line-height: 35px;
+      }
+    }
+    h3 {
+      display: inline-block;
+      font-weight: 400;
+      margin: 0;
+      padding-right: 15px;
+      vertical-align: middle;
+    }
+    background-color: #FFF;
+    padding: 15px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    > div {
+      margin-right: 15px;
+    }
+  }
+  .load {
+  }
+  .add{
+
+  }
+  .output {
+    form {
+      select {
+        margin-right: 15px;
+      }
+      padding-left:0;
+      padding-bottom: 0;
+    }
+  }
+  .schedule {
+
+  }
+}

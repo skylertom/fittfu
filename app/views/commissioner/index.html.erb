@@ -1,0 +1,33 @@
+<div class="body">
+  <div class="add">
+    <h3>Add:</h3>
+    <div class="btn btn-no-padding"><%= link_to "Player", new_player_path %></div>
+    <div class="btn btn-no-padding"><%= link_to "Team", new_team_path %></div>
+    <div class="btn btn-no-padding"><%= link_to "Game", new_game_path %></div>
+  </div>
+
+  <div class="output">
+    <%= form_tag(export_week_path, method: 'get') do %>
+        <h3 class="thin">Export Stats to Google Spreadsheet:</h3>
+        <%= select_tag :week, options_for_select((0..Schedule.all.size).map {|i| ["Week #{i+1}", i]}) %>
+        <%= submit_tag "Export", class: "btn btn-no-paddding" %>
+    <% end %>
+  </div>
+
+  <div class="schedule">
+    <h3>Schedule:</h3>
+      <div class="btn btn-no-padding"><%= link_to "View added days and times", schedules_path %></div>
+      <div class="btn btn-no-padding"><%= link_to "Add days and times for games", new_schedule_path %></div>
+  </div>
+
+  <div class="load">
+    <h3>Load data from Google Spreadsheet:</h3>
+    <div class="btn btn-no-padding">
+      <%= link_to "Load Players", get_players_path %>
+    </div>
+
+    <div class="btn btn-no-padding">
+      <%= link_to "Load Stats", load_stats_path %>
+    </div>
+  </div>
+</div>

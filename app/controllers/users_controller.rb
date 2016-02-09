@@ -36,6 +36,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:commissioner, :admin)
+    if current_user.admin
+      params.require(:user).permit(:commissioner, :admin, :confirmed_at)
+    elsif current_user.commissioner
+      params.require(:user).permit(:commissioner)
+    end
   end
 end

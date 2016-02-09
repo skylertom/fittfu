@@ -1,18 +1,24 @@
 $blue: #86BCF2;
 
 body.users.index {
+
   .table > tbody > tr > td {
     vertical-align: middle;
     text-align: center;
     > form input[type=submit] {
       margin: 0;
     }
-  }
-  .admin, .commissioner {
-    > p {
+    form {
+      background: none;
+      padding: 0;
+      display: inline-block;
+    }
+    p {
       display: inline-block;
       margin: 0;
     }
+  }
+  .admin, .commissioner {
     input[type=submit] {
       margin: 0;
       padding: 0;

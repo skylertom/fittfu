@@ -6,8 +6,9 @@
             <th>User Email</th>
             <th>Commissioner?</th>
             <th>Admin?</th>
+            <th>Confirmed Email?</th>
             <% if policy(User.new).destroy? %>
-                <th>Delete Account?</th>
+                <th>Delete?</th>
             <% end %>
           </tr>
       </thead>
@@ -22,7 +23,7 @@
                   <%= bool_to_s(user.commissioner) %>
                   (
                 </p>
-                <% if policy(user).destroy? %>
+                <% if current_user.commissioner || current_user.admin %>
                     <%= form_for user, action: "patch" do |f| %>
                         <%= f.hidden_field :commissioner, value: !user.commissioner %>
                         <%= f.submit "Change" %>
@@ -46,7 +47,19 @@
                 <p>)</p>
               </div>
             </td>
-            <% if policy(User.new).destroy? %>
+            <td>
+              <% if user.confirmed_at.blank? && user.admin %>
+                  <%= form_for user, action: "patch" do |f| %>
+                      <%= f.hidden_field :confirmed_at, value: DateTime.now %>
+                      <%= f.submit "Confirm" %>
+                  <% end %>
+              <% elsif user.confirmed_at.blank? %>
+                <p>Unconfirmed</p>
+              <% else %>
+                  <p>Confirmed</p>
+              <% end %>
+            </td>
+            <% if user.admin %>
                 <td><%= button_to('x', user, method: :delete) %></td>
             <% end %>
           </tr>

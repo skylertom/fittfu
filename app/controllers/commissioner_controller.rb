@@ -10,14 +10,16 @@ class CommissionerController < ApplicationController
   end
 
   def get_players
-    # TODO better check for over calling
     if Player.exists?
-      # tell commissioner you already have players
+      flash[:alert] = "There are already players in the system"
+      redirect_to :back
     else
       key = auth(get_players_url)
       if !key.blank?
+        initial = Players.all.size
         GetPlayers.from_google(key)
-        redirect_to teams_path
+        flash[:success] = "Added #{Players.all.size - initial} players to the database"
+        redirect_to commissioner_index_path
       end
     end
   end
@@ -27,9 +29,17 @@ class CommissionerController < ApplicationController
     key = auth(load_stats_url)
     if !key.blank?
       GetPlayersStats.from_google(key)
-      redirect_to games_path(params: {time: "all"})
+      flash[:success] = "Loaded Players Stats"
+      redirect_to commissioner_index_path
     end
   end
+
+  def export_week
+    flash[:success] = "exported week #{params[:week]} stats to the Google Spreadsheet"
+    redirect_to commissioner_index_path
+  end
+
+  private
 
   def auth(redirect_url)
     if session[:google_access_token].blank? || session[:google_token_date].blank? || DateTime.now > DateTime.parse(session[:google_token_date])

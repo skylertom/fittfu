@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :commissioner, only: [:index]
   get 'commissioner/getplayers', to: 'commissioner#get_players', as: :get_players
   get 'commissioner/loadstats', to: 'commissioner#load_stats', as: :load_stats
+  get 'commissioner/export_week', to: 'commissioner#export_week', as: :export_week
 
   get 'games/:id/scorekeep', to: 'games#scorekeep', as: :scorekeep_games
 

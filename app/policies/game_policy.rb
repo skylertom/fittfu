@@ -15,7 +15,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def new?
-    user.admin
+    user.admin || user.commissioner
   end
 
   def scorekeep?
@@ -27,7 +27,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin
+    user.admin || user.commissioner
   end
 
   def delete_all?

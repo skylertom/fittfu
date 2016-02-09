@@ -10,7 +10,7 @@ class OutputWeek
     #coordinate system starts at 1
     teams = Team.all
     teams.each do |t|
-      sheet = file.worksheet_by_title(t.captain.name)
+      sheet = file.worksheet_by_title(t.captain_tab)
       players = t.players
       y = 2
       gender = Player::EMAN
@@ -36,7 +36,7 @@ class OutputWeek
     y += 1
     Team::STD_SIZE.times do
       team_name = sheet[y, x]
-      team = Team.find_by(name: team_name)
+      team = Team.find_by(short_name: team_name)
       sheet[y, x] = "#{team_name} (#{team_games.find_by(team_id: team.id).goals})" unless team.blank?
       x = x > 2 ? 2 : 3
       y += 1 if x > 2
