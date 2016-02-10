@@ -15,4 +15,6 @@
  *= require jquery-ui/button
  *= require jquery-ui/datepicker
  *= require jquery-ui/selectmenu
+ *= require select2
+ *= require select2-bootstrap
  */

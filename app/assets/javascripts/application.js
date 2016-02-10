@@ -18,4 +18,5 @@
 //= require jquery-ui/datepicker
 //= require jquery-ui/selectmenu
 //= require jquery.tablesorter
+//= require select2
 //= require_tree .

@@ -29,6 +29,7 @@ gem 'pundit'
 gem 'google-api-client', '< 0.9'
 gem 'google_drive', '1.0.1'
 gem 'resque', '~> 1.25.2'
+gem "select2-rails"
 
 group :production do
   gem 'puma', '2.14.0'

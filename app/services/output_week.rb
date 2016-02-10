@@ -6,7 +6,7 @@ class OutputWeek
   def self.write(token, week)
     session = GoogleDrive.login_with_oauth(token)
 
-    file = session.spreadsheet_by_key("1myvP8Bgdx7plek-gX38GvNVsUztj8EMPY76ckNuax-k")
+    file = session.spreadsheet_by_key(ENV['SPREADSHEET_KEY'])
     #coordinate system starts at 1
     teams = Team.all
     teams.each do |t|
