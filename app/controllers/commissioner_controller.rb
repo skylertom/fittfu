@@ -39,7 +39,7 @@ class CommissionerController < ApplicationController
     if !key.blank?
       week = params[:week] || params[:state]
       Resque.enqueue(ExportData, key, week.to_i)
-      flash[:alert] = "Exported in background"
+      flash[:alert] = "Exported week #{week} in background"
       redirect_to commissioner_index_path
     end
   end
