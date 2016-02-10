@@ -25,6 +25,7 @@ class Game < ActiveRecord::Base
   end
 
   def initialize_time
-    self.time = Schedule.all.order(:start_time).pluck(:start_time)[week].advance(minutes: Game::DURATION * time_slot)
+    start = Schedule.all.order(:start_time).pluck(:start_time)[week]
+    self.time = start.advance(minutes: Game::DURATION * time_slot) if self.time.blank? && !start.blank?
   end
 end
