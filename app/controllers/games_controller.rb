@@ -21,7 +21,9 @@ class GamesController < ApplicationController
   end
 
   def create
+    p params
     @game = Game.new(game_params)
+    p @game
     authorize @game
     if @game.save
       create_team_game(params[:home_team][:team_id])

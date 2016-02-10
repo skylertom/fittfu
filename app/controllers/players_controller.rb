@@ -15,11 +15,8 @@ class PlayersController < ApplicationController
     authorize @player
     if @player.save
       if params[:membership][:team_id].blank?
-        p "why is it BLANK"
         redirect_to @player
       else
-        p "NOPE WE GOOD"
-        p params[:membership][:team_id]
         membership = @player.memberships.create(team_id: params[:membership][:team_id])
         redirect_to team_path(membership.team)
       end

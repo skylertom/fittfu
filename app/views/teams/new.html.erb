@@ -8,7 +8,7 @@
             <%= f.text_field :name, required: true %>
           </p>
           <p>
-            <%= f.label :short_name %>
+            <%= f.label 'Abbreviated Name (optional):' %>
             <%= f.text_field :short_name %>
           </p>
           <p>
@@ -16,7 +16,7 @@
             <%= f.text_field :color, required: true %>
           </p>
           <div>
-            <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+            <%= f.submit "Submit", data: { disable_with: "Please wait...." }, class: 'btn' %>
           </div>
         <% end %>
     </div>

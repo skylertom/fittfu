@@ -14,11 +14,17 @@ class Game < ActiveRecord::Base
   validates :time_slot, presence: true
   validates :week, presence: true
 
+  before_create :initialize_time
+
   def name
     has_teams? ? "#{teams.first.name} VS #{teams.second.name}" : "Not enoughh teams assigned"
   end
 
   def has_teams?
     return team_games.size == 2
+  end
+
+  def initialize_time
+    self.time = Schedule.all.order(:start_time).pluck(:start_time)[week].advance(minutes: Game::DURATION * time_slot)
   end
 end

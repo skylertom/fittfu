@@ -300,3 +300,21 @@ $blue: #86BCF2;
   }
 }
 
+body.games.new {
+  input[type=submit] {
+    margin-top: 20px;
+  }
+  #game_week {
+    width: 110px;
+  }
+  #timeslot_div {
+    display: inline-block;
+    margin-bottom:15px;
+  }
+  .select2-container--bootstrap .select2-results > .select2-results__options {
+    max-height: initial;
+  }
+  .select2-container--bootstrap {
+    display: inline-block;
+  }
+}
