@@ -16,7 +16,7 @@
         <% end %>
       </div>
       <div class="playing-teams">
-          <% @game.team_games.each do |team_game| %>
+          <% @game.team_games.order(:created_at).each do |team_game| %>
               <%= render partial: 'game_stats/table', locals: {team: team_game.team, team_game: team_game} %>
           <% end %>
       </div>

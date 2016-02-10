@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  default_scope { order(:week, :time_slot)}
+  scope :default, -> { order(:week, :time_slot)}
   scope :upcoming, -> { where("time > ?", Time.zone.now) }
   scope :past, -> { where("time < ?", Time.zone.now) }
   # always show this week's

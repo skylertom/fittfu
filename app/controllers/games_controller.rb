@@ -3,15 +3,15 @@ class GamesController < ApplicationController
 
   def index
     if params[:time] == "past"
-      @games = Game.past.includes(:teams)
+      @games = Game.past.default.includes(:teams)
     elsif params[:time] == "upcoming"
-      @games = Game.upcoming.includes(:teams)
+      @games = Game.upcoming.default.includes(:teams)
     elsif params[:time] == "all"
-      @games = Game.all.includes(:teams)
+      @games = Game.all.default.includes(:teams)
     elsif !params[:week].blank?
-      @games = Game.where(week: params[:week]).includes(:teams)
+      @games = Game.where(week: params[:week]).default.includes(:teams)
     else
-      @games = Game.current.includes(:teams)
+      @games = Game.current.default.includes(:teams)
     end
     authorize @games
   end
