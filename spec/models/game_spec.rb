@@ -74,14 +74,14 @@ describe Game do
       context '#name' do
         it 'has default text with not enough teams' do
           expect(game.has_teams?).to be false
-          expect(game.name).to eq "Not enoughh teams assigned"
+          expect(game.name).to eq "Not enough teams assigned"
         end
 
         it 'returns title of the two teams' do
           game.save!
           game.team_games.create(team_id: create(:team).id)
           game.team_games.create(team_id: create(:team).id)
-          expect(game.name).to eq "#{game.teams.first.name} VS #{game.teams.second.name}"
+          expect(game.name).to eq "#{game.teams.first.name} vs. #{game.teams.second.name}"
         end
       end
     end
