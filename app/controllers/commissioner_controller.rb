@@ -10,7 +10,7 @@ class CommissionerController < ApplicationController
   end
 
   def get_players
-    if Player.exists?
+    if !Player.first.blank?
       flash[:alert] = "There are already players in the system"
       redirect_to :back
     else
