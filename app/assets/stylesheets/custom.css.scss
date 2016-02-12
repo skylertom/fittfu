@@ -12,6 +12,33 @@ $blue: #86BCF2;
 $darkened-blue: #6DA3D9;
 $gray: #777;
 
+.Orange {
+  background-color: #FFD268;
+}
+.Black {
+  background-color: #000000;
+  color: #FFF;
+}
+.Green {
+  background-color: #A0FFAC;
+}
+.Blue {
+  background-color: #86BCF2;
+}
+.Yellow {
+  background-color: #FFFFBA;
+}
+.Pink {
+  background-color: #F5B3F5;
+}
+.Red {
+  background-color: #990000;
+  color: white;
+}
+.White {
+  background-color: #FFF;
+}
+
 h2 {
   font-weight: 300;
 }
@@ -274,5 +301,18 @@ table {
     border-color: #FF8C00;
     border-width: 4px;
     &:focus, &:active {outline:0;}
+  }
+}
+
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+  &:hover {
+    cursor: move;
   }
 }

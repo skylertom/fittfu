@@ -1,0 +1,89 @@
+<div class="container">
+  <div>
+      <h2 class="thin"><%= @schedule.start_time.to_s(:day_and_month) %>, Week: <%= @schedule.week %></h2>
+      <%= form_tag("/games/schedule_week", method: "post", onsubmit: "getVal()") do %>
+          <input type="hidden" name="game[week]" value="<%= @schedule.week %>">
+        <input type="hidden" id="time0" name="time[0]" value="">
+        <input type="hidden" id="time1" name="time[1]" value="">
+        <input type="hidden" id="time2" name="time[2]" value="">
+        <input type="hidden" id="time3" name="time[3]" value="">
+          <input id="slot0home" type="hidden" name="slot[0][home_id]" value="" />
+          <input id="slot0away" type="hidden" name="slot[0][away_id]" value="" />
+          <input id="slot1home" type="hidden" name="slot[1][home_id]" value="" />
+          <input id="slot1away" type="hidden" name="slot[1][away_id]" value="" />
+          <input id="slot2home" type="hidden" name="slot[2][home_id]" value="" />
+          <input id="slot2away" type="hidden" name="slot[2][away_id]" value="" />
+          <input id="slot3home" type="hidden" name="slot[3][home_id]" value="" />
+          <input id="slot3away" type="hidden" name="slot[3][away_id]" value="" />
+          <input type="submit" class="btn" value="Add Games" />
+      <% end %>
+  </div>
+  <div class="teams" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dragDrop(event)" ondragenter="dragEnter(event)">
+      <h4 class="thin">Teams:</h4>
+      <% @teams.each do |t| %>
+        <p id="<%= t.id %>" class="team <%= t.color %>" ondrop="childDrop(event)" draggable="true" on ondragstart="return dragDefine(event);"><%= t.short_name %></p>
+      <% end %>
+    </div>
+    <div class="games">
+      <div class="firstgames">
+          <% 2.times do |i| %>
+            <div class="games<%= i %>side">
+              <% 2.times do |j| %>
+                <div type="text" class="game" id="slot<%= i*2 + j %>" ondragleave="dragLeave(event)" ondragover="dragOver(event)" ondragenter="dragEnter(event)" ondrop="dragDrop(event)">
+                  <div>
+                    <h5 class="thin">Time Slot: <%= i*2 + j + 1 %></h5>
+                    <%= select_tag("time[#{i}]", options_for_select(Schedule.times(@schedule.start_time.advance(minutes: 35 * (2*i + j))), @schedule.start_time.advance(minutes: 35 * (2*i + j)).to_s), class:"time") %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+</div>
+
+<script>
+    function getVal() {
+        for (var i = 0; i < 4; i++) {
+            var div = $("#slot" + i);
+            $("#slot" + i + "home").val(div.children(".team")[0].id);
+            $("#slot" + i + "away").val(div.children(".team")[1].id);
+            $("#time" + i).val(div.find(".time")[0].value);
+        }
+    }
+    function dragDefine(ev) {
+        ev.dataTransfer.effectAllowed = 'move';
+        ev.dataTransfer.setData("text/plain", ev.target.getAttribute('id'));
+        ev.dataTransfer.setDragImage(ev.target, 0, 0);
+        return true;
+    }
+
+    function dragEnter(ev) {
+        ev.target.classList.add('over');
+    }
+
+    function dragLeave(ev) {
+        ev.target.classList.remove('over');
+    }
+
+    function dragOver(ev) {
+        // Turn off the default behaviour i.e. allow the drop
+        ev.preventDefault();
+    }
+
+    function dragDrop(ev) {
+        // Get the id of the item being dragged
+        var idDrag = ev.dataTransfer.getData("Text");
+        // Append the dragged item to the item it is currently over
+        ev.target.appendChild(document.getElementById(idDrag));
+        ev.target.classList.remove('over');
+        // Turn off the default behaviour
+        ev.preventDefault();
+    }
+
+    function childDrop(ev) {
+        var idDrag = ev.dataTransfer.getData("Text");
+        ev.target.parentNode.appendChild(document.getElementById(idDrag));
+        ev.stopPropagation();
+    }
+</script>

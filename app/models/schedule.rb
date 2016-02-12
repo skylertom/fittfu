@@ -19,4 +19,16 @@ class Schedule < ActiveRecord::Base
   def end_time_is_later
     errors.add(:end_time, "must be later than start time") if !start_time.blank? && !end_time.blank? && start_time > end_time
   end
+
+  def week
+    Schedule.for(year).map(&:id).index(id)
+  end
+
+  def self.times(time)
+    time = time.advance(minutes: -5 * 6)
+    12.times.map do |i|
+      t = time.advance(minutes: 5 * i)
+      [t.to_s(:time), t.to_s]
+    end
+  end
 end

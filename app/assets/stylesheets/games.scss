@@ -319,11 +319,63 @@ body.games.new {
   }
 }
 
+
 body.games.index {
   .winner {
     font-weight: 500;
     &:hover {
       font-weight: 600;
+    }
+  }
+}
+
+body.games.new_week {
+  .container {
+    .team, .game, .teams {
+      border-radius: 5px;
+    }
+    form {
+      background: none;
+    }
+    > div h2, > div form {
+        margin: 0;
+        display: inline-block;
+    }
+    h5, h4 {
+      margin-top: 0;
+    }
+    .teams, .games, .games0side, .games1side {
+      display: inline-block;
+      vertical-align: top;
+    }
+    .teams {
+      background-color: #FFF;
+      padding: 15px;
+      height: 420px;
+      width: 200px;
+    }
+    .team {
+      border: #000000 1px solid;
+      padding:8px;
+      margin: 5px;
+    }
+
+    .teams.over, .game.over {
+      border: 2px solid #000;
+    }
+
+    .game {
+      padding:10px;
+      width: 250px;
+      height: 150px;
+      background-color: #FFF;
+      margin:25px;
+      > div h5, > div select {
+        display: inline-block;
+      }
+      > div h5 {
+        margin-right: 15px;
+      }
     }
   }
 }

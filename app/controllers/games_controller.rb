@@ -20,10 +20,32 @@ class GamesController < ApplicationController
     authorize Game.new
   end
 
+  def new_week
+    authorize Game.new
+    @schedule = Schedule.find_by(id: params[:schedule_id])
+    @teams = Team.all
+  end
+
+  def create_week
+    authorize Game.new
+    Schedule::GAMES_IN_NIGHT.times do |i|
+      params[:game][:time_slot] = i
+      params[:game][:time] = Time.zone.parse(params[:time][i.to_s])
+      @game = Game.new(game_params)
+      if @game.save
+        create_team_game(params[:slot][i.to_s][:home_id])
+        create_team_game(params[:slot][i.to_s][:away_id])
+      else
+        flash[:error] = "Oops, couldn't create create games for week: #{params[:game][:week] + 1}"
+        redirect_to :back
+        return
+      end
+    end
+    redirect_to games_path({params: {week: params[:game][:week]}})
+  end
+
   def create
-    p params
     @game = Game.new(game_params)
-    p @game
     authorize @game
     if @game.save
       create_team_game(params[:home_team][:team_id])
@@ -91,6 +113,6 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:week, :time_slot)
+    params.require(:game).permit(:week, :time_slot, :time)
   end
 end
