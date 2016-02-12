@@ -16,7 +16,7 @@
             <td>
               <%= player.team.blank? ? content_tag(:p, "Unassigned") : link_to(player.team.short_name, team_path(player.team)) %>
             </td>
-            <td> <%= player.fantasy_points %></td>
+            <td> <%= player.points %></td>
           </tr>
       <% end %>
       </tbody>
