@@ -10,6 +10,7 @@ class GameStat < ActiveRecord::Base
   validates :player_id, presence: true, uniqueness: { scope: :team_game_id }
 
   before_save :update_team_game
+  before_update :update_points
 
   TYPE = %i(goals assists ds turns swag)
   SCORE = [3, 3, 2, -1, 1]
@@ -17,8 +18,8 @@ class GameStat < ActiveRecord::Base
   COUNT = TYPE.zip(SCORE)
 
 
-  def points
-    COUNT.inject(0) { |sum, obj| sum + self[obj[0]] * obj[1] }
+  def update_points
+    self.points = COUNT.inject(0) { |sum, obj| sum + self[obj[0]] * obj[1] }
   end
 
   def update_team_game

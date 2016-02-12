@@ -15,4 +15,8 @@ class Player < ActiveRecord::Base
   def gender_text
     GENDER[gender]
   end
+
+  def fantasy_points
+    game_stats.pluck(:points).sum
+  end
 end

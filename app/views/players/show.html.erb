@@ -1,27 +1,25 @@
 <div class="outerpadleftright">
-    <p>
-      <strong>Name:</strong>
-      <%= @player.name %>
-    </p>
+  <div class="header">
+      <h2 class="thin">
+        <%= @player.name %>
+      </h2>
+      <h3 class="thin">
+        (<%= @player.gender_text %>) - <%= @player.team.blank? ? "No team assigned" : link_to(@player.team.name, team_path(@player.team)) %>
+      </h3>
+  </div>
 
-    <p>
-      <strong>Gender:</strong>
-      <%= @player.gender_text %>
-    </p>
-    <p>
-      <strong>Team:</strong>
-      <%= @player.team.blank? ? "No team assigned" : link_to(@player.team.name, team_path(@player.team)) %>
-    </p>
-    <h3>Stats</h3>
-    <table class="table table-bordered table-hover">
+    <h3 class="thin">Stats:</h3>
+    <table class="table table-bordered table-hover table-nonfluid">
       <thead>
       <tr>
-        <th>Game</th>
+        <th>Week</th>
+        <th class="game">Game</th>
         <th>Points</th>
         <th>Goals</th>
         <th>Assists</th>
         <th>Ds</th>
         <th>Turns</th>
+        <th>Swag</th>
       </tr>
       </thead>
       <tbody>

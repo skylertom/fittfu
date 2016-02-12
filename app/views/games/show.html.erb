@@ -3,11 +3,11 @@
       <div class="score-header">
         <p>
           <strong>Week:</strong>
-          <%= @game.week %>
+          <%= @game.week + 1 %>
         </p>
         <p>
           <strong>Time slot:</strong>
-          <%= @game.time_slot %>
+          <%= @game.time_slot + 1 %>
         </p>
         <% if policy(@game).scorekeep? %>
             <div class="btn btn-no-padding">

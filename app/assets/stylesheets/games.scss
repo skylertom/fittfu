@@ -318,3 +318,12 @@ body.games.new {
     display: inline-block;
   }
 }
+
+body.games.index {
+  .winner {
+    font-weight: 500;
+    &:hover {
+      font-weight: 600;
+    }
+  }
+}

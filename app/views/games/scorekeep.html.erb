@@ -1,11 +1,11 @@
 <div class="score-header">
     <p>
       <strong>Week:</strong>
-      <%= @game.week %>
+      <%= @game.week + 1 %>
     </p>
     <p>
       <strong>Time slot:</strong>
-      <%= @game.time_slot %>
+      <%= @game.time_slot + 1 %>
     </p>
     <div class="btn btn-no-padding">
         <%= link_to "Done scorekeeping", @game %>

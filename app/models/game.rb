@@ -17,7 +17,7 @@ class Game < ActiveRecord::Base
   before_create :initialize_time
 
   def name
-    has_teams? ? "#{teams.first.name} VS #{teams.second.name}" : "Not enoughh teams assigned"
+    has_teams? ? "#{teams.first.short_name} vs. #{teams.second.short_name}" : "Not enough teams assigned"
   end
 
   def has_teams?
@@ -27,5 +27,13 @@ class Game < ActiveRecord::Base
   def initialize_time
     start = Schedule.all.order(:start_time).pluck(:start_time)[week]
     self.time = start.advance(minutes: Game::DURATION * time_slot) if self.time.blank? && !start.blank?
+  end
+
+  def winner
+    team_games.won.blank? ? nil : team_games.won.first.team
+  end
+
+  def loser
+    team_games.lost.blank? ? nil : team_games.lost.first.team
   end
 end
