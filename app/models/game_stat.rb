@@ -19,7 +19,7 @@ class GameStat < ActiveRecord::Base
 
 
   def update_points
-    self.points = COUNT.inject(0) { |sum, obj| sum + self[obj[0]] * obj[1] }
+    update_attribute(:points, COUNT.inject(0) { |sum, obj| sum + self[obj[0]] * obj[1] })
   end
 
   def update_team_game

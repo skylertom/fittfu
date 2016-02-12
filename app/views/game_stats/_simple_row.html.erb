@@ -1,5 +1,5 @@
 <tr>
-    <td><%= simple_row.week %></td>
+    <td><%= simple_row.week + 1 %></td>
     <td><%= link_to(simple_row.team_game.game.name, game_path(simple_row.team_game.game)) %></td>
     <td><%= simple_row.points %></td>
     <% GameStat::TYPE.each do |index| %>
