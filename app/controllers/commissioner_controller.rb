@@ -39,7 +39,7 @@ class CommissionerController < ApplicationController
     if !key.blank?
       week = params[:week] || params[:state]
       ExportData.perform_async(key, week.to_i)
-      flash[:alert] = "Exported week #{week} in background"
+      flash[:alert] = "Exported week #{week + 1} in background"
       redirect_to commissioner_index_path
     end
   end

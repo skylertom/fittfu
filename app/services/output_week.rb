@@ -38,8 +38,8 @@ class OutputWeek
       team_name = sheet[y, x]
       team = Team.find_by(short_name: team_name)
       sheet[y, x] = "#{team_name} (#{team_games.find_by(team_id: team.id).goals})" unless team.blank?
-      x = x > 2 ? 2 : 3
       y += 1 if x > 2
+      x = x > 2 ? 2 : 3
     end
     sheet.save
   end
