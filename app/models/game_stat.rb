@@ -23,7 +23,7 @@ class GameStat < ActiveRecord::Base
     self[:points] = COUNT.inject(0) { |sum, obj| sum + self[obj[0]] * obj[1] }
     player.update_attribute(:points, player.points + points - prior_points)
     # change updating winners in future
-    AssignWinners.perform_in(30*60) if goals < 2
+    AssignWinners.perform_in(30*60, false) if goals < 2
   end
 
   def remove_points

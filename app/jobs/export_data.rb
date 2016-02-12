@@ -5,7 +5,7 @@ class ExportData
     p "starting to export"
     ActiveRecord::Base.connection_pool.with_connection do
       # make sure winners have been assigned
-      AssignWinners.new.perform
+      AssignWinners.new.perform(true)
       begin
         OutputWeek.write(token, week)
       rescue => error
