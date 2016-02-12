@@ -10,15 +10,15 @@ class CommissionerController < ApplicationController
   end
 
   def get_players
-    if !Player.first.blank?
+    if Player.exists?
       flash[:alert] = "There are already players in the system"
       redirect_to :back
     else
       key = auth(get_players_url, nil)
       if !key.blank?
-        initial = Players.all.size
+        initial = Player.all.size
         GetPlayers.from_google(key)
-        flash[:success] = "Added #{Players.all.size - initial} players to the database"
+        flash[:success] = "Added #{Player.all.size - initial} players to the database"
         redirect_to commissioner_index_path
       end
     end
