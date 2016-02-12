@@ -4,25 +4,39 @@
       <%= form_for :game, url: games_path do |f| %>
           <h2>Add a Game</h2>
           <p>
-            <label for="home_team">Home team: </label>:
-            <%= collection_select(:home_team, :team_id, Team.all, :id, :name) %>
+            <%= f.label 'Home Team:' %>
+            <%= collection_select(:home_team, :team_id, Team.all, :id, :short_name) %>
           </p>
           <p>
-            <label for="away_team">Away team: </label>:
-            <%= collection_select(:away_team, :team_id, Team.all, :id, :name) %>
+            <%= f.label 'Away Team:' %>
+            <%= collection_select(:away_team, :team_id, Team.all, :id, :short_name) %>
           </p>
-          <p>
-            <%= f.label :time_slot %>
-            <%= f.number_field :time_slot, required: true %>
-          </p>
-          <p>
-            <%= f.label :week %>
-            <%= f.number_field :week, required: true %>
-          </p>
+          <%= f.label 'Timeslot: ' %>
+          <div id="timeslot_div">
+            <%= f.radio_button(:time_slot, 0, checked: true) %>
+            <%= f.label(:time_slot_0, "1") %>
+            <%= f.radio_button(:time_slot, 1) %>
+            <%= f.label(:time_slot_1, "2") %>
+            <%= f.radio_button(:time_slot, 2) %>
+            <%= f.label(:time_slot_2, "3") %>
+            <%= f.radio_button(:time_slot, 3) %>
+            <%= f.label(:time_slot_3, "4") %>
+          </div>
           <div>
-            <%= f.submit "Submit", data: { disable_with: "Please wait...." } %>
+            <%= f.select :week, options_for_select((0..Schedule.all.size-1).map {|i| ["Week #{i+1}", i]}) %>
+          </div>
+          <div>
+            <%= f.submit "Submit", data: { disable_with: "Please wait...." }, class: 'btn' %>
           </div>
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+    $("#timeslot_div").buttonset();
+    $( "select" ).select2({
+        theme: "bootstrap",
+        minimumResultsForSearch: Infinity
+    });
+</script>

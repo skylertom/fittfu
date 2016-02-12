@@ -21,4 +21,12 @@ class Team < ActiveRecord::Base
     self.captain_tab = self.name if self.captain_tab.blank?
     self.short_name = self.name if self.short_name.blank?
   end
+
+  def num_wins
+    team_games.won.size
+  end
+
+  def num_losses
+    team_games.lost.size
+  end
 end

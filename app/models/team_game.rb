@@ -1,4 +1,7 @@
 class TeamGame < ActiveRecord::Base
+  scope :won, -> { where(winner: true)}
+  scope :lost, -> { where(winner: false)}
+
   belongs_to :game, inverse_of: :team_games
   belongs_to :team
   has_many :game_stats, dependent: :destroy

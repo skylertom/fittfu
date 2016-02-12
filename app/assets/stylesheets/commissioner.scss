@@ -36,8 +36,12 @@ body.commissioner.index {
   }
   .output {
     form {
-      select {
-        margin-right: 15px;
+      .select2-container--bootstrap {
+        display: inline-block;
+        margin-right: 10px;
+      }
+      #week {
+        width: 110px;
       }
       padding-left:0;
       padding-bottom: 0;

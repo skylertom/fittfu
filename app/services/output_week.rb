@@ -6,7 +6,7 @@ class OutputWeek
   def self.write(token, week)
     session = GoogleDrive.login_with_oauth(token)
 
-    file = session.spreadsheet_by_key("1myvP8Bgdx7plek-gX38GvNVsUztj8EMPY76ckNuax-k")
+    file = session.spreadsheet_by_key(ENV['SPREADSHEET_KEY'])
     #coordinate system starts at 1
     teams = Team.all
     teams.each do |t|
@@ -17,7 +17,7 @@ class OutputWeek
       while !sheet[y, 1].blank? || gender < Player::EWO do
         gender = Player::EWO if sheet[y, 1].blank?
         p = players.find_by(name: sheet[y, 1], gender: gender)
-        sheet[y, week + 1 + 1] = p.game_stats.find_by(week: week).points if !p.blank? && sheet[y, week + 1 + 1].blank?
+        sheet[y, week + 1 + 1] = p.game_stats.find_by(week: week).points if !p.blank?
         y += 1
       end
       sheet.save
@@ -38,8 +38,8 @@ class OutputWeek
       team_name = sheet[y, x]
       team = Team.find_by(short_name: team_name)
       sheet[y, x] = "#{team_name} (#{team_games.find_by(team_id: team.id).goals})" unless team.blank?
-      x = x > 2 ? 2 : 3
       y += 1 if x > 2
+      x = x > 2 ? 2 : 3
     end
     sheet.save
   end

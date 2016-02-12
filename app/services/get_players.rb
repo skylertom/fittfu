@@ -4,7 +4,7 @@ require "google_drive"
 class GetPlayers
   def self.from_google(token)
     session = GoogleDrive.login_with_oauth(token)
-    file = session.spreadsheet_by_key("1myvP8Bgdx7plek-gX38GvNVsUztj8EMPY76ckNuax-k")
+    file = session.spreadsheet_by_key(ENV['SPREADSHEET_KEY'])
     Team.all.each do |team|
       sheet = file.worksheet_by_title(team.captain_tab)
       if sheet.blank?

@@ -28,9 +28,18 @@
           <tr>
             <td class="first">Week <%= game.week + 1 %></td>
             <td class="matchup">
-              <%= link_to(game.teams.first.name, game.teams.first) %>
-              <br><p>vs</p>
-              <%= link_to(game.teams.second.name, game.teams.second) %></td>
+              <% if game.team_games.size < 2 %>
+                Teams TBA
+              <% elsif game.time < DateTime.now %>
+                  <%= link_to("#{game.team_games.first.team.short_name} (#{game.team_games.first.goals})", game.teams.first, class: "#{game.team_games.first.winner? ? 'winner' : ''}") %>
+                  <br><p>vs</p>
+                  <%= link_to("#{game.team_games.second.team.short_name} (#{game.team_games.second.goals})", game.teams.second, class: "#{game.team_games.second.winner? ? 'winner' : ''}") %>
+              <% else %>
+                  <%= link_to(game.teams.first.name, game.teams.first) %>
+                  <br><p>vs</p>
+                  <%= link_to(game.teams.second.name, game.teams.second) %>
+              <% end %>
+            </td>
             <% if policy(game).scorekeep? %>
                 <td><%= link_to("Scorekeep", scorekeep_games_path(game)) if game.team_games.any? %></td>
             <% end %>

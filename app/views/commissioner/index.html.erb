@@ -9,7 +9,7 @@
   <div class="output">
     <%= form_tag(export_week_path, method: 'get') do %>
         <h3 class="thin">Export Stats to Google Spreadsheet:</h3>
-        <%= select_tag :week, options_for_select((0..Schedule.all.size).map {|i| ["Week #{i+1}", i]}) %>
+        <%= select_tag :week, options_for_select((0..Schedule.all.size-1).map {|i| ["Week #{i+1}", i]}) %>
         <%= submit_tag "Export", class: "btn btn-no-paddding" %>
     <% end %>
   </div>
@@ -31,3 +31,10 @@
     </div>
   </div>
 </div>
+
+<script>
+    $( "#week" ).select2({
+        theme: "bootstrap",
+        minimumResultsForSearch: Infinity
+    });
+</script>

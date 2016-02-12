@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208182325) do
+ActiveRecord::Schema.define(version: 20160212054047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160208182325) do
     t.integer  "swag",         default: 0
     t.integer  "week"
     t.uuid     "team_game_id"
+    t.integer  "points",       default: 0
   end
 
   create_table "games", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -63,8 +64,9 @@ ActiveRecord::Schema.define(version: 20160208182325) do
   create_table "players", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.integer  "gender"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "points",     default: 0
   end
 
   create_table "schedules", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -81,6 +83,7 @@ ActiveRecord::Schema.define(version: 20160208182325) do
     t.integer  "goals",      default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.boolean  "winner"
   end
 
   add_index "team_games", ["team_id"], name: "index_team_games_on_team_id", using: :btree

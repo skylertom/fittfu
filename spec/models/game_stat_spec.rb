@@ -11,6 +11,8 @@ describe GameStat do
   it { should respond_to (:turns) }
   it { should respond_to (:goals) }
   it { should respond_to (:assists) }
+  it { should respond_to (:points) }
+
 
   it 'has a valid factory' do
     expect(build(:game_stat)).to be_valid
@@ -45,6 +47,7 @@ describe GameStat do
           subject.ds = 1
           subject.goals = 2
           subject.turns = 1
+          subject.update_points
           expect(subject.points).to eq(7)
         end
       end

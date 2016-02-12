@@ -5,9 +5,14 @@ Rails.application.routes.draw do
 
   resources :players
   resources :teams
+  get 'games/schedule_week', to: 'games#new_week'
+  post 'games/schedule_week', to: 'games#create_week'
+
   resources :games do
     resources :team_games, only: [:create]
   end
+
+
   resources :users, only: [:index, :show, :destroy]
   patch 'users/:id', to: 'users#update'
 
@@ -24,4 +29,5 @@ Rails.application.routes.draw do
 
   get 'createschedule', to: 'games#create_schedule', as: :schedule_games
   get 'deleteall', to: 'games#delete_all', as: :destroy_games
+
 end

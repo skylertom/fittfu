@@ -1,14 +1,17 @@
 class ExportData
-  @queue = :data_export
+  include SuckerPunch::Job
 
-  def self.perform(token, week)
-    ActiveRecord::Base.clear_active_connections!
+  def perform(token, week)
     p "starting to export"
-    begin
-      OutputWeek.write(token, week)
-    rescue => error
-      p "ERROR"
-      p error.message
+    ActiveRecord::Base.connection_pool.with_connection do
+      # make sure winners have been assigned
+      AssignWinners.new.perform(true)
+      begin
+        OutputWeek.write(token, week)
+      rescue => error
+        p "ERROR"
+        p error.message
+      end
     end
     p "finished exporting"
   end

@@ -18,11 +18,12 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new(schedule_params)
     authorize @schedule
     if @schedule.save
-      flash[:success] = "Created event starting at #{@schedule.start_time.to_s(:feedback)}"
+      redirect_to games_schedule_week_path({params: {schedule_id: @schedule.id}})
     else
       flash[:error] = "Could not create time for #{params['schedule']['start_time'].start_time.to_s(:feedback)}"
+      redirect_to :back
     end
-    redirect_to new_schedule_path
+
   end
 
   # TODO edit

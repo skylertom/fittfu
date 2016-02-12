@@ -12,6 +12,33 @@ $blue: #86BCF2;
 $darkened-blue: #6DA3D9;
 $gray: #777;
 
+div.Orange {
+  background-color: #FFD268;
+}
+div.Black {
+  background-color: #000000;
+  color: #FFF;
+}
+div.Green {
+  background-color: #A0FFAC;
+}
+div.Blue {
+  background-color: #86BCF2;
+}
+div.Yellow {
+  background-color: #FFFFBA;
+}
+div.Pink {
+  background-color: #F5B3F5;
+}
+div.Red {
+  background-color: #990000;
+  color: white;
+}
+div.White {
+  background-color: #FFF;
+}
+
 h2 {
   font-weight: 300;
 }
@@ -266,4 +293,26 @@ form {
 
 table {
   background-color: white;
+}
+
+
+.table-bordered > thead > tr > th {
+  &.tablesorter-headerDesc, &.tablesorter-headerAsc {
+    border-color: #FF8C00;
+    border-width: 4px;
+    &:focus, &:active {outline:0;}
+  }
+}
+
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+  &:hover {
+    cursor: move;
+  }
 }

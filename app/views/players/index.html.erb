@@ -1,10 +1,11 @@
 <div class="outerpadleftright">
-    <table class="table table-bordered table-hover table-nonfluid">
+    <table class="table table-bordered table-hover table-nonfluid tablesorter {sortlist: [[1,0],[4,0]]}">
       <thead>
           <tr>
             <th>Name</th>
-            <th>Gender</th>
+            <th>Epo?</th>
             <th>Team</th>
+            <th>Total Fantasy Points</th>
           </tr>
       </thead>
       <tbody>
@@ -13,8 +14,9 @@
             <td><%= link_to(player.name, player_path(player)) %></td>
             <td><%= player.gender_text %></td>
             <td>
-              <%= player.team.blank? ? content_tag(:p, "Unassigned") : link_to(player.team.name, team_path(player.team)) %>
+              <%= player.team.blank? ? content_tag(:p, "Unassigned") : link_to(player.team.short_name, team_path(player.team)) %>
             </td>
+            <td> <%= player.points %></td>
           </tr>
       <% end %>
       </tbody>
@@ -22,9 +24,7 @@
 </div>
 
 <script>
-    $(document).ready(function()
-        {
-            $("table").tablesorter();
-        }
-    );
+    $("table").tablesorter({
+        sortList: [[3, 1]]
+    });
 </script>

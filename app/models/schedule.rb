@@ -4,6 +4,7 @@ class Schedule < ActiveRecord::Base
 
   VALID_STARTS = %w(5:00pm 5:30pm 6:00pm 6:30pm 7:00pm 7:30pm 8:00pm 8:30pm 9:00pm 9:30pm 10:00pm 10:30pm)
   GAMES_IN_NIGHT = 4
+  LENGTH = 30
 
   validates :start_time, presence: true
   validates :end_time, presence: true
@@ -17,5 +18,17 @@ class Schedule < ActiveRecord::Base
 
   def end_time_is_later
     errors.add(:end_time, "must be later than start time") if !start_time.blank? && !end_time.blank? && start_time > end_time
+  end
+
+  def week
+    Schedule.for(year).map(&:id).index(id)
+  end
+
+  def self.times(time)
+    time = time.advance(minutes: -5 * 6)
+    12.times.map do |i|
+      t = time.advance(minutes: 5 * i)
+      [t.to_s(:time), t.to_s]
+    end
   end
 end

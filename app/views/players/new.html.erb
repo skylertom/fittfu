@@ -5,7 +5,7 @@
         <%= form_for :player, url: players_path do |f| %>
           <h2>Add a Player</h2>
           <p>
-            <%= f.label :name %>
+            <%= f.label 'Name:' %>
             <%= f.text_field :name, required: true %>
           </p>
           <div id="gender_div">
@@ -16,7 +16,7 @@
           </div>
           <p>
             <label>Team:</label>
-            <%= collection_select(:membership, :team_id, Team.real, :id, :name, {prompt: "Unassigned"}) %>
+            <%= collection_select(:membership, :team_id, Team.real, :id, :short_name, {prompt: "Unassigned"}) %>
           </p>
           <%= check_box_tag 'captain' %>
           <%= label_tag 'captain' %>
@@ -30,7 +30,9 @@
 </div>
 
 <script>
-  $(function() {
-      $("#gender_div").buttonset();
+  $("#gender_div").buttonset();
+  $( "#membership_team_id" ).select2({
+      theme: "bootstrap",
+      minimumResultsForSearch: Infinity
   });
 </script>

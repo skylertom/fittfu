@@ -1,16 +1,20 @@
 <div class="outerpadleftright">
     <table class="table table-bordered table-hover table-nonfluid">
       <thead>
-      <tr>
-        <th>Team Name</th>
-        <th>Color</th>
-      </tr>
+          <tr>
+            <th>Team Name</th>
+            <th>Color</th>
+            <th>Wins</th>
+            <th>Losses</th>
+          </tr>
       </thead>
       <tbody>
       <% @teams.each do |team| %>
           <tr>
             <td><%= link_to team.name, team_path(team) %></td>
             <td><%= team.color %></td>
+            <td><%= team.num_wins %></td>
+            <td><%= team.num_losses %></td>
           </tr>
       <% end %>
       </tbody>
@@ -20,7 +24,9 @@
 <script>
     $(document).ready(function()
         {
-            $("table").tablesorter();
+            $("table").tablesorter({
+                sortList: [[2, 1]]
+            });
         }
     );
 </script>

@@ -3,21 +3,45 @@ class GamesController < ApplicationController
 
   def index
     if params[:time] == "past"
-      @games = Game.past.includes(:teams)
+      @games = Game.past.default.includes(:teams)
     elsif params[:time] == "upcoming"
-      @games = Game.upcoming.includes(:teams)
+      @games = Game.upcoming.default.includes(:teams)
     elsif params[:time] == "all"
-      @games = Game.all.includes(:teams)
+      @games = Game.all.default.includes(:teams)
     elsif !params[:week].blank?
-      @games = Game.where(week: params[:week]).includes(:teams)
+      @games = Game.where(week: params[:week]).default.includes(:teams)
     else
-      @games = Game.current.includes(:teams)
+      @games = Game.current.default.includes(:teams)
     end
     authorize @games
   end
 
   def new
     authorize Game.new
+  end
+
+  def new_week
+    authorize Game.new
+    @schedule = Schedule.find_by(id: params[:schedule_id])
+    @teams = Team.all
+  end
+
+  def create_week
+    authorize Game.new
+    Schedule::GAMES_IN_NIGHT.times do |i|
+      params[:game][:time_slot] = i
+      params[:game][:time] = Time.zone.parse(params[:time][i.to_s])
+      @game = Game.new(game_params)
+      if @game.save
+        create_team_game(params[:slot][i.to_s][:home_id])
+        create_team_game(params[:slot][i.to_s][:away_id])
+      else
+        flash[:error] = "Oops, couldn't create create games for week: #{params[:game][:week] + 1}"
+        redirect_to :back
+        return
+      end
+    end
+    redirect_to games_path({params: {week: params[:game][:week]}})
   end
 
   def create
@@ -89,6 +113,6 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:week, :time_slot)
+    params.require(:game).permit(:week, :time_slot, :time)
   end
 end

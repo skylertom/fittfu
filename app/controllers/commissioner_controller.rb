@@ -14,11 +14,11 @@ class CommissionerController < ApplicationController
       flash[:alert] = "There are already players in the system"
       redirect_to :back
     else
-      key = auth(get_players_url)
+      key = auth(get_players_url, nil)
       if !key.blank?
-        initial = Players.all.size
+        initial = Player.all.size
         GetPlayers.from_google(key)
-        flash[:success] = "Added #{Players.all.size - initial} players to the database"
+        flash[:success] = "Added #{Player.all.size - initial} players to the database"
         redirect_to commissioner_index_path
       end
     end
@@ -26,7 +26,7 @@ class CommissionerController < ApplicationController
 
   def load_stats
     # TODO safeguard against overcalling
-    key = auth(load_stats_url)
+    key = auth(load_stats_url, nil)
     if !key.blank?
       GetPlayersStats.from_google(key)
       flash[:success] = "Loaded Players Stats"
@@ -35,13 +35,18 @@ class CommissionerController < ApplicationController
   end
 
   def export_week
-    flash[:success] = "exported week #{params[:week]} stats to the Google Spreadsheet"
-    redirect_to commissioner_index_path
+    key = auth(export_week_url, params[:week])
+    if !key.blank?
+      week = params[:week] || params[:state]
+      ExportData.perform_async(key, week.to_i)
+      flash[:alert] = "Exporting week #{week.to_i + 1} in background, feel free to keep using the website"
+      redirect_to commissioner_index_path
+    end
   end
 
   private
 
-  def auth(redirect_url)
+  def auth(redirect_url, state)
     if session[:google_access_token].blank? || session[:google_token_date].blank? || DateTime.now > DateTime.parse(session[:google_token_date])
       client = Google::APIClient.new
       auth = client.authorization
@@ -50,7 +55,8 @@ class CommissionerController < ApplicationController
           client_secret: ENV['GOOGLE_CLIENT_SECRET'],
           grant_type: "authorization_code",
           scope: "https://www.googleapis.com/auth/drive ",
-          redirect_uri: redirect_url
+          redirect_uri: redirect_url,
+          state: state
       )
       if params['code'].blank?
         auth_url = auth.authorization_uri.to_s

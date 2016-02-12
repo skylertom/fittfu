@@ -1,3 +1,36 @@
 // Place all the styles related to the players controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.players.new {
+  .select2-container--bootstrap {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  #week {
+    width: 200px;
+  }
+  #gender_div {
+    margin-bottom: 15px;
+  }
+  .select2-container--bootstrap .select2-results > .select2-results__options {
+    max-height: initial;
+  }
+}
+
+body.players.show {
+  .outerpadleftright {
+    .header {
+      > h3, > h2 {
+        display: inline-block;
+        margin-top: 0;
+      }
+    }
+    table th {
+      width: 50px;
+    }
+    table .game {
+      width: 250px;
+    }
+  }
+}
