@@ -28,8 +28,8 @@ gem 'pundit'
 # version 0.9 just came out Jan 2016 and is not backwards compatible
 gem 'google-api-client', '< 0.9'
 gem 'google_drive', '1.0.1'
-gem 'resque', '~> 1.25.2'
 gem "select2-rails"
+gem 'sucker_punch', '~> 2.0'
 
 group :production do
   gem 'puma', '2.14.0'

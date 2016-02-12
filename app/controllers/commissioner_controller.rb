@@ -38,7 +38,7 @@ class CommissionerController < ApplicationController
     key = auth(export_week_url, params[:week])
     if !key.blank?
       week = params[:week] || params[:state]
-      Resque.enqueue(ExportData, key, week.to_i)
+      ExportData.perform_async(key, week.to_i)
       flash[:alert] = "Exported week #{week} in background"
       redirect_to commissioner_index_path
     end
