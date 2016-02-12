@@ -21,7 +21,7 @@
   <div class="teams" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dragDrop(event)" ondragenter="dragEnter(event)">
       <h4 class="thin">Teams:</h4>
       <% @teams.each do |t| %>
-        <p id="<%= t.id %>" class="team <%= t.color %>" ondrop="childDrop(event)" draggable="true" on ondragstart="return dragDefine(event);"><%= t.short_name %></p>
+        <div id="<%= t.id %>" class="team <%= t.color %>" ondrop="childDrop(event)" draggable="true" on ondragstart="return dragDefine(event);"><%= t.short_name %></div>
       <% end %>
     </div>
     <div class="games">
