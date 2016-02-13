@@ -1,25 +1,35 @@
 <div class="outerpadleftright">
-    <p>
-      <strong>Team Name:</strong>
-      <%= @team.name %>
-    </p>
+  <h2><%= @team.name %> </h2>
+  <h2 class="thin inline-block"> - <%= @team.color %></h2>
+  <h3 class="thin">Record: <%= @team.record_text %></h3>
 
-    <p>
-      <strong>Color:</strong>
-      <%= @team.color %>
-    </p>
+  <table class="table table-bordered table-hover table-nonfluid">
+    <thead>
+    <tr>
+      <th>Week</th>
+      <th>Opponent</th>
+      <th>View Game</th>
+      <th>Result</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @team.team_games.each do |team_game| %>
+        <tr>
+          <td><%= team_game.game.week + 1 %></td>
+          <td><%= link_to(team_game.opponent_team_game.team.short_name, team_path(team_game.opponent_team_game.team)) %> (<%= team_game.opponent_team_game.team.record_text %>)</td>
+          <td><%= link_to("View", game_path(team_game.game)) %></td>
+          <td><%= team_game.result_text %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 
-  <p>
-    <strong>Record:</strong>
-    <%= "#{@team.num_wins}-#{@team.num_losses}" %>
-  </p>
-    <h1>Listing Players</h1>
-
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover table-nonfluid">
       <thead>
           <tr>
-            <th>Name</th>
+            <th>Player</th>
             <th>Gender</th>
+            <th>Fantasy Points</th>
           </tr>
       </thead>
       <tbody>
@@ -27,6 +37,7 @@
               <tr>
                 <td><%= link_to(player.name, player_path(player)) %></td>
                 <td><%= player.gender_text %></td>
+                <td><%= player.points %></td>
               </tr>
           <% end %>
       </tbody>

@@ -8,7 +8,7 @@
       <%= @game.time_slot + 1 %>
     </p>
     <div class="btn btn-no-padding">
-        <%= link_to "Done scorekeeping", games_path %>
+        <%= link_to "Done scorekeeping", games_path(params: {week: @game.week}) %>
     </div>
 </div>
 <div class="playing-teams">

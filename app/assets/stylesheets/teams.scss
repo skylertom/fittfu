@@ -1,3 +1,15 @@
 // Place all the styles related to the teams controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.teams.show {
+  .outerpadleftright {
+    h2, h3.inline-block {
+      display: inline-block;
+      margin-top: 0;
+    }
+    h3 {
+      margin-top: 5px;
+    }
+  }
+}

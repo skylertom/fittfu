@@ -5,6 +5,7 @@
       </h2>
       <h3 class="thin">
         (<%= @player.gender_text %>) - <%= @player.team.blank? ? "No team assigned" : link_to(@player.team.name, team_path(@player.team)) %>
+        (<%= @player.team.record_text %>)
       </h3>
   </div>
 

@@ -16,4 +16,16 @@ class TeamGame < ActiveRecord::Base
       self.game_stats.create(player_id: player_id, week: self.game.week)
     end
   end
+
+  def opponent_team_game
+    game.team_games.where.not(id: id).first
+  end
+
+  def result_text
+    if game.time > Time.zone.now
+      "Undecided"
+    else
+      winner? ? "Lost (#{goals}-#{opponent_team_game.goals})" : "Won (#{goals}-#{opponent_team_game.goals})"
+    end
+  end
 end

@@ -29,4 +29,8 @@ class Team < ActiveRecord::Base
   def num_losses
     team_games.lost.size
   end
+
+  def record_text
+    "#{num_wins}-#{num_losses}"
+  end
 end
