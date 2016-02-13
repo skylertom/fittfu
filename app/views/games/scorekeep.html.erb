@@ -31,3 +31,17 @@
       <input type="submit" class="btn" value="Update" />
 <% end %>
 </div>
+
+<script>
+  function updateRow(elem) {
+      x = elem;
+      var multiply = 1;
+      if (elem.classList[0] == "minus") {
+          multiply = -1;
+      }
+      var current = parseInt(elem.parentElement.parentElement.getElementsByClassName('value')[0].innerHTML);
+      elem.parentElement.parentElement.getElementsByClassName('value')[0].innerHTML = current + multiply;
+      var fantasy = parseInt(document.getElementById(elem.classList[1] + "points").innerHTML)
+      document.getElementById(elem.classList[1] + "points").innerHTML = fantasy + (multiply * parseInt(elem.classList[2]));
+  }
+</script>

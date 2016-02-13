@@ -14,6 +14,7 @@ class GameStat < ActiveRecord::Base
 
   TYPE = %i(goals assists ds turns swag)
   SCORE = [3, 3, 2, -1, 1]
+  VALUE = {"goals": 3, "assists": 3, "ds":2, "turns":-1, "swag":1}
 
   COUNT = TYPE.zip(SCORE)
 
