@@ -3,6 +3,7 @@ class PlayersController < ApplicationController
 
   def index
     @players = Player.includes(:team).all
+    @week = Game.past.first.week
   end
 
   def new

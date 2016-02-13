@@ -25,7 +25,11 @@ class CommissionerController < ApplicationController
   end
 
   def load_stats
-    # TODO safeguard against overcalling
+    if GameStat.where(week: 0).where('swag > 0').exists?
+      flash[:alert] = "There are already stats for the first week"
+      redirect_to :back
+      return
+    end
     key = auth(load_stats_url, nil)
     if !key.blank?
       GetPlayersStats.from_google(key)

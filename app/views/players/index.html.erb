@@ -5,6 +5,7 @@
             <th>Name</th>
             <th>Epo?</th>
             <th>Team</th>
+            <th>Week Leaders</th>
             <th>Total Fantasy Points</th>
           </tr>
       </thead>
@@ -16,7 +17,8 @@
             <td>
               <%= player.team.blank? ? content_tag(:p, "Unassigned") : link_to(player.team.short_name, team_path(player.team)) %>
             </td>
-            <td> <%= player.points %></td>
+            <td><%= player.game_stats.find_by(week: @week).points %></td>
+            <td><%= player.points %></td>
           </tr>
       <% end %>
       </tbody>
