@@ -321,6 +321,10 @@ body.games.new {
 
 
 body.games.index {
+  .views select, .select2 {
+    display: inline-block;
+    width: 90px;
+  }
   .winner {
     font-weight: 500;
     &:hover {

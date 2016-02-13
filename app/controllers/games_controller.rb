@@ -9,9 +9,11 @@ class GamesController < ApplicationController
     elsif params[:time] == "all"
       @games = Game.all.default.includes(:teams)
     elsif !params[:week].blank?
+      #current
       @games = Game.where(week: params[:week]).default.includes(:teams)
     else
       @games = Game.current.default.includes(:teams)
+      @games = Game.past.limit(4) if @games.blank?
     end
     authorize @games
   end
