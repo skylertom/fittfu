@@ -40,4 +40,5 @@ class GamePolicy < ApplicationPolicy
   alias_method :edit?, :create?
   alias_method :update?, :edit?
   alias_method :show?, :index?
+  alias_method :update_score?, :scorekeep?
 end

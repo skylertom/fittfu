@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'games/schedule_week', to: 'games#create_week'
 
   resources :games do
+    post 'update_score', to: 'games#update_score'
     resources :team_games, only: [:create]
   end
 

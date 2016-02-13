@@ -57,6 +57,19 @@ class GamesController < ApplicationController
     end
   end
 
+  def update_score
+    @game = Game.find_by(id: params[:id])
+    authorize @game
+    if @game
+      @game.team_games.find_by(id: params[:home][:id]).update_attribute(:goals, params[:home][:goals])
+      @game.team_games.find_by(id: params[:away][:id]).update_attribute(:goals, params[:away][:goals])
+      AssignWinners.perform_async(false)
+      redirect_to scorekeep_games_path(@game)
+    else
+      redirect_to games_path
+    end
+  end
+
   def show
     @game = Game.find_by(id: params[:id])
     authorize @game
