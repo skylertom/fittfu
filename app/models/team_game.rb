@@ -25,7 +25,7 @@ class TeamGame < ActiveRecord::Base
     if game.time > Time.zone.now
       "Undecided"
     else
-      winner? ? "Lost (#{goals}-#{opponent_team_game.goals})" : "Won (#{goals}-#{opponent_team_game.goals})"
+      winner? ? "Won (#{goals}-#{opponent_team_game.goals})" : "Lost (#{goals}-#{opponent_team_game.goals})"
     end
   end
 end
