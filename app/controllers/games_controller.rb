@@ -2,15 +2,14 @@ class GamesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    if params[:time] == "past"
+    if !params[:week].blank?
+      @games = Game.where(week: params[:week]).default.includes(:teams)
+    elsif params[:time] == "past"
       @games = Game.past.default.includes(:teams)
     elsif params[:time] == "upcoming"
       @games = Game.upcoming.default.includes(:teams)
     elsif params[:time] == "all"
       @games = Game.all.default.includes(:teams)
-    elsif !params[:week].blank?
-      #current
-      @games = Game.where(week: params[:week]).default.includes(:teams)
     else
       @games = Game.current.default.includes(:teams)
       @games = Game.past.limit(4) if @games.blank?
