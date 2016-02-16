@@ -24,22 +24,50 @@ class GamesController < ApplicationController
   def new_week
     authorize Game.new
     @schedule = Schedule.find_by(id: params[:schedule_id])
+    if @schedule
+      @games = Game.where(time: @schedule.start_time.beginning_of_day..@schedule.start_time.end_of_day)
+    end
     @teams = Team.all
   end
 
   def create_week
     authorize Game.new
-    Schedule::GAMES_IN_NIGHT.times do |i|
-      params[:game][:time_slot] = i
-      params[:game][:time] = Time.zone.parse(params[:time][i.to_s])
-      @game = Game.new(game_params)
-      if @game.save
-        create_team_game(params[:slot][i.to_s][:home_id])
-        create_team_game(params[:slot][i.to_s][:away_id])
-      else
-        flash[:error] = "Oops, couldn't create create games for week: #{params[:game][:week] + 1}"
-        redirect_to :back
-        return
+    @games = Game.where(week: params[:game][:week])
+    if @games.blank?
+      Schedule::GAMES_IN_NIGHT.times do |i|
+        params[:game][:time_slot] = i
+        params[:game][:time] = Time.zone.parse(params[:time][i.to_s])
+        @game = Game.new(game_params)
+        if @game.save
+          create_team_game(params[:slot][i.to_s][:home_id])
+          create_team_game(params[:slot][i.to_s][:away_id])
+        else
+          flash[:error] = "Oops, couldn't create create games for week: #{params[:game][:week] + 1}"
+          redirect_to :back
+          return
+        end
+      end
+    else
+      Schedule::GAMES_IN_NIGHT.times do |i|
+        params[:game][:time] = Time.zone.parse(params[:time][i.to_s])
+        @game = @games.find_by(time_slot: i)
+        @game.update(game_params)
+        ids = [params[:slot][i.to_s][:home_id], params[:slot][i.to_s][:away_id]]
+        found = 0
+        found += 1 unless @game.team_games.find_by(team_id: ids[0]).blank?
+        found += 2 unless @game.team_games.find_by(team_id: ids[1]).blank?
+        next if @game.team_games.where(team_id: ids).size == 2
+        if found == 1
+          @game.team_games.where.not(team_id: ids[0]).first.destroy
+          create_team_game(ids[1])
+        elsif found == 2
+          @game.team_games.where.not(team_id: ids[1]).first.destroy
+          create_team_game(ids[0])
+        elsif found == 0
+          @game.team_games.destroy_all
+          create_team_game(ids[0])
+          create_team_game(ids[1])
+        end
       end
     end
     redirect_to games_path({params: {week: params[:game][:week]}})
