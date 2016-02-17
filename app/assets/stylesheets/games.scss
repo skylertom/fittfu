@@ -262,13 +262,9 @@ $blue: #86BCF2;
     }
     .form-body {
       padding-top: 20px;
-      padding-bottom: 10px;
       border-top-color: gray;
       border-top-style: solid;
       border-top-width: 1px;
-      border-bottom-color: gray;
-      border-bottom-style: solid;
-      border-bottom-width: 1px;
       input[type=text] {
         width: 220px;
         border-radius: 4px;
@@ -388,5 +384,8 @@ body.games.scorekeep {
   .manualscore {
     margin-top: 25px;
     margin-left: 25px;
+  }
+  form {
+    background: none;
   }
 }

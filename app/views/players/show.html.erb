@@ -8,6 +8,11 @@
         (<%= @player.team.record_text %>)
       </h3>
   </div>
+  <% if policy(@player).edit? %>
+      <div class="btn btn-no-padding">
+        <%= link_to "Edit", edit_player_path(@player) %>
+      </div>
+  <% end %>
 
     <h3 class="thin">Stats:</h3>
     <table class="table table-bordered table-hover table-nonfluid">

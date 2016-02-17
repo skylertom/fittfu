@@ -20,7 +20,7 @@
       <% end %>
     </tbody>
   </table>
-  <button type="button" class="btn" data-toggle="modal" data-target="#addPlayer<%= team.color %>">
+  <button type="button" class="btn btn-gray" data-toggle="modal" data-target="#addPlayer<%= team.color %>">
     Add a player to <%= team.color %> Team
   </button>
   <div class="modal fade" id="addPlayer<%= team.color %>" tabindex="-1" role="dialog" aria-labelledby="title">
@@ -45,7 +45,7 @@
                   <%= hidden_field_tag 'membership[team_id]', team.id  %>
               </div>
               <div class="form-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default btn-gray" data-dismiss="modal">Cancel</button>
                 <%= f.submit "Add Player", data: { disable_with: "Please wait...." }, class: "btn" %>
               </div>
           <% end %>

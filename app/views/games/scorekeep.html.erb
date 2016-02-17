@@ -7,7 +7,7 @@
       <strong>Time slot:</strong>
       <%= @game.time_slot + 1 %>
     </p>
-    <div class="btn btn-no-padding">
+    <div class="btn btn-no-padding btn-gray">
         <%= link_to "Done scorekeeping", games_path(params: {week: @game.week}) %>
     </div>
 </div>
@@ -31,6 +31,8 @@
       <input type="submit" class="btn" value="Update" />
 <% end %>
 </div>
+<%= button_to "Delete Game", {:controller => :games,
+              :action => 'destroy', :id => @game.id }, :method => :delete, class: "btn btn-gray" %>
 
 <script>
   function updateRow(elem) {
