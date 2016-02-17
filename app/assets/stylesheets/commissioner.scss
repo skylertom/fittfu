@@ -4,8 +4,10 @@
 
 body.commissioner.index {
   .body {
-    padding-left: 70px;
-    padding-right: 70px;
+    background-color: #FFF;
+    margin-left: 70px;
+    margin-right: 70px;
+    padding: 15px;
   }
   .load, .output, .add, .schedule {
     .btn, input[type=submit].btn {
@@ -22,17 +24,14 @@ body.commissioner.index {
       vertical-align: middle;
     }
     background-color: #FFF;
-    padding: 15px;
     padding-left: 20px;
     margin-bottom: 20px;
     > div {
       margin-right: 15px;
     }
   }
-  .load {
-  }
-  .add{
-
+  .add {
+    margin-bottom: 5px;
   }
   .output {
     form {
@@ -46,8 +45,5 @@ body.commissioner.index {
       padding-left:0;
       padding-bottom: 0;
     }
-  }
-  .schedule {
-
   }
 }
