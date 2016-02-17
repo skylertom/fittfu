@@ -10,7 +10,7 @@
           <%= @game.time_slot + 1 %>
         </p>
         <% if policy(@game).scorekeep? %>
-            <div class="btn btn-no-padding">
+            <div class="btn btn-no-padding btn-gray">
               <%= link_to "Scorekeep (Edit Game Stats)", scorekeep_games_path(@game) %>
             </div>
         <% end %>

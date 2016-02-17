@@ -173,13 +173,19 @@ a {
 
 .btn-gray {
   background-color: #D2DBE5;
+  color: #474747;
   a {
     color: #474747;
   }
   &:hover {
+    color: #000000;
     background-color: #B4C3D3;
+    a {
+      color: #000000;
+    }
   }
 }
+
 
 body {
   background-color: $background-gray;
