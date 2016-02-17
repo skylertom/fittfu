@@ -1,6 +1,6 @@
 <div class="container">
   <div>
-      <h2 class="thin"><%= @schedule.start_time.to_s(:day_and_month) %>, Week: <%= @schedule.week %></h2>
+      <h2 class="thin"><%= @schedule.start_time.to_s(:day_and_month) %>, Week: <%= @schedule.week + 1 %></h2>
       <%= form_tag("/games/schedule_week", method: "post", onsubmit: "getVal()") do %>
           <input type="hidden" name="game[week]" value="<%= @schedule.week %>">
         <input type="hidden" id="time0" name="time[0]" value="">
@@ -15,7 +15,7 @@
           <input id="slot2away" type="hidden" name="slot[2][away_id]" value="" />
           <input id="slot3home" type="hidden" name="slot[3][home_id]" value="" />
           <input id="slot3away" type="hidden" name="slot[3][away_id]" value="" />
-          <input type="submit" class="btn" value="Add Games" />
+          <input type="submit" class="btn" value="Save Games" />
       <% end %>
   </div>
   <div class="teams" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dragDrop(event)" ondragenter="dragEnter(event)">
@@ -43,6 +43,12 @@
 </div>
 
 <script>
+  <% if @games %>
+        <% @games.each do |g| %>
+        $('#<%= g.teams.first.id %>').appendTo($('#slot<%= g.time_slot %>'));
+        $('#<%= g.teams.second.id %>').appendTo($('#slot<%= g.time_slot %>'));
+        <% end %>
+  <% end %>
     function getVal() {
         for (var i = 0; i < 4; i++) {
             var div = $("#slot" + i);
