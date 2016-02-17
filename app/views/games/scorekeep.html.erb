@@ -31,6 +31,8 @@
       <input type="submit" class="btn" value="Update" />
 <% end %>
 </div>
+<%= button_to "Delete Game", {:controller => :games,
+              :action => 'destroy', :id => @game.id }, :method => :delete, class: "btn red" %>
 
 <script>
   function updateRow(elem) {

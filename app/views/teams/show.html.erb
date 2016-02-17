@@ -1,6 +1,7 @@
 <div class="outerpadleftright">
   <h2><%= @team.name %> </h2>
   <h2 class="thin inline-block"> - <%= @team.color %></h2>
+  <h3><%= @team.rank.ordinalize %> place</h3>
   <h3 class="thin">Record: <%= @team.record_text %></h3>
 
   <table class="table table-bordered table-hover table-nonfluid">

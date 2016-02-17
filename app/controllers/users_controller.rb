@@ -26,6 +26,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     authorize @user
     if @user
+      flash[:alert] = "Deleted #{@user.name}, #{@user.email}"
       @user.destroy
     else
       flash[:error] = "Could not find user with id: #{params[:id]}"

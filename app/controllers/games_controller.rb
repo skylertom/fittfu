@@ -135,6 +135,8 @@ class GamesController < ApplicationController
     @game = Game.find_by(id: params[:id])
     authorize @game
     if @game
+      flash[:alert] = @game.has_teams? ? "Deleted game between #{@game.teams.first.name} and #{@game.teams.second.name}, week: #{@game.week + 1}, timeslot: #{@game.time_slot + 1}"
+                        : "Deleted game on week #{@game.week + 1}, timeslot: #{@game.time_slot +1}"
       @game.destroy
     else
       flash[:error] = "Could not find game with id: #{params[:id]}"

@@ -26,6 +26,13 @@ class Team < ActiveRecord::Base
     team_games.won.size
   end
 
+  def rank
+    # TODO much more efficiently
+    mywins = num_wins
+    wins = Team.all.map {|t| t.num_wins}
+    wins.sort {|a, b| b <=> a}.each_with_index {|t, i| return i+1 if t <= mywins}
+  end
+
   def num_losses
     team_games.lost.size
   end

@@ -1,0 +1,38 @@
+<div class="container">
+  <%= form_for(@player, url: player_path, html: { method: :patch }) do |f| %>
+
+    <h2>Edit Player</h2>
+      <p>
+        <%= f.label 'Name:' %>
+        <%= f.text_field :name, required: true %>
+      </p>
+      <div id="gender_div">
+        <%= f.radio_button(:gender, 0, checked: true) %>
+        <%= f.label(:gender_0, "Eman") %>
+        <%= f.radio_button(:gender, 1) %>
+        <%= f.label(:gender_1, "Ewo") %>
+      </div>
+      <p>
+        <label>Team (WARNING, changing this will erase all the player's stats):</label>
+        <% p @player.membership.id %>
+        <%= collection_select(:membership, :team_id, Team.real, :id, :short_name, {prompt: "Unassigned", selected: @player.membership.team_id }) %>
+      </p>
+      <%= check_box_tag 'captain' %>
+      <%= label_tag 'captain' %>
+      <br><br>
+      <div>
+        <div class="btn btn-no-padding btn-gray">
+          <%= link_to "Cancel", player_path(@player) %>
+        </div>
+        <%= f.submit "Submit", data: { disable_with: "Please wait...." }, class: "centered btn blue" %>
+      </div>
+  <% end %>
+</div>
+
+<script>
+    $("#gender_div").buttonset();
+    $( "#membership_team_id" ).select2({
+        theme: "bootstrap",
+        minimumResultsForSearch: Infinity
+    });
+</script>

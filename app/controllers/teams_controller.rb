@@ -24,6 +24,7 @@ class TeamsController < ApplicationController
     @team = Team.find_by(id: params[:id])
     authorize @team
     if @team
+      flash[:alert] = "Deleted #{@team.name}(#{@team.color})"
       @team.destroy
     else
       flash[:error] = "Could not find team with id: #{params[:id]}"
