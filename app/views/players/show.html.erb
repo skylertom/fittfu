@@ -29,7 +29,7 @@
       </tr>
       </thead>
       <tbody>
-      <%= render partial: 'game_stats/simple_row', collection: @player.game_stats %>
+      <%= render partial: 'game_stats/simple_row', collection: @player.game_stats.order(:week) %>
       </tbody>
     </table>
 </div>
