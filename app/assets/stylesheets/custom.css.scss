@@ -67,6 +67,10 @@ a {
   }
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .indent {
   margin-left: 20px;
 }
@@ -142,6 +146,7 @@ a {
     line-height: 40px;
     padding-right: 10px;
     padding-left: 10px;
+    display: block;
   }
 }
 
@@ -164,6 +169,7 @@ a {
     width: 100%;
     height: 100%;
     text-decoration: none;
+    display: block;
   }
   &:hover {
     background-color: $darkened-blue;

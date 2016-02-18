@@ -3,17 +3,18 @@
       <h2 class="thin">
         <%= @player.name %>
       </h2>
-      <h3 class="thin">
-        (<%= @player.gender_text %>) - <%= @player.team.blank? ? "No team assigned" : link_to(@player.team.name, team_path(@player.team)) %>
-        (<%= @player.team.record_text %>)
-      </h3>
+      <h3 class="thin">(<%= @player.gender_text %>)</h3>
+    <% if policy(@player).edit? %>
+        <div class="btn btn-no-padding btn-gray">
+          <%= link_to "Edit", edit_player_path(@player) %>
+        </div>
+    <% end %>
   </div>
-  <% if policy(@player).edit? %>
-      <div class="btn btn-no-padding">
-        <%= link_to "Edit", edit_player_path(@player) %>
-      </div>
-  <% end %>
-
+    <h3 class="thin">
+      <%= @player.team.blank? ? "No team assigned" : link_to(@player.team.name, team_path(@player.team)) %>
+      (<%= @player.team.record_text %>)
+    </h3>
+  <div>
     <h3 class="thin">Stats:</h3>
     <table class="table table-bordered table-hover table-nonfluid">
       <thead>
@@ -32,6 +33,7 @@
       <%= render partial: 'game_stats/simple_row', collection: @player.game_stats.order(:week) %>
       </tbody>
     </table>
+  </div>
 </div>
 
 <script>

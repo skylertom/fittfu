@@ -4,7 +4,7 @@
   <h3><%= @team.rank.ordinalize %> place</h3>
   <h3 class="thin">Record: <%= @team.record_text %></h3>
 
-  <table class="table table-bordered table-hover table-nonfluid">
+  <table class="table table-bordered table-hover table-nonfluid games">
     <thead>
     <tr>
       <th>Week</th>
@@ -25,7 +25,7 @@
     </tbody>
   </table>
 
-    <table class="table table-bordered table-hover table-nonfluid">
+    <table class="table table-bordered table-hover table-nonfluid players">
       <thead>
           <tr>
             <th>Player</th>
@@ -48,7 +48,12 @@
 <script>
     $(document).ready(function()
         {
-            $("table").tablesorter();
+            $("table.games").tablesorter({
+                sortList: [[0, 1]]
+            });
+            $("table.players").tablesorter({
+                sortList: [[2, 1]]
+            });
         }
     );
 </script>
