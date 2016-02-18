@@ -1,4 +1,5 @@
 <div class="outerpadleftright">
+  <p>Admins have ability to confirm a user's email even if they don't look at the confirmation link</p>
     <table class="table table-bordered table-hover table-nonfluid">
       <thead>
           <tr>
@@ -59,7 +60,7 @@
                   <p>Confirmed</p>
               <% end %>
             </td>
-            <% if user.admin %>
+            <% if current_user.admin %>
                 <td><%= button_to('x', user, method: :delete) %></td>
             <% end %>
           </tr>
