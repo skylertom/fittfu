@@ -12,9 +12,9 @@ class GamesController < ApplicationController
       @games = Game.all.default.includes(:teams)
     else
       @games = Game.current.default.includes(:teams)
-      @games = Game.past.limit(4) if @games.blank?
+      @games = Game.past.order(:time).limit(4) if @games.blank?
     end
-    authorize @games
+    #authorize @games
   end
 
   def new
