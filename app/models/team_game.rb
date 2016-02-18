@@ -23,7 +23,7 @@ class TeamGame < ActiveRecord::Base
 
   def result_text
     if game.time > Time.zone.now
-      "Undecided"
+      game.time.to_s(:pretty_no_year)
     else
       winner? ? "Won (#{goals}-#{opponent_team_game.goals})" : "Lost (#{goals}-#{opponent_team_game.goals})"
     end
