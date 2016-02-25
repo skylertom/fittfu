@@ -245,7 +245,7 @@ form {
     border-width: 1px;
     border-color: $gray;
     border-style: solid;
-    height: 35px;
+    height: 37px;
     padding: 10px;
   }
   .actions {
@@ -334,5 +334,14 @@ table {
   -webkit-user-drag: element;
   &:hover {
     cursor: move;
+  }
+}
+
+body.sessions.new {
+  .field {
+    margin-left: 19px;
+    > input {
+      display: inline-block;
+    }
   }
 }
