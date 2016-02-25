@@ -11,5 +11,9 @@ body.teams.show {
     h3 {
       margin-top: 5px;
     }
+    .players > div {
+      display: inline-block;
+      padding-right: 15px;
+    }
   }
 }
