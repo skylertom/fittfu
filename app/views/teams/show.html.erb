@@ -25,24 +25,11 @@
     </tbody>
   </table>
 
-    <table class="table table-bordered table-hover table-nonfluid players">
-      <thead>
-          <tr>
-            <th>Player</th>
-            <th>Gender</th>
-            <th>Fantasy Points</th>
-          </tr>
-      </thead>
-      <tbody>
-          <% @team.players.each do |player| %>
-              <tr>
-                <td><%= link_to(player.name, player_path(player)) %></td>
-                <td><%= player.gender_text %></td>
-                <td><%= player.points %></td>
-              </tr>
-          <% end %>
-      </tbody>
-    </table>
+  <div class="players">
+    <%= render partial: 'players/team_table', locals: { players: @team.players.ewo} %>
+    <%= render partial: 'players/team_table', locals: { players: @team.players.emen} %>
+  </div>
+
 </div>
 
 <script>

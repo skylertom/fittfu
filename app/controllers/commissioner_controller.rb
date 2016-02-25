@@ -25,7 +25,7 @@ class CommissionerController < ApplicationController
   end
 
   def load_stats
-    if GameStat.where(week: 0).where('swag > 0').exists?
+    if GameStat.where(week: 0).where('created_at < updated_at').exists?
       flash[:alert] = "There are already stats for the first week"
       redirect_to :back
       return

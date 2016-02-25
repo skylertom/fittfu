@@ -61,6 +61,14 @@ h3.thin {
   margin: 15px;
 }
 
+input[type=submit] {
+  margin-top: 0;
+  &:hover {
+    background-color: #ff6347;
+    border-width: 0 2px;
+  }
+}
+
 a {
   &:hover {
     text-decoration: none;

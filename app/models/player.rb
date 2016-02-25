@@ -2,6 +2,8 @@ class Player < ActiveRecord::Base
   GENDER = %w(eman ewo)
   EMAN = 0
   EWO = 1
+  scope :ewo, -> { where(gender: EWO) }
+  scope :emen, -> { where(gender: EMAN) }
 
   has_many :memberships, dependent: :destroy
   has_many :teams, through: :memberships

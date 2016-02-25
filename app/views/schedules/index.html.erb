@@ -1,17 +1,21 @@
 <div class="outerpadleftright">
     <h1>Schedule:</h1>
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-nonfluid table-hover">
       <tr>
-        <th>Start Time:</th>
-        <th>End Time:</th>
+        <th>Week</th>
+        <th>Start:</th>
+        <th>End:</th>
+        <th>Edit Games</th>
         <th>Delete</th>
       </tr>
 
       <% @schedules.each do |schedule| %>
           <tr>
-            <td><%= link_to(schedule.start_time.to_s(:pretty), games_schedule_week_path(params: {schedule_id: schedule.id})) %></td>
-            <td><%= schedule.end_time.to_s(:pretty) %></td>
+            <td>Week <%= schedule.week + 1 %> (<%= schedule.start_time.to_s(:day_and_month) %>)</td>
+            <td><%= schedule.start_time.to_s(:time) %></td>
+            <td><%= schedule.end_time.to_s(:time) %></td>
+            <td><%= link_to("Edit", games_schedule_week_path(params: {schedule_id: schedule.id})) %></td>
             <td><%= button_to('x', schedule, method: :delete) %></td>
           </tr>
       <% end %>
